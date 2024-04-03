@@ -16,22 +16,31 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center gap-3">
-        <div class=""><app-common-input-box [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
-                [fieldType]="'text'" [idSelector]="'country'" [placeholderText]="'Enter your Country'"
-                [errorMessage]="'Country is required'"></app-common-input-box></div>
-
-        <div class=""><app-common-input-box [label]="'State'" [controlName]="'state'" [parentForm]="myForm"
+    <div class=" row d-flex justify-content-between align-items-center gap-3">
+       
+        <div class="col"><app-common-input-box [label]="'State'" [controlName]="'state'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'state'" [placeholderText]="'Enter your State'"
                 [errorMessage]="'State is required'"></app-common-input-box></div>
 
-        <div class=""><app-common-input-box [label]="'Currency'" [controlName]="'currency'" [parentForm]="myForm"
+        <div class="col"><app-common-input-box [label]="'Currency'" [controlName]="'currency'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'currency'" [placeholderText]="'Enter your Currency'"
                 [errorMessage]="'Currency is required'"></app-common-input-box></div>
 
-        <div class=""><app-common-input-box [label]="'Area Name'" [controlName]="'areaName'" [parentForm]="myForm"
+        <div class="col"><app-common-input-box [label]="'Area Name'" [controlName]="'areaName'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'areaName'" [placeholderText]="'Enter your Area Name'"
                 [errorMessage]="'Area Name is required'"></app-common-input-box></div>
+    </div>
+
+    <div>
+        <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
+            [idSelector]="'country'" [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'"
+            [objectKeyToShow]="'name'"
+            [invalidForm]="invalidForm" [dropDownValue]="users"></app-common-dropdown>
+
+            <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
+            [idSelector]="'country'" [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'"
+            [objectKeyToShow]="'name'" [selected]="'Bulbasaur'"
+            [invalidForm]="invalidForm" [dropDownValue]="pokeDetails"></app-common-dropdown>
     </div>
 
     <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>

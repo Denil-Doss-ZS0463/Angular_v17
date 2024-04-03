@@ -1,1 +1,28 @@
-<p>common-dropdown works!</p>
+<div [formGroup]="parentForm">
+    <div class="form-group mt-1">
+        <label [for]="idSelector" class="form-label ps-0">{{ label }}</label>
+        <div class="d- align-items-center">
+            <!-- <input class="form-control" [type]="fieldType" [formControlName]="controlName" [id]="idSelector"
+            [placeholder]="placeholderText" autocomplete="off"
+            [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required')}"> -->
+
+            <select class="form-select" [formControlName]="controlName" [id]="idSelector" autocomplete="off"
+                [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required')}">
+                <option value="0" selected>Choose here</option>
+                @for(item of dropDownValue; track $index)
+                {
+                  <option [value]="item.id" >{{item[objectKeyToShow]}}</option>
+                }
+            </select>
+        </div>
+        @if(showErrors())
+        {
+        <p class="text-danger errorMessage m-0">
+            @if(parentForm.get(controlName)?.hasError('required'))
+            {
+            {{errorMessage}}
+            }
+        </p>
+        }
+    </div>
+</div>
