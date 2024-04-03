@@ -8,7 +8,8 @@
 
             <select class="form-select" [formControlName]="controlName" [id]="idSelector" autocomplete="off"
                 [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required')}">
-                <option value="0" selected>Choose here</option>
+                <option value="0">Choose here</option>
+
                 @for(item of dropDownValue; track $index)
                 {
                   <option [value]="item.id" >{{item[objectKeyToShow]}}</option>
