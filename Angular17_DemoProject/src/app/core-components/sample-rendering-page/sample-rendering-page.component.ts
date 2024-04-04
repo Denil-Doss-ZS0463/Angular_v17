@@ -12,7 +12,7 @@ import { CommonDropdownComponent } from '../../common-libraies/common-dropdown/c
 })
 export class SampleRenderingPageComponent {
 
-  
+
   inputValue = signal('')
 
   myForm!: FormGroup;
