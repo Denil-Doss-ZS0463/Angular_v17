@@ -1,6 +1,13 @@
 <div [formGroup]="parentForm">
     <div class="form-group mt-1">
-        <label [for]="idSelector" class="form-label ps-0">{{ label }}</label>
+        <label [for]="idSelector" class="form-label ps-0">
+            {{ label }}
+            @if(required)
+            {   
+                <span class="text-danger">*</span>
+            }
+        </label>
+
         <div class="d- align-items-center">
             <input class="form-control p-3" 
                 [type]="fieldType" 
@@ -10,15 +17,18 @@
                 autocomplete="off"
                 [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required')}">
         </div>
+
         <p class="text-danger errorMessage hidden m-0">
             &nbsp;
             @if(showErrors())
             {
                 @if(parentForm.get(controlName)?.hasError('required'))
                 {
-                    *{{errorMessage}}
+                    {{errorMessage}}
                 }
             }
         </p>
+
     </div>
+    
 </div>

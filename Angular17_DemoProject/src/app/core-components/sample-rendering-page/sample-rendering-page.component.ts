@@ -11,8 +11,6 @@ import { CommonDropdownComponent } from '../../common-libraies/common-dropdown/c
   styleUrl: './sample-rendering-page.component.css'
 })
 export class SampleRenderingPageComponent {
-
-
   inputValue = signal('')
 
   myForm!: FormGroup;
@@ -28,8 +26,8 @@ export class SampleRenderingPageComponent {
       age: ['', Validators.required],
       country: ['', Validators.required],
       state: ['', Validators.required],
-      currency: ['', Validators.required],
-      areaName: ['', Validators.required]
+      currency: [''],
+      areaName: ['']
     });
   }
 
