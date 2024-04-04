@@ -1,11 +1,11 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-common-dropdown',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgClass],
+  imports: [FormsModule, ReactiveFormsModule, NgClass, NgFor],
   templateUrl: './common-dropdown.component.html',
   styleUrl: './common-dropdown.component.css'
 })
@@ -19,18 +19,11 @@ export class CommonDropdownComponent {
   @Input() invalidForm!: boolean | null;
   @Input() dropDownValue:any[] = [];
   @Input() objectKeyToShow:string = "";
-  @Input() selected:any = "";
+  @Input() selectedValue:string = "";
 
-  constructor() { 
-    console.log(this.dropDownValue);
-
-    this.addPlaceholderLabel();
-    
+  ngOnInit() {
   }
 
-  addPlaceholderLabel() {
-    return this.dropDownValue.unshift({ id: 0, [this.objectKeyToShow]: this.placeholderText });
-  }
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);
     return control && control.invalid && control.touched;

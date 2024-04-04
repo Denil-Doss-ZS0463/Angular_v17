@@ -15,19 +15,17 @@
                 [id]="idSelector"
                 [placeholder]="placeholderText" 
                 autocomplete="off"
-                [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required') && required}">
+                [ngClass]="{' border border-danger':((showErrors() || parentForm.get(controlName)?.hasError('required') && required) && invalidForm) }">
         </div>
 
         <p class="text-danger errorMessage hidden m-0 mb-1">
-            @if(showErrors() && required)
+            @if((showErrors() || parentForm.get(controlName)?.hasError('required') && required) && invalidForm)
             {
                 @if(parentForm.get(controlName)?.hasError('required'))
                 {
                     {{errorMessage}}
                 }
-            }
-            @else
-            {
+            } @else {
                 &nbsp;
             }
         </p>

@@ -2,26 +2,23 @@
     <div class="form-group mt-1">
         <label [for]="idSelector" class="form-label ps-0">{{ label }}</label>
         <div class="d- align-items-center">
-            <select 
-                    class="form-select p-3 dropdownValue" 
-                    [formControlName]="controlName" 
-                    [id]="idSelector" 
-                    autocomplete="off"
-                    [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required')}">
-                        @for(item of dropDownValue; track $index)
-                        {
-                            <option class="" [value]="item.id" [selected]="item[objectKeyToShow]">{{item[objectKeyToShow]}}</option>
-                        }
+            <select class="form-select p-3 dropdownValue" [formControlName]="controlName" [id]="idSelector"
+                autocomplete="off"
+                [ngClass]="{' border border-danger':(showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm}">
+                <option value="" selected disabled>{{placeholderText}}</option>
+                @for(item of dropDownValue; track $index)
+                {
+                <option class="" [value]="item.id">{{item[objectKeyToShow]}}</option>
+                }
             </select>
+
         </div>
         <p class="text-danger errorMessage hidden m-0 pb-0">
-            <!-- &nbsp; -->
-            @if(showErrors())
+            @if((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm)
             {
-                @if(parentForm.get(controlName)?.hasError('required'))
-                {
-                    {{errorMessage}}
-                }
+            {{errorMessage}}
+            }@else {
+            &nbsp;
             }
         </p>
     </div>
