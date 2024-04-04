@@ -1,10 +1,11 @@
 <form [formGroup]="myForm" class="m-3">
 
-    <div class="row mt-2">
-        <div class="col-6 ">
+    <div class="row mt-2 ">
+        <div class="col-6 outerBorder">
+            <div class="bolderLabel">Personal Info</div>
             <app-common-input-box [label]="'Username'" [controlName]="'username'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'username'" [placeholderText]="'Enter your name'"
-                [errorMessage]="'Username is required'" [invalidForm]="invalidForm"></app-common-input-box>
+                [errorMessage]="'Username is required'" [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
         </div>
     </div>
 
@@ -12,7 +13,7 @@
         <div class="col-6 ">
             <app-common-input-box [label]="'Age'" [controlName]="'age'" [parentForm]="myForm" [fieldType]="'number'"
                 [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
-                [invalidForm]="invalidForm"></app-common-input-box>
+                [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
         </div>
     </div>
 
@@ -20,11 +21,11 @@
        
         <div class="col"><app-common-input-box [label]="'State'" [controlName]="'state'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'state'" [placeholderText]="'Enter your State'"
-                [errorMessage]="'State is required'"></app-common-input-box></div>
+                [errorMessage]="'State is required'" [required]="true"></app-common-input-box></div>
 
         <div class="col"><app-common-input-box [label]="'Currency'" [controlName]="'currency'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'currency'" [placeholderText]="'Enter your Currency'"
-                [errorMessage]="'Currency is required'"></app-common-input-box></div>
+                [errorMessage]="'Currency is required'" [required]="false"></app-common-input-box></div>
 
         <div class="col"><app-common-input-box [label]="'Area Name'" [controlName]="'areaName'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'areaName'" [placeholderText]="'Enter your Area Name'"
@@ -34,7 +35,7 @@
     <div>
         <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
             [idSelector]="'country'" [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'"
-            [objectKeyToShow]="'name'"
+            [objectKeyToShow]="'name'"  [selected]="'John Doe'"
             [invalidForm]="invalidForm" [dropDownValue]="users"></app-common-dropdown>
 
             <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"

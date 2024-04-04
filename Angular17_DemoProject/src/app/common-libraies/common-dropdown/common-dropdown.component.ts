@@ -14,12 +14,23 @@ export class CommonDropdownComponent {
   @Input() controlName!: string;
   @Input() parentForm!: FormGroup;
   @Input() idSelector!:string;
-  @Input() placeholderText!:string;
+  @Input() placeholderText:string = "Choose Here";
   @Input() errorMessage!: string;
   @Input() invalidForm!: boolean | null;
   @Input() dropDownValue:any[] = [];
   @Input() objectKeyToShow:string = "";
-  @Input() selected:any;
+  @Input() selected:any = "";
+
+  constructor() { 
+    console.log(this.dropDownValue);
+
+    this.addPlaceholderLabel();
+    
+  }
+
+  addPlaceholderLabel() {
+    return this.dropDownValue.unshift({ id: 0, [this.objectKeyToShow]: this.placeholderText });
+  }
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);
     return control && control.invalid && control.touched;
