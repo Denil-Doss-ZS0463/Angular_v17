@@ -6,7 +6,7 @@ import { CommonDropdownComponent } from '../../common-libraies/common-dropdown/c
 @Component({
   selector: 'app-sample-rendering-page',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonInputBoxComponent, CommonDropdownComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonInputBoxComponent, CommonDropdownComponent,],
   templateUrl: './sample-rendering-page.component.html',
   styleUrl: './sample-rendering-page.component.css'
 })
@@ -17,18 +17,25 @@ export class SampleRenderingPageComponent {
 
   userName: string = "";
   age: number = 0;
-
+  initialValue = "Choose Something!"
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initialValue = 'Bulbasaur';
     this.myForm = this.formBuilder.group({
       username: ['', Validators.required],
       age: ['', Validators.required],
-      country: ['', Validators.required],
+      country: ['',],
       state: ['', Validators.required],
-      currency: [''],
-      areaName: ['']
+      currency: ['',Validators.required],
+      areaName: [''],
+      pokemonData: [this.initialValue,],
+
     });
+   
+
+    this.updateSelectedValue('Bulbasaur');
+
   }
 
   invalidForm!: boolean | null;
@@ -37,17 +44,18 @@ export class SampleRenderingPageComponent {
     this.age = this.myForm.get('age')?.value;
 
     if (this.myForm.valid) {
-      // console.log(this.myForm.value);
       this.invalidForm = false;
-
-      console.log(this.userName, this.age);
-
+      console.log(this.myForm.value); 
     }
     else {
       alert("Invalid Form");
       this.invalidForm = true;
     }
+  }
 
+
+  updateSelectedValue(newValue: string) {
+    this.myForm.get('pokemonData')?.setValue(newValue);
   }
 
   users: any[] = [

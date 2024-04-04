@@ -17,9 +17,6 @@
                     </div>
                 </th> }
             </tr>
-            <!-- <tr *ngFor="let header of headers">
-                <th>{{ header }}</th>
-            </tr> -->
         </thead>
         <tbody>
             @for(user of data; track $index)
@@ -42,10 +39,6 @@
                 }
             </tr>
             }
-
-            <!-- <tr *ngFor="let item of data">
-                <td *ngFor="let header of headers">{{ item[header.toLowerCase()] }}</td>
-            </tr> -->
         </tbody>
     </table>
 </div>
