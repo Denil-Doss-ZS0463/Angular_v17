@@ -5,18 +5,21 @@
             <select class="form-select p-3 dropdownValue" [formControlName]="controlName" [id]="idSelector"
                 autocomplete="off"
                 [ngClass]="{' border border-danger':(showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm}">
-                <option value="" selected disabled>{{placeholderText}}</option>
-                @for(item of dropDownValue; track $index)
-                {
-                <option class="" [value]="item.id">{{item[objectKeyToShow]}}</option>
-                }
+                    <option value="" selected disabled>{{placeholderText}}</option>
+                    @for(item of dropDownValue; track $index)
+                    {
+                        <option class="" [value]="item[objectKeyAsValue]">{{item[objectKeyToShow]}}</option>
+                    }
             </select>
 
         </div>
         <p class="text-danger errorMessage hidden m-0 pb-0">
             @if((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm)
             {
-            {{errorMessage}}
+                @if(parentForm.get(controlName)?.hasError('required'))
+                {
+                    {{errorMessage}}
+                }
             }@else {
             &nbsp;
             }
