@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @for(user of data; track $index)
+            @for(user of mockData; track $index)
             {
             <tr class="text-center" (click)="showRowDetails(user)">
                 @for(key of getUserKeys(user); track $index)

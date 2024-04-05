@@ -20,14 +20,20 @@ export class CommonTableComponent {
   loading: boolean = false;
   errorLoading: boolean = false;
 
-  constructor(private router: Router) { }
+  @Input() mockData: any[] = [];
+  constructor(private router: Router) {
+  }
+  ngOnInit() {
+    this.mockData = this.data;
+
+  }
 
   getUserKeys(key: any): string[] {
     return Object.keys(key);
   }
 
   removableObjects(key: any): string[] {
-    this.dataToRemove = ['id','image','type']
+    this.dataToRemove = ['id', 'image', 'type']
     return Object.keys(key == this.dataToRemove);
   }
 
