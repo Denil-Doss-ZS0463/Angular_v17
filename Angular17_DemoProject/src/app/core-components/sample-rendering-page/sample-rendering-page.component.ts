@@ -17,11 +17,9 @@ export class SampleRenderingPageComponent {
 
   userName: string = "";
   age: number = 0;
-  initialValue = "Choose Something!"
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.initialValue = 'Bulbasaur';
     this.myForm = this.formBuilder.group({
       username: ['', Validators.required],
       age: ['', Validators.required],

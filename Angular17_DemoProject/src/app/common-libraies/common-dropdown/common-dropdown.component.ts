@@ -22,9 +22,6 @@ export class CommonDropdownComponent {
   @Input() objectKeyAsValue:any;
   @Input() selectedValue:string = "";
 
-  ngOnInit() {
-  }
-
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);
     return control && control.invalid && control.touched;
