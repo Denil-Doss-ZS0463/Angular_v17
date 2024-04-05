@@ -1,1 +1,147 @@
-<p>header works!</p>
+<div class="demo">
+    <nav class="navbar navbar-expand-lg bg-body-white shadow" aria-label="Main Navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand"><img src="../../../assets/Images/zuciBallLogo.svg" alt=""></a>
+            <div class="logoContainer">
+                <div>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row">
+                        <li class="nav-item dropdown me-lg-4">
+                            <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-location-dot" style="color: #f72257;"></i><span
+                                    class="ms-2 me-1">Sportball</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" id="dropdownMenu">
+                                @for(items of dropdownItems; track $index){
+                                <li>
+                                    <a class="dropdown-item" style="max-height: 50px; overflow: hidden;">{{ items
+                                        }}</a>
+                                </li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown profile-circle profileIcon me-3">
+                            <a class="nav-link d-flex align-items-center justify-content-center text-white text-uppercase"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">{{
+                                dropdownItems[0].charAt(0)
+                                + dropdownItems[1].charAt(0) }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end mt-1 viewProfile" id="dropdownMenu">
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profile"><i
+                                            class="fa-regular fa-user iconColor col-sm-2"></i><span
+                                            class="col-sm-3">Profile</span></a>
+                                </li>
+                                <li><a class="dropdown-item"><i
+                                            class="fa-regular fa-right-from-bracket iconColor col-sm-2"></i>Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="collapse col-md-3 d-md-block sidebar" id="navbarSupportedContent"
+                [ngStyle]="{'width': isCollapsed ? '75px' : '190px'}" aria-label="Main navigation">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList" routerLink="/home" routerLinkActive="active">
+                                <i class="iconColor fa-sharp fa-solid fa-house col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Home</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList" routerLink="/reports" routerLinkActive="active">
+                                <i class="fa-solid fa-files iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Reports</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-user iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Users</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-sharp fa-solid fa-map-location-dot iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Area</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-sharp fa-solid fa-shirt iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Merchandise</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-volleyball iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-3">Program</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-location-dot iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Location</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-person-running-fast iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Events</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-user-group iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                    <span class="col-sm-3">Registrants</span>
+                                }
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="toggler profile-circle d-flex align-items-center justify-content-center text-white fs-6"
+                        (click)="toggleSidebar()">
+                        @if (!isCollapsed) {
+                            <i class="fa-sharp fa-solid fa-angles-left"></i>
+                        }
+                        @if (isCollapsed) {
+                            <i class="fa-sharp fa-solid fa-angles-right"></i>
+                        }
+                    </div>
+                </div>
+            </nav>
+            <main role="main" class="col main-content">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+    </div>
+</div>
