@@ -4,15 +4,13 @@
             <tr class="text-center">
                 @for(header of headers; track $index)
                 { <th>
-                    <div class="d-flex justify-content-between align-items-center gap-1 px-3">
-                        <span> {{ header }}</span>
-                        <span class="d-inline-flex gap-2 fs-4">
-                            <span class="sortingAscendeningArrow" (click)="sortByColumnAscending($index)"
-                                [ngClass]="{'selectedSorting':ascendingClicked}">&uarr;</span>
-
-                            <span class="sortingDescendingArrow" (click)="sortByColumnDescending($index)"
-                                [ngClass]="{'selectedSorting':descendingClicked}">&darr;</span>
-
+                    <div class="d-flex justify-content-between align-items-center gap-4 px-3">
+                            <span> {{ header }}</span>
+                        <span class="d-grid">
+                            <span class="fa-solid fa-caret-up sortingArrowSize"  (click)="sortByColumnAscending($index)"
+                            [ngClass]="{'selectedSorting':ascendingClicked}"></span>
+                            <span class="fa-solid fa-caret-down sortingArrowSize"  (click)="sortByColumnDescending($index)"
+                                [ngClass]="{'selectedSorting':descendingClicked}"></span>
                         </span>
                     </div>
                 </th> }
@@ -24,16 +22,16 @@
             <tr class="text-center" (click)="showRowDetails(user)">
                 @for(key of getUserKeys(user); track $index)
                 {
-                @if(key !== 'id')
+                @if(key !== 'id' && !dataToRemove.includes(key))
                 {
                 <td>
-                    @if(key === 'image')
+                    <!-- @if(key === 'image')
                     {
-                    <img [src]="user[key]" alt="image" height="100px" width="100px">
+                        <img [src]="user[key]" alt="image" height="100px" width="100px">
                     }
-                    @else{
+                    @else{ -->
                     {{user[key]}}
-                    }
+                    <!-- } -->
                 </td>
                 }
                 }

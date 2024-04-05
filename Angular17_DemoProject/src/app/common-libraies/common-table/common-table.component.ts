@@ -11,27 +11,31 @@ import { Router } from '@angular/router';
 })
 export class CommonTableComponent {
 
-  
-
   @Input() headers: string[] = [];
   @Input() data: any[] = [];
+  @Input() dataToRemove: any[] = [];
+
   ascendingClicked: boolean = false;
   descendingClicked: boolean = false;
   loading: boolean = false;
   errorLoading: boolean = false;
 
   constructor(private router: Router) { }
-  getUserKeys(user: any): string[] {
-    return Object.keys(user);
+
+  getUserKeys(key: any): string[] {
+    return Object.keys(key);
   }
 
+  removableObjects(key: any): string[] {
+    this.dataToRemove = ['id','image','type']
+    return Object.keys(key == this.dataToRemove);
+  }
 
   showRowDetails(data: any) {
     this.router.navigate(['show-details', data.id]);
   }
 
   sortByColumnAscending(columnIndex: number) {
-    this.callPageLoader();
     this.ascendingClicked = true;
     this.descendingClicked = false;
     const columnKey = this.getColumnKey(columnIndex);
@@ -48,7 +52,6 @@ export class CommonTableComponent {
   }
 
   sortByColumnDescending(columnIndex: number) {
-    this.callPageLoader();
     this.descendingClicked = true;
     this.ascendingClicked = false;
     const columnKey = this.getColumnKey(columnIndex);
@@ -67,11 +70,5 @@ export class CommonTableComponent {
     });
   }
 
-  callPageLoader() {
-    this.loading = true;
-    setTimeout(() => {
-      this.errorLoading = true;
-    }, 2000);
-  }
 
 }
