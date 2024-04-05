@@ -10,7 +10,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  dropdownItems: string[] = ["Zuciball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area",];
+  dropdownItems: string[] = ["ZuciBall", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area","Sportball", "AGS Navalur", "Area",];
   isCollapsed: boolean = false;
   sidebarHovered:boolean=false;
   toggleSidebar(): void {

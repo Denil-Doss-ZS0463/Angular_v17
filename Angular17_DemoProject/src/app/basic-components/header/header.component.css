@@ -3,6 +3,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    font-weight: 500;
 }
 
 .dropdown-menu:not(.viewProfile) {
@@ -11,12 +12,24 @@
     overflow-y: scroll;
 }
 
+.viewProfile {
+    font-weight: 500;
+}
+
+.viewProfile:hover {
+    cursor: pointer;
+}
+
 .dropdown-item {
     display: block;
     width: 180px;
     height: auto;
     overflow: hidden;
     white-space: normal;
+}
+
+.dropdown-item:hover {
+    cursor: pointer;
 }
 
 .shadow {
@@ -28,14 +41,13 @@
     height: 100vh;
 }
 
-.demo {
+.headerContainer {
     height: 100vh;
     overflow-y: hidden;
 }
 
 .sideNavList>span {
     color: #a7a8a7;
-    font-size: 16px;
     font-weight: 500;
 }
 
@@ -60,6 +72,11 @@
 .active>span,
 .active>i {
     color: white;
+    font-weight: bold;
+}
+
+.locationPlaceholder {
+    font-weight: 500;
 }
 
 @media screen and (max-width: 992px) {
