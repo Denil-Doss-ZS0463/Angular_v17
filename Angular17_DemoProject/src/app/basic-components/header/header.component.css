@@ -1,0 +1,75 @@
+.profile-circle {
+    background-color: #007cba;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdown-menu:not(.viewProfile) {
+    max-width: 150px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.dropdown-item {
+    display: block;
+    width: 180px;
+    height: auto;
+    overflow: hidden;
+    white-space: normal;
+}
+
+.shadow {
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.3) !important;
+}
+
+.sidebar {
+    background-color: #b8d8eb38 !important;
+    height: 100vh;
+}
+
+.demo {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.sideNavList>span {
+    color: #a7a8a7;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sideNavList {
+    padding: 14px 13px !important;
+}
+
+.sideNavList:hover {
+    background-color: #e5ecf1;
+}
+
+.main-content {
+    height: calc(95vh - 56px);
+    overflow-y: auto;
+}
+
+.active,
+.active:hover {
+    background-color: #007cba;
+}
+
+.active>span,
+.active>i {
+    color: white;
+}
+
+@media screen and (max-width: 992px) {
+    .logoContainer {
+        display: flex;
+        justify-content: end;
+    }
+
+    .profileIcon {
+        margin-left: 20px;
+    }
+
+}
