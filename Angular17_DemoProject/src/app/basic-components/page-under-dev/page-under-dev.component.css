@@ -1,0 +1,12 @@
+.page-title,
+.page-content {
+  font-size: 18px;
+  font-family: Montserrat;
+  font-weight: 600;
+}
+.page-title {
+  align-items: center;
+}
+.page-content {
+  color: rgba(48, 38, 29, 0.3);
+}

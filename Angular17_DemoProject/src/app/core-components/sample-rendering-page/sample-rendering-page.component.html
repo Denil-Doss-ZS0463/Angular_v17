@@ -1,10 +1,11 @@
 <form [formGroup]="myForm" class="m-3">
 
-    <div class="row mt-2">
-        <div class="col-6 ">
+    <div class="row mt-2 ">
+        <div class="col-6 outerBorder">
+            <div class="bolderLabel">Personal Info</div>
             <app-common-input-box [label]="'Username'" [controlName]="'username'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'username'" [placeholderText]="'Enter your name'"
-                [errorMessage]="'Username is required'" [invalidForm]="invalidForm"></app-common-input-box>
+                [errorMessage]="'Username is required'" [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
         </div>
     </div>
 
@@ -12,7 +13,7 @@
         <div class="col-6 ">
             <app-common-input-box [label]="'Age'" [controlName]="'age'" [parentForm]="myForm" [fieldType]="'number'"
                 [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
-                [invalidForm]="invalidForm"></app-common-input-box>
+                [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
         </div>
     </div>
 
@@ -20,38 +21,31 @@
        
         <div class="col"><app-common-input-box [label]="'State'" [controlName]="'state'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'state'" [placeholderText]="'Enter your State'"
-                [errorMessage]="'State is required'"></app-common-input-box></div>
+                [errorMessage]="'State is required'" [required]="true" [invalidForm]="invalidForm"></app-common-input-box></div>
 
         <div class="col"><app-common-input-box [label]="'Currency'" [controlName]="'currency'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'currency'" [placeholderText]="'Enter your Currency'"
-                [errorMessage]="'Currency is required'"></app-common-input-box></div>
+                [errorMessage]="'Currency is required'" [required]="false" [invalidForm]="invalidForm"></app-common-input-box></div>
 
         <div class="col"><app-common-input-box [label]="'Area Name'" [controlName]="'areaName'" [parentForm]="myForm"
                 [fieldType]="'text'" [idSelector]="'areaName'" [placeholderText]="'Enter your Area Name'"
-                [errorMessage]="'Area Name is required'"></app-common-input-box></div>
+                [errorMessage]="'Area Name is required'" [invalidForm]="invalidForm"></app-common-input-box></div>
     </div>
 
     <div>
         <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
             [idSelector]="'country'" [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'"
-            [objectKeyToShow]="'name'"
-            [invalidForm]="invalidForm" [dropDownValue]="users"></app-common-dropdown>
+            [objectKeyToShow]="'name'"  [selectedValue]="'John Doe'"
+            [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'"></app-common-dropdown>
 
-            <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
-            [idSelector]="'country'" [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'"
-            [objectKeyToShow]="'name'" [selected]="'Bulbasaur'"
-            [invalidForm]="invalidForm" [dropDownValue]="pokeDetails"></app-common-dropdown>
+            <app-common-dropdown [label]="'Country'" [controlName]="'pokemonData'" [parentForm]="myForm"
+            [idSelector]="'country'" [placeholderText]="'Enter your Pokemon'" [errorMessage]="'Starter Pokemon is required'"
+            [objectKeyToShow]="'name'" [selectedValue]="'Bulbasaur'"
+            [invalidForm]="invalidForm" [dropDownValue]="pokeDetails" [objectKeyAsValue]="'type'"></app-common-dropdown>
     </div>
 
     <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
 </form>
-
-<!-- 
-<h2 class="mt-3">This is User Details</h2>
-<app-common-table [headers]="['Name', 'Age', 'Email']" [data]="users"></app-common-table>
-
-<h2 class="mt-3">This is employee Details</h2>
-<app-common-table [headers]="employeeHeader" [data]="employeeDetails"></app-common-table> -->
 
 <!-- <h2 class="mt-3">This is Pokemon Details</h2>
 <app-common-table [headers]="pokeHeaders" [data]="pokeDetails"></app-common-table> -->

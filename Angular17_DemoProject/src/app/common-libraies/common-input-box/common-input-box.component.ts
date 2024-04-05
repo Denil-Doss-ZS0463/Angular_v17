@@ -18,6 +18,7 @@ export class CommonInputBoxComponent {
   @Input() placeholderText!:string;
   @Input() errorMessage!: string;
   @Input() invalidForm!: boolean | null;
+  @Input() required!:boolean;
 
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);

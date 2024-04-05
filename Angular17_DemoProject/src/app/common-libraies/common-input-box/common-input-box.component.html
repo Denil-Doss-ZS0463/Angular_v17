@@ -1,19 +1,35 @@
 <div [formGroup]="parentForm">
     <div class="form-group mt-1">
-        <label [for]="idSelector" class="form-label ps-0">{{ label }}</label>
+        <label [for]="idSelector" class="form-label ps-0">
+            {{ label }}
+            @if(required)
+            {   
+                <span class="text-danger">*</span>
+            }
+        </label>
+
         <div class="d- align-items-center">
-            <input class="form-control" [type]="fieldType" [formControlName]="controlName" [id]="idSelector"
-            [placeholder]="placeholderText" autocomplete="off"
-            [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.hasError('required')}">
+            <input class="form-control p-3" 
+                [type]="fieldType" 
+                [formControlName]="controlName" 
+                [id]="idSelector"
+                [placeholder]="placeholderText" 
+                autocomplete="off"
+                [ngClass]="{' border border-danger':((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm) }">
+        </div>
+
+        <p class="text-danger errorMessage hidden m-0 mb-1">
+            @if((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm)
+            {
+                @if(parentForm.get(controlName)?.hasError('required'))
+                {
+                    {{errorMessage}}
+                }
+            } @else {
+                &nbsp;
+            }
+        </p>
+
     </div>
-    @if(showErrors())
-    {
-    <p class="text-danger errorMessage m-0">
-        @if(parentForm.get(controlName)?.hasError('required'))
-        {
-            {{errorMessage}}
-        }
-    </p>
-    }
-    </div>
+
 </div>
