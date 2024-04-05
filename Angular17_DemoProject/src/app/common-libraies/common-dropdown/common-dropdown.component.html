@@ -8,7 +8,7 @@
                 <option value="" selected disabled>{{placeholderText}}</option>
                 @for(item of dropDownValue; track $index)
                 {
-                <option class="" [value]="item.id">{{item[objectKeyToShow]}}</option>
+                    <option class="" [value]="item[objectKeyAsValue]">{{item[objectKeyToShow]}}</option>
                 }
             </select>
 
@@ -16,7 +16,10 @@
         <p class="text-danger errorMessage hidden m-0 pb-0">
             @if((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm)
             {
-            {{errorMessage}}
+                @if(parentForm.get(controlName)?.hasError('required'))
+                {
+                    {{errorMessage}}
+                }
             }@else {
             &nbsp;
             }

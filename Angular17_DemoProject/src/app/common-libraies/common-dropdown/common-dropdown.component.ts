@@ -19,6 +19,7 @@ export class CommonDropdownComponent {
   @Input() invalidForm!: boolean | null;
   @Input() dropDownValue:any[] = [];
   @Input() objectKeyToShow:string = "";
+  @Input() objectKeyAsValue:any;
   @Input() selectedValue:string = "";
 
   ngOnInit() {

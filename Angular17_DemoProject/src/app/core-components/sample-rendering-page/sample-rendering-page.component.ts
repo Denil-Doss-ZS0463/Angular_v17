@@ -25,37 +25,28 @@ export class SampleRenderingPageComponent {
     this.myForm = this.formBuilder.group({
       username: ['', Validators.required],
       age: ['', Validators.required],
-      country: ['',],
       state: ['', Validators.required],
       currency: ['',Validators.required],
       areaName: [''],
-      pokemonData: [this.initialValue,],
+      country: ['',],
+      pokemonData: ['',Validators.required],
 
     });
    
-
-    this.updateSelectedValue('Bulbasaur');
-
   }
 
   invalidForm!: boolean | null;
   getData() {
     this.userName = this.myForm.get('username')?.value;
     this.age = this.myForm.get('age')?.value;
-
     if (this.myForm.valid) {
       this.invalidForm = false;
       console.log(this.myForm.value); 
     }
     else {
-      alert("Invalid Form");
+      // alert("Invalid Form");
       this.invalidForm = true;
     }
-  }
-
-
-  updateSelectedValue(newValue: string) {
-    this.myForm.get('pokemonData')?.setValue(newValue);
   }
 
   users: any[] = [
