@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row login-form-container align-items-center">
+        <div class="col-sm-6 d-none d-sm-flex px-0">
+            <img src="assets/Images/login_page_bg.png" class="w-100 h-100 vh-100" style="object-fit: cover;">
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <img src="assets/Images/Main_logo.png" class="">
+                        <h1 class="ls-tight font-bolder h2 mt-2">ZuciBall Central</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form [formGroup]="myForm" class="text-center" (ngSubmit)="login()">
+                        <div class="form-group row">
+                            <div class="col-7 mx-auto">
+                                <app-common-input-box [controlName]="'email'" [parentForm]="myForm" [fieldType]="'text'"
+                                    [idSelector]="'email'" [placeholderText]="'Email'"
+                                    [errorMessage]="'Username is required'"></app-common-input-box>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-7 mx-auto">
+                                <app-common-input-box [controlName]="'password'" [parentForm]="myForm"
+                                    [fieldType]="'password'" [idSelector]="'password'" [placeholderText]="'Password'"
+                                    [errorMessage]="'Password is required'"></app-common-input-box>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-7 mx-auto mt-4">
+                                <button type="submit" class="btn btn-lg text-white w-100 py-3"
+                                    style="background-color: #f72257;">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
