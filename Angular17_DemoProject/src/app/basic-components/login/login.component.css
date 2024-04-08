@@ -1,23 +1,3 @@
 .container-fluid{
     font-family: Montserrat;
 }
-
-@media (min-width: 576px) {
-    /* Style the login form container */
-    .login-form-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh; /* Full height of the viewport */
-    }
-
-    /* Style the image container */
-    .login-image-container {
-        width: 50%; /* Adjust the width as needed */
-    }
-
-    /* Style the login form container */
-    .login-form {
-        width: 50%; /* Adjust the width as needed */
-    }
-}
