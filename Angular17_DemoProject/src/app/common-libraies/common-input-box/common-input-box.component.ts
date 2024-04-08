@@ -14,8 +14,8 @@ export class CommonInputBoxComponent {
   @Input() controlName!: string;
   @Input() parentForm!: FormGroup;
   @Input() fieldType!: string;
-  @Input() idSelector!:string;
-  @Input() placeholderText!:string;
+  @Input() idSelector!: string;
+  @Input() placeholderText!: string;
   @Input() errorMessage!: string;
   @Input() invalidForm!: boolean | null;
   @Input() required!:boolean;
