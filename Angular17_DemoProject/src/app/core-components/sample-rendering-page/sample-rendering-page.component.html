@@ -37,14 +37,14 @@
             [objectKeyToShow]="'name'"  [selectedValue]="'John Doe'"
             [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'"></app-common-dropdown>-->
 
-            <app-common-dropdown [label]="'Country'" [controlName]="'pokemonData'" [parentForm]="myForm"
+            <!-- <app-common-dropdown [label]="'Country'" [controlName]="'pokemonData'" [parentForm]="myForm"
             [idSelector]="'country'" [placeholderText]="'Enter your Pokemon'" [errorMessage]="'Starter Pokemon is required'"
             [objectKeyToShow]="'name'" [selectedValue]="'Bulbasaur'"
-            [invalidForm]="invalidForm" [dropDownValue]="pokeDetails" [objectKeyAsValue]="'type'"></app-common-dropdown>
+            [invalidForm]="invalidForm" [dropDownValue]="pokeDetails" [objectKeyAsValue]="'type'"></app-common-dropdown> -->
     <!-- </div> -->
 
-    <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
-</form>
+    <!-- <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
+</form> -->
 
 <!-- <h2 class="mt-3">This is Pokemon Details</h2>
 <app-common-table [headers]="pokeHeaders" [data]="pokeDetails"></app-common-table>
@@ -54,11 +54,11 @@
 <h2 class="mt-3">This is User Details</h2>
 <app-common-table [headers]="['Name', 'Email']" [data]="users" [dataToRemove]="['id', 'age']"></app-common-table> 
  -->
- <!-- <h2 class="mt-3">This is employee Details</h2>
-<app-common-table [headers]="employeeHeader" [data]="mockData" [mockData]="mockData"></app-common-table> -->
+ <h2 class="mt-3">This is employee Details</h2>
+<app-common-table [headers]="employeeHeader" [data]="mockData" [mockData]="mockData"></app-common-table>
 
 <!-- <h2 class="mt-3">This is Pokemon Details</h2>
 <app-common-table [headers]="pokeHeaders" [data]="pokeDetails"></app-common-table> --> 
 
 
-<app-common-filter [headers]="employeeHeader" [tableData]="employeeDetails" (filtersChanged)="updateFilter($event)" (resetFilter)="resetFilter()"></app-common-filter>
+<!-- <app-common-filter [headers]="employeeHeader" [tableData]="employeeDetails" (filtersChanged)="updateFilter($event)" (resetFilter)="resetFilter()"></app-common-filter> -->
