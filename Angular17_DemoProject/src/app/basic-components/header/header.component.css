@@ -26,6 +26,7 @@
     height: auto;
     overflow: hidden;
     white-space: normal;
+    color: rgba(0, 0, 0, 0.87);
 }
 
 .dropdown-item:hover {
@@ -49,10 +50,11 @@
 .sideNavList>span {
     color: #a7a8a7;
     font-weight: 500;
+    margin-left: -5px;
 }
 
 .sideNavList {
-    padding: 14px 13px !important;
+    padding: 13px 13px !important;
 }
 
 .sideNavList:hover {
