@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SampleRenderingPageComponent } from './core-components/sample-rendering-page/sample-rendering-page.component';
 import { HeaderComponent } from './basic-components/header/header.component';
-import { PageUnderDevComponent } from './basic-components/page-under-dev/page-under-dev.component';
 import { NgIf } from '@angular/common';
 import { LoginComponent } from './basic-components/login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SampleRenderingPageComponent, HeaderComponent, PageUnderDevComponent, LoginComponent, NgIf],
+  imports: [RouterOutlet, SampleRenderingPageComponent, HeaderComponent, LoginComponent, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
