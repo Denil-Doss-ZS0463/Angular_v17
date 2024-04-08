@@ -19,15 +19,21 @@ export class CommonTableComponent {
   descendingClicked: boolean = false;
   loading: boolean = false;
   errorLoading: boolean = false;
+  sortByColumn:number = 0;
 
-  constructor(private router: Router) { }
+  @Input() mockData: any[] = [];
+  constructor(private router: Router) {
+  }
+  ngOnInit() {
+    this.mockData = this.data;
+  }
 
   getUserKeys(key: any): string[] {
     return Object.keys(key);
   }
 
   removableObjects(key: any): string[] {
-    this.dataToRemove = ['id','image','type']
+    this.dataToRemove = ['id', 'image', 'type']
     return Object.keys(key == this.dataToRemove);
   }
 
@@ -38,6 +44,7 @@ export class CommonTableComponent {
   sortByColumnAscending(columnIndex: number) {
     this.ascendingClicked = true;
     this.descendingClicked = false;
+    this.sortByColumn = columnIndex;
     const columnKey = this.getColumnKey(columnIndex);
     this.data.sort((a, b) => {
       if (a[columnKey] < b[columnKey]) return -1;
@@ -54,6 +61,7 @@ export class CommonTableComponent {
   sortByColumnDescending(columnIndex: number) {
     this.descendingClicked = true;
     this.ascendingClicked = false;
+    this.sortByColumn = columnIndex;
     const columnKey = this.getColumnKey(columnIndex);
     this.data.sort((a, b) => {
       if (a[columnKey] < b[columnKey]) return 1;

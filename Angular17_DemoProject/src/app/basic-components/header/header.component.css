@@ -79,6 +79,12 @@
     font-weight: 500;
 }
 
+
+.sampleClass
+{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 992px) {
     .logoContainer {
         display: flex;

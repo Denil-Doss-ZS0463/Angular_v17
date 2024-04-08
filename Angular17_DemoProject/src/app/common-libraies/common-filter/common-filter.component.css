@@ -1,0 +1,30 @@
+.btn-apply {
+    background-color: #EB0045;
+}
+
+.filterDisabled {
+    opacity: 0.5;
+}
+
+.addFilterLabel {
+    color: #007CBA;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.addFilterLabel:hover {
+    cursor: pointer;
+    text-decoration: underline;
+
+}
+
+.andLabel {
+    color: #007CBA;
+    font-weight: 500;
+}
+
+.removeFilterIcon {
+    cursor: pointer;
+    color: #a7a8a7;
+
+}

@@ -3,21 +3,21 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonInputBoxComponent } from '../../common-libraies/common-input-box/common-input-box.component';
 import { CommonDropdownComponent } from '../../common-libraies/common-dropdown/common-dropdown.component';
 import { CommonTableComponent } from '../../common-libraies/common-table/common-table.component';
-
+import { CommonFilterComponent } from '../../common-libraies/common-filter/common-filter.component';
+import { StringContants } from '../../../assets/Constants/stringConstant';
 @Component({
   selector: 'app-sample-rendering-page',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonInputBoxComponent, CommonDropdownComponent, CommonTableComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonInputBoxComponent, CommonDropdownComponent, CommonTableComponent, CommonFilterComponent],
   templateUrl: './sample-rendering-page.component.html',
   styleUrl: './sample-rendering-page.component.css'
 })
 export class SampleRenderingPageComponent {
-  inputValue = signal('')
-
+  inputValue = signal('');
   myForm!: FormGroup;
-
   userName: string = "";
   age: number = 0;
+  mockData: any[] = [];
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -25,13 +25,13 @@ export class SampleRenderingPageComponent {
       username: ['', Validators.required],
       age: ['', Validators.required],
       state: ['', Validators.required],
-      currency: ['',Validators.required],
+      currency: ['', Validators.required],
       areaName: [''],
       country: ['',],
-      pokemonData: ['',Validators.required],
-
+      pokemonData: ['', Validators.required],
     });
-   
+    this.mockData = this.employeeDetails;
+
   }
 
   invalidForm!: boolean | null;
@@ -40,13 +40,25 @@ export class SampleRenderingPageComponent {
     this.age = this.myForm.get('age')?.value;
     if (this.myForm.valid) {
       this.invalidForm = false;
-      console.log(this.myForm.value); 
+      console.log(this.myForm.value);
     }
     else {
       // alert("Invalid Form");
       this.invalidForm = true;
     }
   }
+
+  updateFilter(data: any) {
+    console.log("From parent ",data);
+    
+    this.mockData = data;
+  }
+
+  resetFilter() {
+    this.mockData = this.employeeDetails;
+  }
+
+
 
   users: any[] = [
     {
