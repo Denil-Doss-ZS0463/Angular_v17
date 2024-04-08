@@ -22,3 +22,9 @@
     color: #007CBA;
     font-weight: 500;
 }
+
+.removeFilterIcon {
+    cursor: pointer;
+    color: #a7a8a7;
+
+}

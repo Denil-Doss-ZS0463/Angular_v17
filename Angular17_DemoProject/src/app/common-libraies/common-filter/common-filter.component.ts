@@ -7,7 +7,7 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-common-filter',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonDropdownComponent, CommonInputBoxComponent,NgClass],
+  imports: [ReactiveFormsModule, FormsModule, CommonDropdownComponent, CommonInputBoxComponent, NgClass],
   templateUrl: './common-filter.component.html',
   styleUrl: './common-filter.component.css'
 })
@@ -19,25 +19,26 @@ export class CommonFilterComponent {
   @Input() tableData: any[] = [];
   @Input() dataAsSelected!: string;
   @Output() resetFilter = new EventEmitter<any>();
+
   dataToFilter: any[] = [];
   filterForm!: FormGroup;
-  
-  constructor(private formBuilder: FormBuilder) {
-    this.filterForm = this.formBuilder.group({
-      filterColumn: ['', Validators.required],
-      filterValue: ['', Validators.required],
-      filterCondition: ['Attributes', Validators.required]
-    });
+  columnValue!: string;
 
-  }
+  applyLabel:string = StringContants.generalContants.apply;
+  addFilterLabel:string = StringContants.filter.addFilterLabel;
+  andLabel:string = StringContants.filter.andLabel;
+
+  filters: any[] = [{ column: '', condition: '', value: '' }];
+
   ngOnInit() {
     this.dataToFilter = this.tableData;
+    this.filters = [{ column: this.headers[0], condition: 'Equals', value: '' }];
   }
 
-  filters: any[] = [{ column: '', condition: 'equals', value: '' }];
-
   addFilter() {
-    this.filters.push({ column: '', condition: 'equals', value: '' });
+    if (this.headers.length) {
+      this.filters.push({ column: this.headers[this.filters.length], condition: 'Equals', value: '' });
+    }
   }
 
   removeFilter(index: number) {
@@ -45,40 +46,36 @@ export class CommonFilterComponent {
   }
 
   applyFilters() {
-    console.log("filter criteria-->", this.filters);
-    console.log("table data-->", this.tableData);
-    console.log(this.filterForm.value);
-    if (!this.filterForm.invalid) {
-      this.dataToFilter = this.applyFiltersCriteria(this.tableData, [this.filterForm.value]);
-      // console.log(this.dataToFilter);
+    if (this.filters.length > 0) {
+      this.dataToFilter = this.applyFiltersCriteria(this.tableData, this.filters) ? this.applyFiltersCriteria(this.tableData, this.filters) : [];
+      console.log(this.dataToFilter);
       this.filtersChanged.emit(this.dataToFilter);
     }
 
   }
 
-  columnValue!: string;
   applyFiltersCriteria<T>(data: any, filterCriteria: any[]): T[] {
     return data.filter((item: any) => {
       return filterCriteria.every(criteria => {
-        const columnName = this.toCamelCase(criteria.filterColumn);
+        const columnName = this.toCamelCase(criteria.column);
         this.columnValue = item[columnName];
-        switch (criteria.filterCondition.toLowerCase()) {
+        switch (criteria.condition.toLowerCase()) {
           case 'equals':
-            return this.columnValue.toLocaleLowerCase() === criteria.filterValue.toLocaleLowerCase();
+            return this.columnValue.toLocaleLowerCase() === criteria.value.toLocaleLowerCase();
           case 'does not equal':
-            return this.columnValue.toLocaleLowerCase() !== criteria.filterValue.toLocaleLowerCase();
+            return this.columnValue.toLocaleLowerCase() !== criteria.value.toLocaleLowerCase();
           case 'begins with':
-            return this.columnValue.startsWith(criteria.filterValue.toLocaleLowerCase());
+            return this.columnValue.startsWith(criteria.value.toLocaleLowerCase());
           case 'not begins with':
-            return !this.columnValue.startsWith(criteria.filterValue.toLocaleLowerCase());
+            return !this.columnValue.startsWith(criteria.value.toLocaleLowerCase());
           case 'ends with':
-            return this.columnValue.endsWith(criteria.filterValue.toLocaleLowerCase());
+            return this.columnValue.endsWith(criteria.value.toLocaleLowerCase());
           case 'not ends with':
-            return !this.columnValue.endsWith(criteria.filterValue.toLocaleLowerCase());
+            return !this.columnValue.endsWith(criteria.value.toLocaleLowerCase());
           case 'contains':
-            return this.columnValue.toLocaleLowerCase().includes(criteria.filterValue.toLocaleLowerCase());
+            return this.columnValue.toLocaleLowerCase().includes(criteria.value.toLocaleLowerCase());
           case 'not contains':
-            return !this.columnValue.toLocaleLowerCase().includes(criteria.filterValue.toLocaleLowerCase());
+            return !this.columnValue.toLocaleLowerCase().includes(criteria.value.toLocaleLowerCase());
           default:
             return true;
         }
@@ -99,4 +96,5 @@ export class CommonFilterComponent {
   resetValues() {
     this.resetFilter.emit(true)
   }
+
 }

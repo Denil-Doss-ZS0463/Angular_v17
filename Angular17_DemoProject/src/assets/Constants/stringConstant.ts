@@ -14,7 +14,7 @@ export class StringContants
         filterLabel:'Filter',
         columnLabel:'Column',
         filterAttributes: ['Equals', 'Does Not Equal', 'Begins With', 'Not Begins With', 'Ends With', 'Not Ends With', 'Contains', 'Not Contains' ],
-        addFilterLabel:'Add Filter',
-
+        andLabel:'and',
+        addFilterLabel:'+ Add Filter'
     }
 }

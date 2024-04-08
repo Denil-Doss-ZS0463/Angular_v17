@@ -49,6 +49,8 @@ export class SampleRenderingPageComponent {
   }
 
   updateFilter(data: any) {
+    console.log("From parent ",data);
+    
     this.mockData = data;
   }
 
