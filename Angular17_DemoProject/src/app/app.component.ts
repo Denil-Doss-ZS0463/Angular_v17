@@ -8,18 +8,24 @@ import { LoginComponent } from './basic-components/login/login.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SampleRenderingPageComponent, HeaderComponent, LoginComponent, NgIf],
+  imports: [
+    RouterOutlet,
+    SampleRenderingPageComponent,
+    HeaderComponent,
+    LoginComponent,
+    NgIf,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Angular17_DemoProject';
   includePaths: string[] = ['', 'home', 'reports','users'];
   hideNav = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   ngOnInit() {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const endpoint = this.getEndpointFromUrl(event.urlAfterRedirects);
         this.hideNav = this.includePaths.includes(endpoint);

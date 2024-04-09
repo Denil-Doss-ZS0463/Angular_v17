@@ -1,100 +1,122 @@
 .profile-circle {
-    background-color: #007cba;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-weight: 500;
+  background-color: #007cba;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: 500;
 }
 
 .dropdown-menu:not(.viewProfile) {
-    max-width: 150px;
-    max-height: 400px;
-    overflow-y: scroll;
+  max-width: 150px;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 .viewProfile {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .viewProfile:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .dropdown-item {
-    display: block;
-    width: 180px;
-    height: auto;
-    overflow: hidden;
-    white-space: normal;
-    color: rgba(0, 0, 0, 0.87);
+  display: block;
+  width: 180px;
+  height: auto;
+  overflow: hidden;
+  white-space: normal;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .dropdown-item:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .shadow {
-    box-shadow: 0 0 10px rgba(128, 128, 128, 0.3) !important;
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.3) !important;
 }
 
 .sidebar {
-    background-color: #b8d8eb38 !important;
-    height: 100vh;
+  background-color: #b8d8eb38 !important;
+  height: 100vh;
 }
 
 .headerContainer {
-    height: 100vh;
-    overflow-y: hidden;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
-.sideNavList>span {
-    color: #a7a8a7;
-    font-weight: 500;
-    margin-left: -5px;
+.sideNavList > span {
+  color: #a7a8a7;
+  font-weight: 500;
+  margin-left: -5px;
 }
 
 .sideNavList {
-    padding: 13px 13px !important;
+  padding: 13px 13px !important;
 }
 
 .sideNavList:hover {
-    background-color: #e5ecf1;
+  background-color: #e5ecf1;
 }
 
 .main-content {
-    height: calc(95vh - 56px);
-    overflow-y: auto;
+  height: calc(95vh - 56px);
+  overflow-y: auto;
 }
 
 .active,
 .active:hover {
-    background-color: #007cba;
+  background-color: #007cba;
 }
 
-.active>span,
-.active>i {
-    color: white;
-    font-weight: bold;
+.active > span,
+.active > i {
+  color: white;
+  font-weight: bold;
 }
 
 .locationPlaceholder {
-    font-weight: 500;
+  font-weight: 500;
 }
 
-
-.sampleClass
-{
-    cursor: pointer;
+.sampleClass {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 992px) {
-    .logoContainer {
-        display: flex;
-        justify-content: end;
-    }
+  .logoContainer {
+    display: flex;
+    justify-content: end;
+  }
 
-    .profileIcon {
-        margin-left: 20px;
-    }
+  .profileIcon {
+    margin-left: 20px;
+  }
+}
 
+.modal-section {
+  padding: 32px;
+}
+
+.profile-circle-modal {
+  background-color: #007cba;
+  padding: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-weight: 500;
+  font-size: 28px;
+}
+
+.signed-user {
+  color: rgb(48, 38, 29);
+  font-size: 24px;
+  font-weight: 600;
+}
+.signed-user-role {
+  color: rgba(48, 38, 29, 0.698);
+  font-size: 14px;
+  font-weight: 500;
 }
