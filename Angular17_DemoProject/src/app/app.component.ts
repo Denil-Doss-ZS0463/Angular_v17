@@ -14,7 +14,7 @@ import { NgIf } from '@angular/common';
 })
 export class AppComponent {
   title = 'Angular17_DemoProject';
-  includePaths: string[] = ['', 'home', 'reports'];
+  includePaths: string[] = ['', 'home', 'reports','users'];
   hideNav = false;
 
   constructor(private router: Router) { }

@@ -11,8 +11,12 @@ table {
 
 thead {
     border-bottom: none !important;
+    position: sticky;
+    top: 0;
+    background-color: #f0f7fb !important;
     width: auto;
     height: 40px;
+    z-index: 1;
 }
 
 table th {
@@ -21,12 +25,13 @@ table th {
     line-height: 17.07px;
     box-shadow: none !important;
     border-bottom: none !important;
+    font-size: 0.875rem;
     font-weight: 600 !important;
 }
 
 td {
     border-collapse: collapse;
-    font-weight: 400;
+    font-weight: 500 !important;
     font-size: 0.875rem;
     line-height: 1.43;
     letter-spacing: 0.01071em;
@@ -35,7 +40,8 @@ td {
     border-bottom: 1px solid rgb(224, 224, 224);
     text-align: left;
     padding: 16px;
-    color: rgba(0, 0, 0, 0.87);
+    color: #30261d !important;
+    opacity: .7;
 }
 
 th:first-child {
@@ -57,4 +63,13 @@ th:last-child {
 .selectedSorting
 {
     color: #B2CDE0;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.tableContainer{
+    height: 375px;
+    overflow: auto;
 }

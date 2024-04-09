@@ -1,6 +1,7 @@
-<div class="d-flex justify-content-center align-items-center">
+<div class="tableContainer">
     <table>
-        <thead>
+        <caption></caption>
+        <thead class="noWrap">
             <tr class="text-center">
                 @for(header of headers; track $index)
                 { <th>
@@ -31,7 +32,7 @@
             {
                 @for(user of mockData; track $index)
                 {
-                <tr class="text-center" (click)="showRowDetails(user)">
+                <tr class="text-center hello" (click)="showRowDetails(user)">
                     @for(key of getUserKeys(user); track $index)
                     {
                     @if(key !== 'id' && !dataToRemove.includes(key))
