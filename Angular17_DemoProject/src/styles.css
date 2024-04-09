@@ -1,24 +1,22 @@
-.iconColor{
-    color: #9d9b9b;
-    font-size: 20px;
+.iconColor {
+  color: #9d9b9b;
+  font-size: 20px;
 }
 
-*
-{
-    font-family: 'Montserrat', sans-serif;
-    /* font-size: 11px; */
-}
-.outerBorder
-{
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+* {
+  font-family: "Montserrat", sans-serif;
+  /* font-size: 11px; */
 }
 
-.bolderLabel
-{
-    font-weight: bold;
-    font-size: 12px;
+.outerBorder {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.bolderLabel {
+  font-weight: bold;
+  font-size: 12px;
 }

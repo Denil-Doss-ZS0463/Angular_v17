@@ -6,31 +6,29 @@ import { PageUnderDevComponent } from './basic-components/page-under-dev/page-un
 import { PageNotFoundComponent } from './basic-components/page-not-found/page-not-found.component';
 import { SampleRenderingPageComponent } from './core-components/sample-rendering-page/sample-rendering-page.component';
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-    },
-    {
-
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-
-        path: 'reports',
-        component: ReportsComponent
-    },
-    {
-        path: 'sampleRendering',
-        component: SampleRenderingPageComponent
-    },
-    {
-        path: '**',
-        component: PageNotFoundComponent
-    },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
+  },
+  {
+    path: 'sampleRendering',
+    component: SampleRenderingPageComponent,
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+  },
 ];
