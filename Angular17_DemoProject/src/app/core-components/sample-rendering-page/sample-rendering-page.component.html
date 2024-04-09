@@ -1,5 +1,5 @@
 <form [formGroup]="myForm" class="m-3">
-<!-- <div class="row mt-2 ">
+<div class="row mt-2 ">
         <div class="col-6 outerBorder">
             <div class="bolderLabel">Personal Info</div>
             <app-common-input-box [label]="'Username'" [controlName]="'username'" [parentForm]="myForm"
@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="row mt-2">
+ <!--    <div class="row mt-2">
         <div class="col-6 ">
             <app-common-input-box [label]="'Age'" [controlName]="'age'" [parentForm]="myForm" [fieldType]="'number'"
                 [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
@@ -43,8 +43,10 @@
             [invalidForm]="invalidForm" [dropDownValue]="pokeDetails" [objectKeyAsValue]="'type'"></app-common-dropdown> -->
     <!-- </div> -->
 
-    <!-- <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
-</form> -->
+    <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
+
+       
+</form> 
 
 <!-- <h2 class="mt-3">This is Pokemon Details</h2>
 <app-common-table [headers]="pokeHeaders" [data]="pokeDetails"></app-common-table>

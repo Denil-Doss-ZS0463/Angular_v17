@@ -79,7 +79,7 @@ export class CommonTableComponent {
   }
 
   currentPage: number = 1;
-  itemsPerPage: number = 5; // Default items per page
+  itemsPerPage: number = 50; // Default items per page
   totalPages: number = 0;
 
   calculateTotalPages() {
@@ -105,7 +105,7 @@ export class CommonTableComponent {
   }
 
   availablePages(totalPages: any) {
-    return Array(totalPages).fill(0).map((_, i) => i + 1)
+    return Array(totalPages).fill(0).map((_, i) => i + 1);
   }
 
 
