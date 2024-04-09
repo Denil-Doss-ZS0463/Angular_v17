@@ -14,18 +14,21 @@ export class CommonTableComponent {
   @Input() headers: string[] = [];
   @Input() data: any[] = [];
   @Input() dataToRemove: any[] = [];
+  @Input() mockData: any[] = [];
 
   ascendingClicked: boolean = false;
   descendingClicked: boolean = false;
   loading: boolean = false;
   errorLoading: boolean = false;
-  sortByColumn:number = 0;
+  sortByColumn: number = 0;
+  pageItems: number[] = [50, 100, 150, 200, 250];
 
-  @Input() mockData: any[] = [];
   constructor(private router: Router) {
   }
   ngOnInit() {
     this.mockData = this.data;
+    this.calculateTotalPages();
+
   }
 
   getUserKeys(key: any): string[] {
@@ -37,9 +40,6 @@ export class CommonTableComponent {
     return Object.keys(key == this.dataToRemove);
   }
 
-  showRowDetails(data: any) {
-    this.router.navigate(['show-details', data.id]);
-  }
 
   sortByColumnAscending(columnIndex: number) {
     this.ascendingClicked = true;
@@ -76,6 +76,36 @@ export class CommonTableComponent {
     }).replace(/^[A-Z]/, function (match) {
       return match.toLowerCase();
     });
+  }
+
+  currentPage: number = 1;
+  itemsPerPage: number = 50; // Default items per page
+  totalPages: number = 0;
+
+  calculateTotalPages() {
+    this.totalPages = Math.ceil(this.mockData.length / this.itemsPerPage);
+  }
+
+  updateDisplayedData() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.mockData.length);
+    return this.mockData.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  onItemsPerPageChange(itemsPerPage: any) {
+    this.itemsPerPage = itemsPerPage?.target?.value;
+    this.currentPage = 1;
+    this.calculateTotalPages();
+  }
+
+  availablePages(totalPages: any) {
+    return Array(totalPages).fill(0).map((_, i) => i + 1);
   }
 
 
