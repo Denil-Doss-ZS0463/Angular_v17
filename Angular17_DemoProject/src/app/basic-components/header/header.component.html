@@ -45,110 +45,105 @@
       </div>
     </div>
   </nav>
-
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="collapse col-md-3 d-md-block sidebar" id="navbarSupportedContent"
-        [ngStyle]="{'width': isCollapsed ? '75px' : '195px'}" aria-label="Main navigation">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item mt-3">
-              <a class="row nav-link sideNavList" routerLink="/home" routerLinkActive="active">
-                <i class="iconColor fa-sharp fa-solid fa-house col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Home</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList" routerLink="/reports" routerLinkActive="active">
-                <i class="fa-solid fa-files iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Reports</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList">
-                <i class="fa-solid fa-user iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Users</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList">
-                <i class="fa-sharp fa-solid fa-map-location-dot iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Area</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList">
-                <i class="fa-sharp fa-solid fa-shirt iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Merchandise</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList">
-                <i class="fa-solid fa-volleyball iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-3">Program</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList">
-                <i class="fa-solid fa-location-dot iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Location</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="row nav-link sideNavList">
-                <i class="fa-solid fa-person-running-fast iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-6">Events</span>
-                }
-              </a>
-            </li>
-            <li class="nav-item mb-2">
-              <a class="row nav-link sideNavList">
-                <i class="fa-solid fa-user-group iconColor col-sm-3"></i>
-                @if (!isCollapsed) {
-                <span class="col-sm-3">Registrants</span>
-                }
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex justify-content-center mb-3">
-          <div class="toggler profile-circle d-flex align-items-center justify-content-center text-white fs-6"
-            (click)="toggleSidebar()">
-            @if (!isCollapsed) {
-            <i class="fa-sharp fa-solid fa-angles-left"></i>
-            }
-            @if (isCollapsed) {
-            <i class="fa-sharp fa-solid fa-angles-right"></i>
-            }
-          </div>
-        </div>
-        <div>
-          <div class="sampleClass" routerLink="/sampleRendering">Sample Rendering Component</div>
-        </div>
-      </nav>
-      <main role="main" class="col main-content">
-        <router-outlet></router-outlet>
-      </main>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="collapse col-md-3 d-md-block sidebar" id="navbarSupportedContent"
+                [ngStyle]="{'width': isCollapsed ? '75px' : '195px'}" aria-label="Main navigation">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item mt-3">
+                            <a class="row nav-link sideNavList" routerLink="/home" routerLinkActive="active">
+                                <i class="iconColor fa-sharp fa-solid fa-house col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Home</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList" routerLink="/reports" routerLinkActive="active">
+                                <i class="fa-solid fa-files iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Reports</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList" routerLink="/users" routerLinkActive="active">
+                                <i class="fa-solid fa-user iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Users</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-sharp fa-solid fa-map-location-dot iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Area</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-sharp fa-solid fa-shirt iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Merchandise</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-volleyball iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-3">Program</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-location-dot iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Location</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-person-running-fast iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                <span class="col-sm-6">Events</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="row nav-link sideNavList">
+                                <i class="fa-solid fa-user-group iconColor col-sm-3"></i>
+                                @if (!isCollapsed) {
+                                    <span class="col-sm-3">Registrants</span>
+                                }
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="toggler profile-circle d-flex align-items-center justify-content-center text-white fs-6"
+                        (click)="toggleSidebar()">
+                        @if (!isCollapsed) {
+                            <i class="fa-sharp fa-solid fa-angles-left"></i>
+                        }
+                        @if (isCollapsed) {
+                            <i class="fa-sharp fa-solid fa-angles-right"></i>
+                        }
+                    </div>
+                </div>
+                <div>
+                    <div class="sampleClass" routerLink="/sampleRendering">Sample Rendering Component</div>
+                </div>
+            </nav>
+            <main role="main" class="col main-content">
+                <router-outlet></router-outlet>
+            </main>
     </div>
-    <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
   </div>
 </div>
 

@@ -4,3 +4,9 @@
     font-family: Montserrat;
     font-weight: 600;
 }
+
+.errorName {
+    font-size: 26px;
+    font-weight: 600;
+    color: rgb(0, 124, 186) !important;
+}

@@ -20,7 +20,7 @@ import { LoginComponent } from './basic-components/login/login.component';
 })
 export class AppComponent {
   title = 'Angular17_DemoProject';
-  includePaths: string[] = ['', 'home', 'reports'];
+  includePaths: string[] = ['', 'home', 'reports','users'];
   hideNav = false;
 
   constructor(private router: Router) {}
