@@ -18,8 +18,8 @@
 
     <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm" [idSelector]="'country'"
         [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'" [objectKeyToShow]="'name'"
-        [selectedValue]="'John Doe'" [invalidForm]="invalidForm" [dropDownValue]="users"
-        [objectKeyAsValue]="'name'"></app-common-dropdown>
+        [selectedValue]="'John Doe'" [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'">
+    </app-common-dropdown>
 
     <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
 
