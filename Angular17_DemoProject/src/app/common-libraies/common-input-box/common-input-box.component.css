@@ -1,0 +1,10 @@
+label {
+  font-size: 11px;
+}
+
+input[type="text"] {
+  font-size: 16px;
+  padding: 13px;
+  font-weight: 500;
+  color: rgba(48, 38, 29, 0.698);
+}

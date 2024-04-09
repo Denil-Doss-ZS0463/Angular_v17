@@ -7,7 +7,7 @@ import { ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, NgClass],
   templateUrl: './common-input-box.component.html',
-  styleUrl: './common-input-box.component.css'
+  styleUrl: './common-input-box.component.css',
 })
 export class CommonInputBoxComponent {
   @Input() label!: string;
@@ -18,11 +18,11 @@ export class CommonInputBoxComponent {
   @Input() placeholderText!: string;
   @Input() errorMessage!: string;
   @Input() invalidForm!: boolean | null;
-  @Input() required!:boolean;
+  @Input() required!: boolean;
+  @Input() disabled: boolean = false;
 
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);
     return control && control.invalid && control.touched;
   }
-
 }
