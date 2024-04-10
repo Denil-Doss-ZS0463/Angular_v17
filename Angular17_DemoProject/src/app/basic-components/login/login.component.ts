@@ -9,6 +9,7 @@ import {
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CommonLogicsService } from '../../services/common-logics.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private logicService: CommonLogicsService
   ) {}
 
   ngOnInit() {
@@ -51,9 +53,7 @@ export class LoginComponent {
 
     this.userService.login(this.myForm.value).subscribe(
       (response) => {
-        console.log(response);
-        this.userData = response;
-        this.userService.setLoggedInUser(response);
+        this.userService.setUserToken(response.token);
         this.router.navigate(['/home']);
       },
       (error) => {
