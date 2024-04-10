@@ -5,6 +5,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../../core-components/profile/profile.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -50,7 +51,7 @@ export class HeaderComponent {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,private router:Router) {}
 
   openProfileModal() {
     this.modalService.open(ProfileComponent, {
@@ -59,5 +60,10 @@ export class HeaderComponent {
       backdrop: 'static',
       keyboard: false,
     });
+  }
+  userLogout(){
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

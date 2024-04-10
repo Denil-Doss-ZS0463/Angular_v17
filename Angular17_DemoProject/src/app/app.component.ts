@@ -19,7 +19,7 @@ import { LoginComponent } from './basic-components/login/login.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Angular17_DemoProject';
+  title = 'ZuciBall Central';
   includePaths: string[] = ['', 'home', 'reports','users'];
   hideNav = false;
 
