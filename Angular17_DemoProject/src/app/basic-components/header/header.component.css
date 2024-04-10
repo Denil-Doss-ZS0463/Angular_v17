@@ -95,28 +95,9 @@
     margin-left: 20px;
   }
 }
-
-.modal-section {
-  padding: 32px;
-}
-
-.profile-circle-modal {
-  background-color: #007cba;
-  padding: 10px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  font-weight: 500;
-  font-size: 28px;
-}
-
-.signed-user {
-  color: rgb(48, 38, 29);
-  font-size: 24px;
-  font-weight: 600;
-}
-.signed-user-role {
-  color: rgba(48, 38, 29, 0.698);
-  font-size: 14px;
-  font-weight: 500;
+.profile-modal > .modal-dialog,
+.profile-modal > .modal-dialog > .modal-content {
+  --bs-modal-width: 1138px !important;
+  width: 700px !important;
+  max-width: none;
 }
