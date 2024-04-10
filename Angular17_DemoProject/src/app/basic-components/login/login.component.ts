@@ -27,6 +27,9 @@ export class LoginComponent {
   }
 
   get formControls() { return this.myForm.controls; }
+  get email() {
+    return this.myForm.get('email');
+  }
 
   login() {
     this.submitted = true;
@@ -44,6 +47,9 @@ export class LoginComponent {
       },
       error => {
         console.error(error);
+        if (error.status === 404) {
+          this.myForm.get('email')?.setErrors({ userNotFound: true });
+        }
       }
     );
   }
