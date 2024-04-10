@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../../core-components/profile/profile.component';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -53,10 +54,9 @@ export class HeaderComponent {
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
-
   constructor(
     private modalService: NgbModal,
-    private userService: UserService
+    private userService: UserService,private router:Router
   ) {
     this.setUserInitials();
   }
@@ -76,5 +76,10 @@ export class HeaderComponent {
       backdrop: 'static',
       keyboard: false,
     });
+  }
+  userLogout(){
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

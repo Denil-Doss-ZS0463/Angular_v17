@@ -101,3 +101,7 @@
   width: 700px !important;
   max-width: none;
 }
+
+.toggleSidebar:hover {
+  cursor: pointer;
+}

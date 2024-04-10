@@ -1,5 +1,4 @@
-<div class="relative w-100">
-
+<div class="relative w-100 tableContainer">
     <div>
         <table>
             <caption></caption>
@@ -46,50 +45,44 @@
             </tbody>
         </table>
     </div>
-
-    <div class="row paginationContent">
-        <div class="col-5"></div>
-        <div class="col-7 d-flex justify-content-end align-items-center gap-2">
-            <div class="d-flex gap-2">
-                <div class="">Rows per page</div>
-                <select class="p-1" (change)="onItemsPerPageChange($event)">
-                    <option *ngFor="let pageItem of pageItems" [value]="pageItem">{{ pageItem }}</option>
+</div>
+<div class="row paginationContent mt-3">
+    <div class="col-5"></div>
+    <div class="col-7 d-flex justify-content-end align-items-center gap-2 rowsPerPage">
+        <div class="d-flex gap-2 justify-content-center align-items-center rowsPerPageContainer">
+            <div class="">Rows per page</div>
+            <select class="p-1" (change)="onItemsPerPageChange($event)">
+                <option *ngFor="let pageItem of pageItems" [value]="pageItem">{{ pageItem }}</option>
+            </select>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+            <button class="btn paginationButtons rounded col-1" (click)="onPageChange(currentPage - 1)"
+                [disabled]="currentPage === 1">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fa-solid fa-angles-left"></i>
+                </div>
+            </button>
+            <div class="d-flex gap-2 align-items-center rowsPerPageContainer">
+                <div class="">Page</div>
+                <select class="p-1" [(ngModel)]="currentPage" (ngModelChange)="onPageChange($event)">
+                    @for(page of availablePages(totalPages); track $index)
+                    {
+                    <option [value]="page">{{ page }}</option>
+                    }
                 </select>
+                <div class="d-flex gap-2">
+                    <div>of </div>
+                    <div>{{ totalPages }}</div>
+                </div>
             </div>
-            <div class="d-flex gap-2 align-items-center">
-                <button class="btn paginationButtons rounded col-1" (click)="onPageChange(currentPage - 1)"
-                    [disabled]="currentPage === 1">
+            <div>
+                <button class=" col-1 btn paginationButtons rounded" (click)="onPageChange(currentPage + 1)"
+                    [disabled]="currentPage === totalPages">
                     <div class="d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-angles-left"></i>
+                        <i class="fa-solid fa-angles-right"></i>
                     </div>
                 </button>
-                <div class="d-flex gap-2 align-items-center">
-                    <div class="">Page</div>
-                    <select class="p-1" [(ngModel)]="currentPage" (ngModelChange)="onPageChange($event)">
-                        @for(page of availablePages(totalPages); track $index)
-                        {
-                        <option [value]="page">{{ page }}</option>
-                        }
-                    </select>
-                    <div class="d-flex gap-2">
-                        <div>of </div>
-                        <div>{{ totalPages }}</div>
-                    </div>
-                </div>
-                <div>
-                    <button class=" col-1 btn paginationButtons rounded" (click)="onPageChange(currentPage + 1)"
-                        [disabled]="currentPage === totalPages">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-angles-right"></i>
-                        </div>
-                    </button>
-                </div>
             </div>
-
         </div>
-
-
     </div>
-
-
 </div>

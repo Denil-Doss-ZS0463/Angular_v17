@@ -14,14 +14,14 @@ db.connect()
 
     return db.query(`
     CREATE TABLE IF NOT EXISTS users (
-        id INT PRIMARY KEY,
-        firstName VARCHAR(20),
-        lastName VARCHAR(20),
-        emailId VARCHAR(50),
-        password VARCHAR(30),
-        phoneNumber VARCHAR(30),
-        jobTitle VARCHAR(50),
-        accessLevel VARCHAR(50)
+      id SERIAL PRIMARY KEY,
+      firstName VARCHAR(20),
+      lastName VARCHAR(20),
+      emailId VARCHAR(100),
+      password TEXT,
+      phoneNumber VARCHAR(30),
+      jobTitle VARCHAR(50),
+      accessLevel VARCHAR(50)
     );
     `);
   })

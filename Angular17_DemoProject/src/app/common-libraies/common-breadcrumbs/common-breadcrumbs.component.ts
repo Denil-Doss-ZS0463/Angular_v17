@@ -1,9 +1,10 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 declare let bootstrap: any;
 @Component({
   selector: 'app-common-breadcrumbs',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './common-breadcrumbs.component.html',
   styleUrl: './common-breadcrumbs.component.css'
 })

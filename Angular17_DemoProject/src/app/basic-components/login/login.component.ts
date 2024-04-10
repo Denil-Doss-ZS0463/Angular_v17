@@ -34,9 +34,11 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
-
   get formControls() {
     return this.myForm.controls;
+  }
+  get email() {
+    return this.myForm.get('email');
   }
 
   login() {
@@ -56,6 +58,9 @@ export class LoginComponent {
       },
       (error) => {
         console.error(error);
+        if (error.status === 404) {
+          this.myForm.get('email')?.setErrors({ userNotFound: true });
+        }
       }
     );
   }

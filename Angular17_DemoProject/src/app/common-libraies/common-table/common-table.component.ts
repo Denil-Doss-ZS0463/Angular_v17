@@ -79,7 +79,7 @@ export class CommonTableComponent {
   }
 
   currentPage: number = 1;
-  itemsPerPage: number = 50; // Default items per page
+  itemsPerPage: number = 5;
   totalPages: number = 0;
 
   calculateTotalPages() {
