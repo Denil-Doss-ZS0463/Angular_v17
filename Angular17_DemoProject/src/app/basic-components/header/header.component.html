@@ -22,9 +22,8 @@
             </li>
             <li class="nav-item dropdown profile-circle profileIcon me-3">
               <a class="nav-link d-flex align-items-center justify-content-center text-white text-uppercase"
-                role="button" data-bs-toggle="dropdown" aria-expanded="false">{{
-                dropdownItems[0].charAt(0)
-                + dropdownItems[1].charAt(0) }}
+                role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ userFirstInitial }}{{ userLastInitial
+                }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end mt-1 viewProfile" id="dropdownMenu">
                 <li><a class="dropdown-item" role="button" (click)="openProfileModal()"><i

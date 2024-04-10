@@ -5,6 +5,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../../core-components/profile/profile.component';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,6 +25,9 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   profileModal: any;
+  loggedInUser: any;
+  userFirstInitial: string | undefined;
+  userLastInitial: string | undefined;
 
   dropdownItems: string[] = [
     'ZuciBall',
@@ -50,8 +54,20 @@ export class HeaderComponent {
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
+  constructor(
+    private modalService: NgbModal,
+    private userService: UserService,private router:Router
+  ) {
+    this.setUserInitials();
+  }
 
-  constructor(private modalService: NgbModal,private router:Router) {}
+  setUserInitials() {
+    const user = this.userService.loggedInUser;
+    if (user) {
+      this.userFirstInitial = user.firstname.charAt(0);
+      this.userLastInitial = user.lastname.charAt(0);
+    }
+  }
 
   openProfileModal() {
     this.modalService.open(ProfileComponent, {
