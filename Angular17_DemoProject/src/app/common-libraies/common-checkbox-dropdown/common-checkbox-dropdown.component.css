@@ -1,0 +1,42 @@
+.customCheckboxDropdown {
+    padding: 5px;
+    margin: 2px;
+    margin-top: 2px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: auto;
+    max-height: 200px;
+    overflow: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: lightgray;
+    overflow-x: auto;
+}
+
+.commonLabel {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+}
+
+.customCheckBox
+{
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.customCheckBox:checked {
+    background-color: #007cba;
+}
+
+.form-check-input:focus {
+    box-shadow: none !important;
+}
+.customCheckBoxTextbox
+{
+    cursor: pointer;
+}
+.customCheckboxOption:hover,
+.customCheckboxOption:hover .customFormCheckLabel
+{
+    cursor: pointer;
+    background-color: #f3f3f3;
+}

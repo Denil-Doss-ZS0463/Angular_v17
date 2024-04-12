@@ -5,10 +5,11 @@ import { CommonDropdownComponent } from '../../common-libraies/common-dropdown/c
 import { CommonTableComponent } from '../../common-libraies/common-table/common-table.component';
 import { CommonFilterComponent } from '../../common-libraies/common-filter/common-filter.component';
 import { StringContants } from '../../../assets/Constants/stringConstant';
+import { CommonCheckboxDropdownComponent } from '../../common-libraies/common-checkbox-dropdown/common-checkbox-dropdown.component';
 @Component({
   selector: 'app-sample-rendering-page',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonInputBoxComponent, CommonDropdownComponent, CommonTableComponent, CommonFilterComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonInputBoxComponent, CommonDropdownComponent, CommonTableComponent, CommonFilterComponent, CommonCheckboxDropdownComponent],
   templateUrl: './sample-rendering-page.component.html',
   styleUrl: './sample-rendering-page.component.css'
 })

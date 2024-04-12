@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +37,9 @@ export class UserService {
   getUserIdFromToken() {
     const token = this.getUserToken();
     if (token) {
-      const decodedToken: any = jwtDecode(token);
-      return decodedToken.userId;
+      // const decodedToken: any = jwtDecode(token);
+      // return decodedToken.userId;
+      return token;
     } else {
       return null;
     }

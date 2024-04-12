@@ -1,0 +1,29 @@
+<label [for]="idSelector" class="form-label commonLabel ps-0" >{{ label }}</label>
+<div #container>
+    <input type="text" (click)="toggleDropdDown()" class="form-control customCheckBoxTextbox" placeholder="Select Items"
+        [ngModel]="selectedItems.length === 0 ? placeholderText : (selectedItems.length === 1 ? returnLastSelectedValue(selectedItems[0]) : selectedItems.length + ' selected')" readonly
+        [ngClass]="{'border border-danger':selectedItems.length == 0 && invalidForm}">
+    @if(showDropdown)
+    {
+    <div class="customCheckboxDropdown">
+        @for (item of dropdownOptions; track $index) {
+        <div class="my-1 p-1 customCheckboxOption">
+            <label class="customFormCheckLabel">
+                <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item.id)"
+                    (change)="toggleSelection(item.id, $index)">
+                    {{item[objectKeyToShow]}}
+            </label>
+        </div>
+        }
+    </div>
+    }
+
+    <p class="text-danger errorMessage hidden m-0 pb-0">
+        @if(selectedItems.length == 0 && invalidForm)
+        {
+            {{errorMessage}}
+        }@else {
+        &nbsp;
+        }
+    </p>
+</div>
