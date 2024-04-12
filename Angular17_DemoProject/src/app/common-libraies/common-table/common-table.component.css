@@ -80,7 +80,7 @@ th:last-child {
    color: white;
    border-radius: 50% !important;
    text-align: center;
-   font-size: 10px;
+   font-size: 12px;
    opacity: .7;
 }
 
@@ -98,4 +98,9 @@ th:last-child {
 .rowsPerPageContainer>select {
     border-radius: 6px !important;
     width: 55px;
+}
+
+.disabledPaginations
+{
+    opacity: .4;
 }
