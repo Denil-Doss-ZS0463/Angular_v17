@@ -1,32 +1,47 @@
 import { Component } from '@angular/core';
 import { CommonInputBoxComponent } from '../../common-libraies/common-input-box/common-input-box.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CommonLogicsService } from '../../services/common-logics.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonInputBoxComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   myForm!: FormGroup;
   submitted = false;
   userData: any;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private logicService: CommonLogicsService
+  ) {}
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
-
-  get formControls() { return this.myForm.controls; }
+  get formControls() {
+    return this.myForm.controls;
+  }
+  get email() {
+    return this.myForm.get('email');
+  }
 
   login() {
     this.submitted = true;
@@ -37,13 +52,15 @@ export class LoginComponent {
     const email = this.myForm.value.email;
 
     this.userService.login(this.myForm.value).subscribe(
-      response => {
-        console.log(response);
-        this.userData = response;
+      (response) => {
+        this.userService.setUserToken(response.token);
         this.router.navigate(['/home']);
       },
-      error => {
+      (error) => {
         console.error(error);
+        if (error.status === 404) {
+          this.myForm.get('email')?.setErrors({ userNotFound: true });
+        }
       }
     );
   }

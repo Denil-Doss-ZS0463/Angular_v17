@@ -1,27 +1,41 @@
-<div class="modal-section">
+<div class="modal-section profile-section">
     <div class="modal-header justify-content-space-between">
         <div class="profile-circle-modal d-flex justify-content-center align-items-center">
-            <h4 class="mb-0">KN</h4>
+            <h4 class="mb-0">{{userInitials}}</h4>
         </div>
         <div class="user-details ms-3">
             <div class="user-name row">
-                <h4 class="signed-user">Karthick Nagarajan</h4>
+                <h4 class="signed-user">{{user.firstname}} {{user.lastname}}</h4>
             </div>
             <div class="user-role row">
-                <p class="signed-user-role">User | Super Admin</p>
+                <p class="signed-user-role">{{user.jobtitle}} | {{user.accesslevel}}</p>
             </div>
         </div>
         <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
     </div>
-    <div class="profile-section my-5">
+    <div class="profile-section my-3">
         <div class="header-section d-flex justify-content-between">
             <h4>Personal Details</h4>
             <div class="edit-section">
-                <a role="button" (click)="getData()">
+                @if (!isEditMode) {
+                <a role="button" (click)="enableEditMode()">
                     <i class="fa-solid fa-pen" style="color: #007cba;"></i>
                     <h5>Edit</h5>
                 </a>
+                }
+                @if (isEditMode) {
+                <a role="button" (click)="saveUserData()">
+                    <i class="fa-solid fa-pen" style="color: #007cba;"></i>
+                    <h5>Save</h5>
+                </a>
+                }
             </div>
+            <!-- <div class="save-section" *ngIf="isEditMode">
+                <a role="button" (click)="saveUserData()">
+                    <i class="fa-solid fa-pen" style="color: #007cba;"></i>
+                    <h5>Save</h5>
+                </a>
+            </div> -->
         </div>
         <div class="body-section">
             <form>
@@ -29,23 +43,26 @@
                     <div class="col">
                         <app-common-input-box [label]="'First Name'" [controlName]="'firstName'" [parentForm]="myForm"
                             [fieldType]="'text'" [idSelector]="'firstName'" [placeholderText]="'Enter your First Name'"
-                            [errorMessage]="'FirstName is required'" [invalidForm]="invalidForm" [required]="true">
+                            [errorMessage]="'FirstName is required'" [invalidForm]="invalidForm" [required]="true"
+                            [disabled]="!isEditMode">
                         </app-common-input-box>
                     </div>
                     <div class="col">
                         <app-common-input-box [label]="'Last Name'" [controlName]="'lastName'" [parentForm]="myForm"
                             [fieldType]="'text'" [idSelector]="'lastName'" [placeholderText]="'Enter your Last Name'"
-                            [errorMessage]="'Last Name is required'" [invalidForm]="invalidForm" [required]="true">
+                            [errorMessage]="'Last Name is required'" [invalidForm]="invalidForm" [required]="true"
+                            [disabled]="!isEditMode">
                         </app-common-input-box>
                     </div>
                 </div>
                 <app-common-input-box [label]="'Phone Number'" [controlName]="'phoneNumber'" [parentForm]="myForm"
                     [fieldType]="'tel'" [idSelector]="'phoneNumber'" [placeholderText]="'Enter your Phone Number'"
-                    [errorMessage]="'Phone Number is required'" [invalidForm]="invalidForm">
+                    [errorMessage]="'Phone Number is required'" [invalidForm]="invalidForm" [disabled]="!isEditMode">
                 </app-common-input-box>
                 <app-common-input-box [label]="'Email ID'" [controlName]="'emailid'" [parentForm]="myForm"
                     [fieldType]="'email'" [idSelector]="'emailid'" [placeholderText]="'Enter your Email ID'"
-                    [errorMessage]="'Email is required'" [invalidForm]="invalidForm" [required]="true">
+                    [errorMessage]="'Email is required'" [invalidForm]="invalidForm" [required]="true"
+                    [disabled]="!isEditMode">
                 </app-common-input-box>
             </form>
         </div>

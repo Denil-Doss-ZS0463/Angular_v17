@@ -15,6 +15,7 @@ export class CommonTableComponent {
   @Input() data: any[] = [];
   @Input() dataToRemove: any[] = [];
   @Input() mockData: any[] = [];
+  @Input() componentName: string = '';
 
   ascendingClicked: boolean = false;
   descendingClicked: boolean = false;
@@ -22,24 +23,21 @@ export class CommonTableComponent {
   errorLoading: boolean = false;
   sortByColumn: number = 0;
   pageItems: number[] = [50, 100, 150, 200, 250];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 0;
+
 
   constructor(private router: Router) {
   }
   ngOnInit() {
     this.mockData = this.data;
     this.calculateTotalPages();
-
   }
 
   getUserKeys(key: any): string[] {
     return Object.keys(key);
   }
-
-  removableObjects(key: any): string[] {
-    this.dataToRemove = ['id', 'image', 'type']
-    return Object.keys(key == this.dataToRemove);
-  }
-
 
   sortByColumnAscending(columnIndex: number) {
     this.ascendingClicked = true;
@@ -78,10 +76,6 @@ export class CommonTableComponent {
     });
   }
 
-  currentPage: number = 1;
-  itemsPerPage: number = 5;
-  totalPages: number = 0;
-
   calculateTotalPages() {
     this.totalPages = Math.ceil(this.mockData.length / this.itemsPerPage);
   }
@@ -106,6 +100,26 @@ export class CommonTableComponent {
 
   availablePages(totalPages: any) {
     return Array(totalPages).fill(0).map((_, i) => i + 1);
+  }
+
+  sendRowDetails(data: any) {
+    switch (this.componentName) {
+      case "users":
+        {
+          this.router.navigate(['/users', data]);
+        } break;
+
+      case "area":
+        {
+          this.router.navigate(['/area', data]);
+        } break;
+
+      case "reports":
+        {
+          this.router.navigate(['/reports', data]);
+        }
+    }
+
   }
 
 

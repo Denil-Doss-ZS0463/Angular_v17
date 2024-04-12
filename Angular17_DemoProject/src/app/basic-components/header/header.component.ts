@@ -5,7 +5,9 @@ import { NgClass, NgStyle } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../../core-components/profile/profile.component';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonLogicsService } from '../../services/common-logics.service';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +26,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   profileModal: any;
+  userInitials: string = '';
 
   dropdownItems: string[] = [
     'ZuciBall',
@@ -50,8 +53,27 @@ export class HeaderComponent {
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
+  constructor(
+    private modalService: NgbModal,
+    private userService: UserService,
+    private router: Router,
+    private logicService: CommonLogicsService
+  ) {
+    this.fetchUserDetails();
+  }
 
-  constructor(private modalService: NgbModal,private router:Router) {}
+  fetchUserDetails() {
+    const userId = this.userService.getUserIdFromToken();
+    this.userService.loggedUser(userId).subscribe(
+      (userDetails) => {
+        this.userService.setLoggedInUser(userDetails);
+        this.userInitials = this.logicService.setUserInitials();
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+      }
+    );
+  }
 
   openProfileModal() {
     this.modalService.open(ProfileComponent, {
@@ -61,7 +83,7 @@ export class HeaderComponent {
       keyboard: false,
     });
   }
-  userLogout(){
+  userLogout() {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate(['/login']);
