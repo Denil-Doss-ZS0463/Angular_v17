@@ -23,6 +23,7 @@ export class CommonInputBoxComponent {
 
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);
-    return control && control.invalid && control.touched;
+    return control && control.invalid && control.touched || this.invalidForm;
   }
+  
 }

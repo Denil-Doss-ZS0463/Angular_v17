@@ -19,17 +19,26 @@ export class SampleRenderingPageComponent {
   userName: string = "";
   age: number = 0;
   mockData: any[] = [];
+  accessLevel: string[] = [
+    "Admin",
+    "User",
+    "Guest",
+    "Super Admin"
+  ];
+
+  selectedAreas: any[] = [];
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
       username: ['', Validators.required],
       age: ['', Validators.required],
-      state: ['', Validators.required],
-      currency: ['', Validators.required],
+      // state: ['', Validators.required],
+      // currency: ['', Validators.required],
       areaName: [''],
       country: ['',],
-      pokemonData: ['', Validators.required],
+      // pokemonData: ['', Validators.required],
+      accessLevel: ['', Validators.required],
     });
     this.mockData = this.employeeDetails;
 
@@ -39,12 +48,14 @@ export class SampleRenderingPageComponent {
   getData() {
     this.userName = this.myForm.get('username')?.value;
     this.age = this.myForm.get('age')?.value;
+
     if (this.myForm.valid) {
       this.invalidForm = false;
       console.log(this.myForm.value);
+      console.log(this.selectedAreas);
     }
     else {
-      // alert("Invalid Form");
+      alert("Invalid Form");
       this.invalidForm = true;
     }
   }
@@ -53,6 +64,10 @@ export class SampleRenderingPageComponent {
     console.log("From parent ",data);
     
     this.mockData = data;
+  }
+
+  getSelectedValues(data: any) {
+    this.selectedAreas = data;
   }
 
   resetFilter() {

@@ -11,19 +11,16 @@
         <div class="d- align-items-center">
             <input class="form-control" [type]="fieldType" [formControlName]="controlName" [id]="idSelector"
                 [placeholder]="placeholderText" autocomplete="off"
-                [ngClass]="{' border border-danger':((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm) }">
+                [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.errors}">
         </div>
         @if(invalidForm)
         {
         <span class="text-danger errorMessage hidden m-0 mb-1">
             @if((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm)
             {
-            @if(parentForm.get(controlName)?.hasError('required'))
-            {
-            {{errorMessage}}
-            }
+                {{errorMessage}}
             } @else {
-            &nbsp;
+            <!-- &nbsp; -->
             }
         </span>
         }
