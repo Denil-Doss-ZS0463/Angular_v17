@@ -28,7 +28,7 @@ export class LoginComponent {
     private userService: UserService,
     private router: Router,
     private logicService: CommonLogicsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({

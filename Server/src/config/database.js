@@ -5,7 +5,7 @@ const db = new Client({
   user: "postgres",
   port: 5432,
   password: "Password@123",
-  database: "postgres",
+  database: "zuciball",
 });
 
 db.connect()
@@ -21,7 +21,9 @@ db.connect()
       password TEXT,
       phoneNumber VARCHAR(30),
       jobTitle VARCHAR(50),
-      accessLevel VARCHAR(50)
+      accessLevel VARCHAR(50),
+      areaAccess VARCHAR(100),
+      status VARCHAR(20) DEFAULT 'active' 
     );
     `);
   })
