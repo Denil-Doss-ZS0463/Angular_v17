@@ -13,14 +13,16 @@ export class CommonDropdownComponent {
   @Input() label!: string;
   @Input() controlName!: string;
   @Input() parentForm!: FormGroup;
-  @Input() idSelector!:string;
-  @Input() placeholderText:string = "Choose Here";
+  @Input() idSelector!: string;
+  @Input() placeholderText: string = "Choose Here";
   @Input() errorMessage!: string;
   @Input() invalidForm!: boolean | null;
-  @Input() dropDownValue:any[] = [];
-  @Input() objectKeyToShow:string = "";
-  @Input() objectKeyAsValue:any;
-  @Input() selectedValue:string = "";
+  @Input() dropDownValue: any[] = [];
+  @Input() objectKeyToShow: string = "";
+  @Input() objectKeyAsValue: any;
+  @Input() selectedValue: string = "";
+  @Input() required!: boolean;
+  @Input() disabled: boolean = false;
 
   showErrors(): boolean | null {
     const control = this.parentForm.get(this.controlName);
@@ -30,4 +32,13 @@ export class CommonDropdownComponent {
   getObjectKeys(user: any): string[] {
     return Object.keys(user);
   }
+
+  checkForArrayOfObject() {
+    return this.dropDownValue && this.dropDownValue.length && this.dropDownValue[0] && typeof this.dropDownValue[0] === 'object'
+  }
+
+  checkForArrayOfString() {
+    return this.dropDownValue && this.dropDownValue.length && typeof this.dropDownValue[0] === 'string'
+  }
+
 }

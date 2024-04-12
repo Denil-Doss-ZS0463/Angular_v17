@@ -20,6 +20,9 @@ export class CommonCheckboxDropdownComponent {
   @Input() objectKeyToShow: string = "";
   @Input() dropdownOptions: any[] = [];
   @Input() selectedItems: any[] = [];
+  @Input() required!: boolean;
+  @Input() disabled: boolean = false;
+
   @Output() itemsSelected = new EventEmitter<any>();
 
   showDropdown: boolean = false;
@@ -78,5 +81,13 @@ export class CommonCheckboxDropdownComponent {
     if (!clickedInsideContainer) {
       this.showDropdown = false;
     }
+  }
+
+  checkForArrayOfObject() {
+    return this.dropdownOptions && this.dropdownOptions.length && this.dropdownOptions[0] && typeof this.dropdownOptions[0] === 'object'
+  }
+
+  checkForArrayOfString() {
+    return this.dropdownOptions && this.dropdownOptions.length && typeof this.dropdownOptions[0] === 'string'
   }
 }
