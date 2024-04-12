@@ -31,3 +31,7 @@
 
 <h2 class="mt-3">This is User Details</h2>
 <app-common-table [headers]="['Name', 'Email']" [data]="users" [dataToRemove]="['id', 'age']"></app-common-table>
+
+<app-common-checkbox-dropdown [dropdownOptions]="users"[errorMessage]="'Choose the user'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" ></app-common-checkbox-dropdown>
+
+<app-common-checkbox-dropdown [dropdownOptions]="pokeDetails"[errorMessage]="'Choose the pokemon'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" ></app-common-checkbox-dropdown>
