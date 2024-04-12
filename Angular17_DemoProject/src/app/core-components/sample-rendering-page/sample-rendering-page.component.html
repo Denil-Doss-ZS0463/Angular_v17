@@ -8,13 +8,22 @@
                 [errorMessage]="'Username is required'" [invalidForm]="invalidForm" [required]="true">
             </app-common-input-box>
         </div>
+
     </div>
 
-    <div class="col-6 ">
-        <app-common-input-box [label]="'Age'" [controlName]="'age'" [parentForm]="myForm" [fieldType]="'number'"
-            [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
-            [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+    <div class="row">
+        <div class="col-6 ">
+            <app-common-input-box [label]="'Age'" [controlName]="'age'" [parentForm]="myForm" [fieldType]="'number'"
+                [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
+                [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+        </div>
+        <div class="col-6 ">
+            <app-common-input-box [label]="'state'" [controlName]="'state'" [parentForm]="myForm" [fieldType]="'text'"
+                [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
+                [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+        </div>
     </div>
+
 
     <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm" [idSelector]="'country'"
         [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'" [objectKeyToShow]="'name'"
