@@ -1,3 +1,6 @@
-.container-fluid{
-    font-family: Montserrat;
+.signin{
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 500;
+    background-color: #f72257;
 }

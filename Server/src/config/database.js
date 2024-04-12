@@ -11,6 +11,28 @@ const db = new Client({
 db.connect()
   .then(() => {
     console.log("Connected to PostgreSQL");
+    return db.query(`
+     CREATE TABLE IF NOT EXISTS user_access_level (
+       id SERIAL PRIMARY KEY,
+       value VARCHAR(255) UNIQUE
+     );
+   `);
+  })
+  .then(() => {
+    console.log("Table 'user_access_level' created or already exists");
+
+    return db.query(`
+     INSERT INTO user_access_level (value) VALUES 
+     ('super admin'),
+     ('area admin'),
+     ('user'),
+     ('coach')
+     ON CONFLICT DO NOTHING;
+   `);
+  })
+  .then(() => {
+    console.log("Default values inserted into 'user_access_level' table");
+
 
     return db.query(`
     CREATE TABLE IF NOT EXISTS users (
@@ -21,7 +43,7 @@ db.connect()
       password TEXT,
       phoneNumber VARCHAR(30),
       jobTitle VARCHAR(50),
-      accessLevel VARCHAR(50),
+      accessLevel INT REFERENCES user_access_level(id),
       areaAccess VARCHAR(100),
       status VARCHAR(20) DEFAULT 'active' 
     );

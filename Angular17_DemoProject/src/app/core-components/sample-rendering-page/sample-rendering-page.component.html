@@ -8,6 +8,7 @@
                 [errorMessage]="'Username is required'" [invalidForm]="invalidForm" [required]="true">
             </app-common-input-box>
         </div>
+
     </div>
 
     <div class="row">
@@ -16,7 +17,7 @@
                 [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
                 [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
         </div>
-
+      
         <div class="col-3">
 
             <app-common-dropdown [label]="'accessLevel'" [controlName]="'accessLevel'" [parentForm]="myForm"
@@ -34,7 +35,6 @@
                 [objectKeyToShow]="'name'" [invalidForm]="invalidForm" [dropDownValue]="users"
                 [objectKeyAsValue]="'name'" [required]="true" >
             </app-common-dropdown>
-
         </div>
         <div class="col-3">
             <app-common-checkbox-dropdown [dropdownOptions]="pokeDetails" [errorMessage]="'Choose the pokemon'"
