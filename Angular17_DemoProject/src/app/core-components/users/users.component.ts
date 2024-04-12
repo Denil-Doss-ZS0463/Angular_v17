@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonBreadcrumbsComponent } from '../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
 import { CommonTableComponent } from '../../common-libraies/common-table/common-table.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -11,8 +12,13 @@ import { CommonTableComponent } from '../../common-libraies/common-table/common-
 })
 export class UsersComponent {
   mockData: any[] = [];
+
+  constructor(private route: ActivatedRoute) {}
   ngOnInit(){
     this.mockData = this.employeeDetails;
+    this.route.params.subscribe((params) => {
+      console.log(params);
+    })
   }
   employeeDetails: any[] =
     [
@@ -25,7 +31,7 @@ export class UsersComponent {
         "department": "Engineering",
         "position": "Software Engineer",
         "salary": '75000',
-        "startDate": "2022-01-15"
+        "joinDate": "2022-01-15"
       },
       {
         "id": '2',
@@ -36,7 +42,7 @@ export class UsersComponent {
         "department": "Marketing",
         "position": "Marketing Manager",
         "salary": "65000",
-        "startDate": "2021-11-20"
+        "joinDate": "2021-11-20"
       },
       {
         "id": "3",
@@ -47,7 +53,7 @@ export class UsersComponent {
         "department": "Finance",
         "position": "Financial Analyst",
         "salary": "80000",
-        "startDate": "2020-09-10"
+        "joinDate": "2020-09-10"
       },
       {
         "id": "4",
@@ -58,7 +64,7 @@ export class UsersComponent {
         "department": "Human Resources",
         "position": "HR Manager",
         "salary": "70000",
-        "startDate": "2023-03-05"
+        "joinDate": "2023-03-05"
       },
       {
         "id": "5",
@@ -69,7 +75,7 @@ export class UsersComponent {
         "department": "Operations",
         "position": "Operations Director",
         "salary": "90000",
-        "startDate": "2019-06-15"
+        "joinDate": "2019-06-15"
       },
       {
         "id": "6",
@@ -80,7 +86,7 @@ export class UsersComponent {
         "department": "Customer Service",
         "position": "Customer Service Representative",
         "salary": "55000",
-        "startDate": "2023-02-28"
+        "joinDate": "2023-02-28"
       },
       {
         "id": "7",
@@ -91,7 +97,7 @@ export class UsersComponent {
         "department": "Sales",
         "position": "Sales Manager",
         "salary": "75000",
-        "startDate": "2020-12-10"
+        "joinDate": "2020-12-10"
       },
       {
         "id": "8",
@@ -102,7 +108,7 @@ export class UsersComponent {
         "department": "Product Management",
         "position": "Product Manager",
         "salary": "85000",
-        "startDate": "2021-08-20"
+        "joinDate": "2021-08-20"
       },
       {
         "id": "9",
@@ -113,7 +119,7 @@ export class UsersComponent {
         "department": "Research and Development",
         "position": "Research Scientist",
         "salary": "80000",
-        "startDate": "2022-04-30"
+        "joinDate": "2022-04-30"
       },
       {
         "id": "10",
@@ -124,7 +130,7 @@ export class UsersComponent {
         "department": "Quality Assurance",
         "position": "Quality Assurance Engineer",
         "salary": "65000",
-        "startDate": "2023-01-05"
+        "joinDate": "2023-01-05"
       }
     ]
 
