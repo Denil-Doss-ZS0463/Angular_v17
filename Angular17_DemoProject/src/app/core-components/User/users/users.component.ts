@@ -12,6 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UsersComponent {
   mockData: any[] = [];
+  userOptions={
+    title:"User Management",
+    hideIcons:false
+  }
 
   constructor(private route: ActivatedRoute) {}
   ngOnInit(){

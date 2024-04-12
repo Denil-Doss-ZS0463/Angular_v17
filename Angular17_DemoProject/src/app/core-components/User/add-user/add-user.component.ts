@@ -21,6 +21,10 @@ export class AddUserComponent {
     "User",
     "Coach"
   ]
+  userOptions={
+    title:"User Management > Add User",
+    hideIcons:true
+  }
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
       emailId: ['', Validators.required],

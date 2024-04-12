@@ -28,3 +28,12 @@
     font-weight: 600;
     line-height: 21.94px;
 }
+
+.functionName{
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    color: rgb(0, 124, 186);
+    font-weight: 600;
+    cursor: pointer;
+}
