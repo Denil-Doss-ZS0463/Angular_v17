@@ -20,7 +20,7 @@ import { LoginComponent } from './basic-components/login/login.component';
 })
 export class AppComponent {
   title = 'ZuciBall Central';
-  includePaths: string[] = ['', 'home', 'reports', 'users', 'new-user'];
+  includePaths: string[] = ['', 'home', 'reports', 'users', 'new-user','sampleRendering'];
   hideNav = false;
 
   constructor(private router: Router) { }

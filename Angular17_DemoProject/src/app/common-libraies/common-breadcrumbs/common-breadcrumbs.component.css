@@ -22,7 +22,7 @@
     box-shadow: 0px 1px 5px lightgray !important;
 }
 
-.bredCrumbsTitle{
+.bredCrumbsTitle, .breadCrumbsLink{
     letter-spacing: 0.7px;
     font-size: 18px;
     font-weight: 600;
@@ -36,4 +36,14 @@
     color: rgb(0, 124, 186);
     font-weight: 600;
     cursor: pointer;
+}
+
+.breadCrumbsLink{
+    color: rgb(0, 124, 186);
+    cursor: pointer;
+}
+
+.arrowMark{
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
 }

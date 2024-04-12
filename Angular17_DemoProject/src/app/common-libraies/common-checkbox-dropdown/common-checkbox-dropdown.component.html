@@ -1,5 +1,5 @@
 <label [for]="idSelector" class="form-label commonLabel ps-0" >{{ label }}</label>
-<div #container>
+<div #container  class="mt-1">
     <input type="text" (click)="toggleDropdDown()" class="form-control customCheckBoxTextbox" placeholder="Select Items"
         [ngModel]="selectedItems.length === 0 ? placeholderText : (selectedItems.length === 1 ? returnLastSelectedValue(selectedItems[0]) : selectedItems.length + ' selected')" readonly
         [ngClass]="{'border border-danger':selectedItems.length == 0 && invalidForm}">
@@ -17,13 +17,15 @@
         }
     </div>
     }
-
-    <p class="text-danger errorMessage hidden m-0 pb-0">
-        @if(selectedItems.length == 0 && invalidForm)
-        {
-            {{errorMessage}}
-        }@else {
-        &nbsp;
-        }
-    </p>
+    @if(selectedItems.length == 0 || invalidForm)
+    {
+        <span class="text-danger errorMessage hidden m-0 pb-0">
+            @if(selectedItems.length == 0 && invalidForm)
+            {
+                {{errorMessage}}
+            }@else {
+            &nbsp;
+            }
+        </span>
+    }
 </div>

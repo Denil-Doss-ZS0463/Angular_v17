@@ -5,7 +5,7 @@ declare let bootstrap: any;
 @Component({
   selector: 'app-common-breadcrumbs',
   standalone: true,
-  imports: [RouterLink,NgIf],
+  imports: [RouterLink],
   templateUrl: './common-breadcrumbs.component.html',
   styleUrl: './common-breadcrumbs.component.css'
 })
@@ -14,11 +14,12 @@ export class CommonBreadcrumbsComponent {
   tooltip:any;
   @Input() user:any='';
   hideIcons: boolean = false;
+  customRoutes = ['/users', '/users/new-user']; 
+  addUser:string="";
   constructor(private renderer: Renderer2, private elementRef: ElementRef,private router:Router) { }
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
-    console.log(this.user,"user");
   }
 
   initializeTooltips(): void {
@@ -30,7 +31,7 @@ export class CommonBreadcrumbsComponent {
       });
     });
   }
-  addUser(){
+  saveFunctionaity(){
     this.hideIcons = true;
     this.tooltip.hide();
     this.router.navigate(['users/new-user']);
