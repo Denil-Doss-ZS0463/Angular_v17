@@ -2,7 +2,7 @@
     padding: 10px;
 }
 
-label {
+.commonLabel {
     font-size: 0.75rem;
     color: rgba(0, 0, 0, 0.6);
     font-weight: 500;

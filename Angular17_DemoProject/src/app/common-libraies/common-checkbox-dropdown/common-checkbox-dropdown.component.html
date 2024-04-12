@@ -1,4 +1,4 @@
-<label [for]="idSelector" class="form-label ps-0" >{{ label }}</label>
+<label [for]="idSelector" class="form-label commonLabel ps-0" >{{ label }}</label>
 <div #container>
     <input type="text" (click)="toggleDropdDown()" class="form-control customCheckBoxTextbox" placeholder="Select Items"
         [ngModel]="selectedItems.length === 0 ? placeholderText : (selectedItems.length === 1 ? returnLastSelectedValue(selectedItems[0]) : selectedItems.length + ' selected')" readonly
@@ -27,5 +27,3 @@
         }
     </p>
 </div>
-
-<button class="btn btn-success" (click)="showData()">Submit</button>

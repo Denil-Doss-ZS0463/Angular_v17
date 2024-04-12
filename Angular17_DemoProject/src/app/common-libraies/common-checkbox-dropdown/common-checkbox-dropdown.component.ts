@@ -35,8 +35,6 @@ export class CommonCheckboxDropdownComponent {
 
   ifChecked(id: any) {
     this.selectedItems.includes(id);
-    console.log(this.selectedItems);
-
   }
 
   toggleSelection(id: any, checkedIndex: number) {
@@ -47,7 +45,7 @@ export class CommonCheckboxDropdownComponent {
     } else {
       this.selectedItems.push(id);
     }
-    console.log(this.selectedItems);
+    this.itemsSelected.emit(this.selectedItems);
   }
 
   toggleDropdDown() {
@@ -60,7 +58,9 @@ export class CommonCheckboxDropdownComponent {
   }
 
   isSelected(id: number): boolean {
-    return this.selectedItems.includes(id);
+    const checkedIds = this.selectedItems.includes(id);
+    this.itemsSelected.emit(this.selectedItems);
+    return checkedIds;
   }
 
   returnLastSelectedValue(id: any) {

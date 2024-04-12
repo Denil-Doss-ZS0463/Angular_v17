@@ -10,7 +10,12 @@
     scrollbar-width: thin;
     scrollbar-color: lightgray;
     overflow-x: auto;
+}
 
+.commonLabel {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
 }
 
 .customCheckBox
