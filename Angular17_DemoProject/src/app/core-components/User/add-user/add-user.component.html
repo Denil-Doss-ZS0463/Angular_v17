@@ -1,0 +1,40 @@
+<app-common-breadcrumbs [user]="userOptions"></app-common-breadcrumbs>
+<form [formGroup]="myForm" class="mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <app-common-input-box [label]="'Email Id'" [controlName]="'emailId'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'emailId'" [placeholderText]="'Enter user email'"
+                    [errorMessage]="'Email id is required'" [invalidForm]="invalidForm" [required]="true">
+                </app-common-input-box>
+            </div>
+            <div class="col-4">
+                <app-common-input-box [label]="'First Name'" [controlName]="'firstName'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'firstName'" [placeholderText]="'Enter user\'s first name'"
+                    [errorMessage]="'First name is required'" [invalidForm]="invalidForm"
+                    [required]="true"></app-common-input-box>
+            </div>
+            <div class="col-4">
+                <app-common-input-box [label]="'Last Name'" [controlName]="'lastName'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'lastName'" [placeholderText]="'Enter user\'s last name'"
+                    [errorMessage]="'Last name is required'" [invalidForm]="invalidForm"
+                    [required]="true"></app-common-input-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <app-common-input-box [label]="'Job Title'" [controlName]="'jobTitle'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'jobTitle'" [placeholderText]="'Enter job title'"
+                    [errorMessage]="'Job title is required'" [invalidForm]="invalidForm"
+                    [required]="true"></app-common-input-box>
+            </div>
+            <div class="col-4">
+                <app-common-dropdown [label]="'Access Level'" [controlName]="'accessLevel'" [parentForm]="myForm"
+                    [idSelector]="'accessLevel'" [placeholderText]="'Choose access level'"
+                    [errorMessage]="'Access level is required'" [objectKeyToShow]="'name'" [selectedValue]="'John Doe'"
+                    [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'">
+                </app-common-dropdown>
+            </div>
+        </div>
+    </div>
+</form>

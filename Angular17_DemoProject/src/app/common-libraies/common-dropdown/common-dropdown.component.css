@@ -1,3 +1,16 @@
 .dropdownPadding {
     padding: 10px;
 }
+
+label {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+}
+
+.commonDropdown>select {
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 500;
+    color: rgba(48, 38, 29, 0.698);
+}

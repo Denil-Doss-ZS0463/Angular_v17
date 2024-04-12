@@ -1,7 +1,7 @@
 <div class="modal-section profile-section">
     <div class="modal-header justify-content-space-between">
         <div class="profile-circle-modal d-flex justify-content-center align-items-center">
-            <h4 class="mb-0">{{userInitials}}</h4>
+            <h4 class="custom-profile mb-0">{{userInitials}}</h4>
         </div>
         <div class="user-details ms-3">
             <div class="user-name row">
@@ -13,33 +13,27 @@
         </div>
         <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
     </div>
-    <div class="profile-section my-3">
-        <div class="header-section d-flex justify-content-between">
-            <h4>Personal Details</h4>
+    <div class="profile-section">
+        <div class="header-section my-2 d-flex justify-content-between">
+            <h4 class="custom-string">Personal Details</h4>
             <div class="edit-section">
                 @if (!isEditMode) {
                 <a role="button" (click)="enableEditMode()">
-                    <i class="fa-solid fa-pen" style="color: #007cba;"></i>
-                    <h5>Edit</h5>
+                    <i class="fa-solid fa-pen me-1" style="color: #007cba;"></i>
+                    <span>Edit</span>
                 </a>
                 }
                 @if (isEditMode) {
                 <a role="button" (click)="saveUserData()">
-                    <i class="fa-solid fa-pen" style="color: #007cba;"></i>
-                    <h5>Save</h5>
+                    <i class="fa-solid fa-bookmark me-1" style="color: #007cba;"></i>
+                    <span>Save</span>
                 </a>
                 }
             </div>
-            <!-- <div class="save-section" *ngIf="isEditMode">
-                <a role="button" (click)="saveUserData()">
-                    <i class="fa-solid fa-pen" style="color: #007cba;"></i>
-                    <h5>Save</h5>
-                </a>
-            </div> -->
         </div>
         <div class="body-section">
             <form>
-                <div class="row d-flex my-3">
+                <div class="row d-flex my-1">
                     <div class="col">
                         <app-common-input-box [label]="'First Name'" [controlName]="'firstName'" [parentForm]="myForm"
                             [fieldType]="'text'" [idSelector]="'firstName'" [placeholderText]="'Enter your First Name'"

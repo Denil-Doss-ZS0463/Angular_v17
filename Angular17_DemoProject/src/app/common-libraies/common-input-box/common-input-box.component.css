@@ -1,10 +1,17 @@
 label {
-  font-size: 11px;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
 }
 
-input[type="text"] {
-  font-size: 16px;
-  padding: 13px;
+input {
+  font-size: 13px;
+  padding: 10px;
   font-weight: 500;
   color: rgba(48, 38, 29, 0.698);
+}
+
+::placeholder {
+  color: rgba(48, 38, 29, 0.698);
+  opacity: 0.7;
 }

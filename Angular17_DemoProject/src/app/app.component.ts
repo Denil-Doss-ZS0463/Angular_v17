@@ -20,10 +20,10 @@ import { LoginComponent } from './basic-components/login/login.component';
 })
 export class AppComponent {
   title = 'ZuciBall Central';
-  includePaths: string[] = ['', 'home', 'reports','users'];
+  includePaths: string[] = ['', 'home', 'reports', 'users', 'new-user'];
   hideNav = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
