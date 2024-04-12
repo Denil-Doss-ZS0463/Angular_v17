@@ -7,6 +7,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from '../../core-components/profile/profile.component';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonLogicsService } from '../../services/common-logics.service';
 
 @Component({
   selector: 'app-header',
@@ -25,9 +26,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   profileModal: any;
-  loggedInUser: any;
-  userFirstInitial: string | undefined;
-  userLastInitial: string | undefined;
+  userInitials: string = '';
 
   dropdownItems: string[] = [
     'ZuciBall',
@@ -56,17 +55,24 @@ export class HeaderComponent {
   }
   constructor(
     private modalService: NgbModal,
-    private userService: UserService,private router:Router
+    private userService: UserService,
+    private router: Router,
+    private logicService: CommonLogicsService
   ) {
-    this.setUserInitials();
+    this.fetchUserDetails();
   }
 
-  setUserInitials() {
-    const user = this.userService.loggedInUser;
-    if (user) {
-      this.userFirstInitial = user.firstname.charAt(0);
-      this.userLastInitial = user.lastname.charAt(0);
-    }
+  fetchUserDetails() {
+    const userId = this.userService.getUserIdFromToken();
+    this.userService.loggedUser(userId).subscribe(
+      (userDetails) => {
+        this.userService.setLoggedInUser(userDetails);
+        this.userInitials = this.logicService.setUserInitials();
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+      }
+    );
   }
 
   openProfileModal() {
@@ -77,7 +83,7 @@ export class HeaderComponent {
       keyboard: false,
     });
   }
-  userLogout(){
+  userLogout() {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate(['/login']);

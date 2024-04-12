@@ -7,6 +7,7 @@ import {
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import { CommonInputBoxComponent } from '../../common-libraies/common-input-box/common-input-box.component';
+import { CommonLogicsService } from '../../services/common-logics.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -23,10 +24,10 @@ export class ProfileComponent {
   userInitials: string = '';
 
   constructor(
-    private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal,
-    private userService: UserService
+    private userService: UserService,
+    private logicService: CommonLogicsService
   ) {}
 
   ngOnInit() {
@@ -42,7 +43,6 @@ export class ProfileComponent {
 
   fetchUserData() {
     this.user = this.userService.getLoggedInUser();
-
     this.myForm.patchValue({
       firstName: this.user.firstname,
       lastName: this.user.lastname,
@@ -50,15 +50,7 @@ export class ProfileComponent {
       emailid: this.user.emailid,
     });
     this.myForm.disable();
-    this.setUserInitials();
-  }
-
-  setUserInitials() {
-    if (this.user) {
-      const firstNameInitial = this.user.firstname.charAt(0);
-      const lastNameInitial = this.user.lastname.charAt(0);
-      this.userInitials = firstNameInitial + lastNameInitial;
-    }
+    this.userInitials = this.logicService.setUserInitials();
   }
   enableEditMode() {
     this.isEditMode = true;
