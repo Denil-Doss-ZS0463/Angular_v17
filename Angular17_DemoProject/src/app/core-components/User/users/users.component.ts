@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonBreadcrumbsComponent } from '../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
-import { CommonTableComponent } from '../../common-libraies/common-table/common-table.component';
+import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
+import { CommonTableComponent } from '../../../common-libraies/common-table/common-table.component';
 
 @Component({
   selector: 'app-users',

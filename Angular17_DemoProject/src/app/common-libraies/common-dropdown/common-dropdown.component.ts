@@ -30,5 +30,4 @@ export class CommonDropdownComponent {
   getObjectKeys(user: any): string[] {
     return Object.keys(user);
   }
-
 }

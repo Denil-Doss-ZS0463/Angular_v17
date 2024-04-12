@@ -9,7 +9,7 @@
         </label>
 
         <div class="d- align-items-center">
-            <input class="form-control p-3" [type]="fieldType" [formControlName]="controlName" [id]="idSelector"
+            <input class="form-control" [type]="fieldType" [formControlName]="controlName" [id]="idSelector"
                 [placeholder]="placeholderText" autocomplete="off"
                 [ngClass]="{' border border-danger':((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm) }">
         </div>
