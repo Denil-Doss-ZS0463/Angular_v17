@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-// import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -11,19 +11,11 @@ export class UserService {
   loggedInUser: any;
   token!: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}login`, credentials);
   }
-
-  // setLoggedInUser(user: any) {
-  //   this.loggedInUser = user;
-  // }
-
-  // getLoggedInUser() {
-  //   return this.loggedInUser;
-  // }
 
   setUserToken(token: string) {
     this.token = token;
@@ -37,9 +29,8 @@ export class UserService {
   getUserIdFromToken() {
     const token = this.getUserToken();
     if (token) {
-      // const decodedToken: any = jwtDecode(token);
-      // return decodedToken.userId;
-      return token;
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.userId;
     } else {
       return null;
     }

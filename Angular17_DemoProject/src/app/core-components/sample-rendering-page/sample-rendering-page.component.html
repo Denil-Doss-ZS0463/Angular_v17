@@ -17,20 +17,37 @@
                 [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
                 [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
         </div>
-        <div class="col-6 ">
-            <app-common-input-box [label]="'state'" [controlName]="'state'" [parentForm]="myForm" [fieldType]="'text'"
-                [idSelector]="'age'" [placeholderText]="'Enter your age'" [errorMessage]="'Age is required'"
-                [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+      
+        <div class="col-3">
+
+            <app-common-dropdown [label]="'accessLevel'" [controlName]="'accessLevel'" [parentForm]="myForm"
+                [idSelector]="'state'" [placeholderText]="'Enter your Access Level'"
+                [errorMessage]="'Access Level is required'" [objectKeyToShow]="'name'" [invalidForm]="invalidForm"
+                [dropDownValue]="accessLevel" [objectKeyAsValue]="'name'" [required]="true">
+            </app-common-dropdown>
         </div>
     </div>
 
-
-    <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm" [idSelector]="'country'"
-        [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'" [objectKeyToShow]="'name'"
-        [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'">
-    </app-common-dropdown>
-
-    <button type="submit" class="btn btn-success mt-3" (click)="getData()">Get Data</button>
+    <div class="row">
+        <div class="col-6">
+            <app-common-dropdown [label]="'Country'" [controlName]="'country'" [parentForm]="myForm"
+                [idSelector]="'country'" [placeholderText]="'Enter your Country'" [errorMessage]="'Country is required'"
+                [objectKeyToShow]="'name'" [invalidForm]="invalidForm" [dropDownValue]="users"
+                [objectKeyAsValue]="'name'" [required]="true" >
+            </app-common-dropdown>
+        </div>
+        <div class="col-3">
+            <app-common-checkbox-dropdown [dropdownOptions]="pokeDetails" [errorMessage]="'Choose the pokemon'"
+                [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Pokemons'" [required]="false"
+                (itemsSelected)="getSelectedValues($event)" ></app-common-checkbox-dropdown>
+        </div>
+        <div class="col-3">
+            <app-common-checkbox-dropdown [dropdownOptions]="accessLevel" [errorMessage]="'Choose multiple Access'"
+                [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Multi Access'" [required]="false"
+                (itemsSelected)="getSelectedValues($event)" ></app-common-checkbox-dropdown>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-3 z-1" (click)="getData()">Get Data</button>
 
 </form>
 
@@ -41,6 +58,5 @@
 <h2 class="mt-3">This is User Details</h2>
 <app-common-table [headers]="['Name', 'Email']" [data]="users" [dataToRemove]="['id', 'age']"></app-common-table>
 
-<app-common-checkbox-dropdown [dropdownOptions]="users"[errorMessage]="'Choose the user'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Users'"></app-common-checkbox-dropdown>
-
-<app-common-checkbox-dropdown [dropdownOptions]="pokeDetails"[errorMessage]="'Choose the pokemon'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Pokemons'"></app-common-checkbox-dropdown>
+<app-common-checkbox-dropdown [dropdownOptions]="users" [errorMessage]="'Choose the user'" [invalidForm]="invalidForm"
+    [objectKeyToShow]="'name'" [label]="'Users'"></app-common-checkbox-dropdown>

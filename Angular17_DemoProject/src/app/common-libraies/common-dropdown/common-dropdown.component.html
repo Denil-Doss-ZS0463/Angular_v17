@@ -1,26 +1,41 @@
 <div [formGroup]="parentForm">
     <div class="form-group mt-1">
-        <label [for]="idSelector" class="form-label commonLabel ps-0">{{ label }}</label>
+        <label [for]="idSelector" class="form-label commonLabel ps-0">
+            {{ label }}
+            @if(required)
+            {
+            <span class="text-danger">*</span>
+            }
+        </label>
         <div class="d- align-items-center">
             <select class="form-select dropdownPadding dropdownValue" [formControlName]="controlName" [id]="idSelector"
                 autocomplete="off"
-                [ngClass]="{' border border-danger':(showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm}">
-                    <option value="" selected disabled>{{placeholderText}}</option>
+                [ngClass]="{'border border-danger':(showErrors() && parentForm.get(controlName)?.errors)}">
+                <option value="" selected disabled>{{placeholderText}}</option>
+                @if(checkForArrayOfObject())
+                {
                     @for(item of dropDownValue; track $index)
                     {
                         <option class="" [value]="item[objectKeyAsValue]">{{item[objectKeyToShow]}}</option>
                     }
+                }
+                @else if (checkForArrayOfString()) {
+                    @for(item of dropDownValue; track $index)
+                    {
+                        <option class="" [value]="item">{{item}}</option>
+                    }
+                }
             </select>
         </div>
         @if(invalidForm)
         {
         <span class="text-danger errorMessage hidden m-0 pb-0">
-            @if((showErrors() || parentForm.get(controlName)?.hasError('required')) && invalidForm)
+            @if((showErrors() && parentForm.get(controlName)?.errors))
             {
-                @if(parentForm.get(controlName)?.hasError('required'))
-                {
-                    {{errorMessage}}
-                }
+            @if(parentForm.get(controlName)?.errors)
+            {
+            {{errorMessage}}
+            }
             }@else {
             &nbsp;
             }
