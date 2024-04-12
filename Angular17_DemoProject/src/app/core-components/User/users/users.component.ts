@@ -14,6 +14,7 @@ export class UsersComponent {
   mockData: any[] = [];
   userOptions={
     title:"User Management",
+    currentTitle:"Add User",
     hideIcons:false
   }
 

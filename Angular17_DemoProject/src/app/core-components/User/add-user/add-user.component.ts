@@ -3,11 +3,12 @@ import { EmailValidator, FormBuilder, FormGroup, ReactiveFormsModule, Validators
 import { CommonInputBoxComponent } from '../../../common-libraies/common-input-box/common-input-box.component';
 import { CommonDropdownComponent } from '../../../common-libraies/common-dropdown/common-dropdown.component';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
+import { CommonCheckboxDropdownComponent } from '../../../common-libraies/common-checkbox-dropdown/common-checkbox-dropdown.component';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [CommonInputBoxComponent, ReactiveFormsModule, CommonDropdownComponent,CommonBreadcrumbsComponent],
+  imports: [CommonInputBoxComponent, ReactiveFormsModule, CommonDropdownComponent,CommonBreadcrumbsComponent,CommonCheckboxDropdownComponent],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })

@@ -39,13 +39,15 @@
 
     </div>
     }
-
-    <p class="text-danger errorMessage hidden m-0 pb-0">
-        @if(selectedItems.length == 0 && invalidForm)
-        {
-            {{errorMessage}}
-        }@else {
-        &nbsp;
-        }
-    </p>
+    @if(selectedItems.length == 0 || invalidForm)
+    {
+        <span class="text-danger errorMessage hidden m-0 pb-0">
+            @if(selectedItems.length == 0 && invalidForm)
+            {
+                {{errorMessage}}
+            }@else {
+            &nbsp;
+            }
+        </span>
+    }
 </div>

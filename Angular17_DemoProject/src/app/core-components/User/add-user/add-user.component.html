@@ -1,7 +1,7 @@
 <app-common-breadcrumbs [user]="userOptions"></app-common-breadcrumbs>
 <form [formGroup]="myForm" class="mt-4">
     <div class="container">
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-4">
                 <app-common-input-box [label]="'Email Id'" [controlName]="'emailId'" [parentForm]="myForm"
                     [fieldType]="'text'" [idSelector]="'emailId'" [placeholderText]="'Enter user email'"
@@ -34,6 +34,9 @@
                     [errorMessage]="'Access level is required'" [objectKeyToShow]="'name'" [selectedValue]="'John Doe'"
                     [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'">
                 </app-common-dropdown>
+            </div>
+            <div class="col-4">
+                <app-common-checkbox-dropdown [dropdownOptions]="users" [errorMessage]="'Choose the user'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Users'"></app-common-checkbox-dropdown>
             </div>
         </div>
     </div>

@@ -1,14 +1,26 @@
 <div class="container">
     <div class="mt-4 row align-items-center">
         <div class="col bredCrumbsTitle">
-            {{user.title}}
+            @for (item of user.title.split('>'); track $index;let last = $last;) {
+                @if (!last) {
+                    @if($index < customRoutes.length){
+                        <span class="breadCrumbsLink" [routerLink]="customRoutes[$index]">{{item}}</span> <span class="arrowMark"> > </span>
+                    }
+                }
+                @else if (last) {
+                    <span>{{item}}</span>
+                }
+                @else {
+                    <span> &gt; </span>
+                }
+            }
         </div>
         <div class="col-auto">
             @if(!user.hideIcons){
             <div class="d-flex justify-content-end tableOptions">
                 <i class="fa-sharp fa-regular fa-circle-plus fa-lg me-4 custom-tooltip" style="color: #007cba;"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
-                    data-bs-title="Add User" (click)="addUser()"></i>
+                    [attr.data-bs-title]="user.currentTitle" (click)="saveFunctionaity()"></i>
                 <i class="fa-sharp fa-regular fa-filter-list fa-lg me-4" style="color: #007cba;"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Filter"></i>
                 <i class="fa-solid fa-down-to-line fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
