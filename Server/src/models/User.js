@@ -69,7 +69,7 @@ class User {
                 userData.jobtitle,
                 userData.accesslevel,
                 userData.areaaccess,
-                status // Include status in the INSERT query
+                status
             ], (insertErr, result) => {
                 if (insertErr) {
                     return callback(insertErr, null);
@@ -92,7 +92,6 @@ class User {
     }
 
     static patchUserStatus(userId, status, callback) {
-        // Check if status is provided and it's 'inactive'
         if (status === 'inactive') {
             db.query('UPDATE users SET status = $1 WHERE id = $2 RETURNING *', ['inactive', userId], (err, result) => {
                 if (err) {
@@ -101,8 +100,7 @@ class User {
                 callback(null, result.rows[0]);
             });
         } else {
-            // Handle other patch operations if needed
-            callback(null, null); // No status change or unsupported patch operation
+            callback(null, null); 
         }
     }
 }
