@@ -11,10 +11,18 @@ export class UserService {
   loggedInUser: any;
   token!: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}login`, credentials);
+  }
+
+  loggedUser(id: any) {
+    return this.http.get(`${this.baseUrl}getUserById/${id}`);
+  }
+
+  updateUser(id: any, userData: any) {
+    return this.http.put(`${this.baseUrl}updateUser/${id}`, id, userData);
   }
 
   setUserToken(token: string) {
@@ -42,9 +50,5 @@ export class UserService {
 
   getLoggedInUser() {
     return this.loggedInUser;
-  }
-
-  loggedUser(id: any) {
-    return this.http.get(`${this.baseUrl}getUserById/${id}`);
   }
 }
