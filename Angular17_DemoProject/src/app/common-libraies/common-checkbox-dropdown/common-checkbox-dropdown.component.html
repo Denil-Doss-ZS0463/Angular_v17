@@ -1,53 +1,57 @@
-<label [for]="idSelector" class="form-label commonLabel ps-0" >
-    {{ label }}
-    @if(required)
-    {
-    <span class="text-danger">*</span>
-    }
-</label>
-<div #container>
-    <input type="text" (click)="toggleDropdDown()" class="form-control customCheckBoxTextbox" placeholder="Select Items"
-        [ngModel]="selectedItems.length === 0 ? placeholderText : (selectedItems.length === 1 ? returnLastSelectedValue(selectedItems[0]) : selectedItems.length + ' selected')" readonly
-        [ngClass]="{'border border-danger':selectedItems.length == 0 && invalidForm}">
-    @if(showDropdown)
-    {
-    <div class="customCheckboxDropdown">
-
-        @if(checkForArrayOfObject())
+<div class="form-group">
+    <label [for]="idSelector" class="form-label commonLabel ps-0">
+        {{ label }}
+        @if(required)
         {
-            @for (item of dropdownOptions; track $index) {
-                <div class="my-1 p-1 customCheckboxOption">
-                    <label class="customFormCheckLabel">
-                        <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item.id)"
-                            (change)="toggleSelection(item.id, $index)">
-                            {{item[objectKeyToShow]}}
-                    </label>
-                </div>
-                }
+        <span class="text-danger">*</span>
         }
-        @else if (checkForArrayOfString()) {
-            @for (item of dropdownOptions; track $index) {
-                <div class="my-1 p-1 customCheckboxOption">
-                    <label class="customFormCheckLabel">
-                        <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item)"
-                            (change)="toggleSelection(item, $index)">
-                            {{item}}
-                    </label>
-                </div>
-            }
-        }
+    </label>
+    <div #container class="customCheckboxDropdownContainer">
+        <div (click)="toggleDropdDown()" class="form-select customCheckBoxTextbox" placeholder="Select Items"
+            [ngClass]="{'border border-danger':selectedItems.length == 0 && invalidForm}">
 
-    </div>
-    }
-    @if(selectedItems.length == 0 || invalidForm)
-    {
+            <span> {{selectedItems.length === 0 ? placeholderText : (selectedItems.length === 1 ?
+                returnLastSelectedValue(selectedItems[0]) : selectedItems.length + ' selected')}}</span>
+        </div>
+        @if(showDropdown)
+        {
+        <div class="customCheckboxDropdown">
+            @if(checkForArrayOfObject())
+            {
+            @for (item of dropdownOptions; track $index) {
+            <div class="my-1 p-1 customCheckboxOption">
+                <label class="customFormCheckLabel d-flex align-items-center gap-2">
+                    <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item.id)"
+                        (change)="toggleSelection(item.id, $index)">
+                    <span> {{item[objectKeyToShow]}}</span>
+                </label>
+            </div>
+            }
+            }
+            @else if (checkForArrayOfString()) {
+            @for (item of dropdownOptions; track $index) {
+            <div class="my-1 p-1 customCheckboxOption">
+                <label class="customFormCheckLabel d-flex align-items-center gap-2">
+                    <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item)"
+                        (change)="toggleSelection(item, $index)">
+                    <span>{{item}}</span>
+                </label>
+            </div>
+            }
+            }
+
+        </div>
+        }
+        @if(selectedItems.length == 0 || invalidForm)
+        {
         <span class="text-danger errorMessage hidden m-0 pb-0">
             @if(selectedItems.length == 0 && invalidForm)
             {
-                {{errorMessage}}
+            {{errorMessage}}
             }@else {
             &nbsp;
             }
         </span>
-    }
+        }
+    </div>
 </div>
