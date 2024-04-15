@@ -1,3 +1,8 @@
+@if(spinnerLoading) {
+    <div class="spinner-container" [class.show]="spinnerLoading">
+        <app-spinner-loading></app-spinner-loading>
+    </div>
+}
 <app-common-breadcrumbs [user]="userOptions"></app-common-breadcrumbs>
 <div class="container mt-3 overflow-auto">
     <app-common-table [headers]="userHeaderList" [data]="mockData" [mockData]="mockData" [dataToRemove]="['password', 'phonenumber']"></app-common-table>

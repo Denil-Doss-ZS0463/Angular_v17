@@ -36,12 +36,12 @@
             <div class="col-4">
                 <app-common-dropdown [label]="'Access Level'" [controlName]="'accesslevel'" [parentForm]="myForm"
                     [idSelector]="'accesslevel'" [placeholderText]="'Choose access level'"
-                    [errorMessage]="'Access level is required'" [objectKeyToShow]="'name'" [selectedValue]="'John Doe'"
-                    [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'" [required]="true">
+                    [errorMessage]="'Access level is required'" [objectKeyToShow]="'value'" [selectedValue]="'John Doe'"
+                    [invalidForm]="invalidForm" [dropDownValue]="accessLevelLists"  [objectKeyAsValue]="'id'" [required]="true">
                 </app-common-dropdown>
             </div>
             <div class="col-4">
-                <app-common-checkbox-dropdown [dropdownOptions]="users" [errorMessage]="'Choose the user'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Users'" [required]="true"></app-common-checkbox-dropdown>
+                <app-common-checkbox-dropdown [dropdownOptions]="accessLevelLists" [errorMessage]="'Area is required'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Area Access'" [required]="true"></app-common-checkbox-dropdown>
             </div>
         </div>
         <div class="row">

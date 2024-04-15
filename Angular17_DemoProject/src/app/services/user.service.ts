@@ -1,28 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = 'http://localhost:3300/users/';
+  private userUrl = 'http://localhost:3300/users/';
+  private userAccessUrl = 'http://localhost:3300/useraccess/';
+
   loggedInUser: any;
   token!: string;
 
   constructor(private http: HttpClient) {}
 
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}login`, credentials);
+    return this.http.post(`${this.userUrl}login`, credentials);
   }
 
   loggedUser(id: any) {
-    return this.http.get(`${this.baseUrl}getUserById/${id}`);
+    return this.http.get(`${this.userUrl}getUserById/${id}`);
   }
 
   updateUser(id: any, userData: any) {
-    return this.http.put(`${this.baseUrl}updateUser/${id}`, id, userData);
+    return this.http.put(`${this.userUrl}updateUser/${id}`, id, userData);
   }
 
   setUserToken(token: string) {
@@ -53,9 +55,17 @@ export class UserService {
   }
 
   addUser(userData: any) {
-    return this.http.post(`${this.baseUrl}addUser`, userData);
+    return this.http.post(`${this.userUrl}addUser`, userData);
   }
   getUsersList(){
-    return this.http.get(`${this.baseUrl}getAllUsers`);
+    return this.http.get(`${this.userUrl}getAllUsers`);
+  }
+  getAccessLevelDetails(){
+    return this.http.get(`${this.userAccessUrl}user-access-levels`)
+  }
+  private refreshUserListSource = new Subject<void>();
+  refreshUserList$ = this.refreshUserListSource.asObservable();
+  refreshUserList() {
+    this.refreshUserListSource.next();
   }
 }

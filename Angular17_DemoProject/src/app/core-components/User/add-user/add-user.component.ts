@@ -7,11 +7,13 @@ import { CommonCheckboxDropdownComponent } from '../../../common-libraies/common
 import { UserService } from '../../../services/user.service';
 import { SpinnerLoadingComponent } from '../../../basic-components/spinner-loading/spinner-loading.component';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../services/toast.service';
+import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [CommonInputBoxComponent, ReactiveFormsModule, CommonDropdownComponent,CommonBreadcrumbsComponent,CommonCheckboxDropdownComponent,SpinnerLoadingComponent],
+  imports: [CommonInputBoxComponent, ReactiveFormsModule, CommonDropdownComponent, CommonBreadcrumbsComponent, CommonCheckboxDropdownComponent, SpinnerLoadingComponent],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })
@@ -19,16 +21,14 @@ export class AddUserComponent {
   [x: string]: any;
   myForm!: FormGroup;
   invalidForm!: boolean | null;
-  users: any[] = [
-    "1","2","3","4"
-  ]
-  userOptions={
-    title:"User Management > Add User",
-    currentTitle:"Add User",
-    hideIcons:true
+  userOptions = {
+    title: "User Management > Add User",
+    currentTitle: "Add User",
+    hideIcons: true
   }
-  spinnerLoading:boolean = false;
-  constructor(private fb: FormBuilder, private userService:UserService, private router:Router) {
+  spinnerLoading: boolean = false;
+  accessLevelLists: any[] = [];
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toastrService:ToastService) {
     this.myForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -39,28 +39,58 @@ export class AddUserComponent {
     });
   }
 
-  getInputFormValues(){
-    this.spinnerLoading = true;
-    console.log(this.myForm.value);
-    const formDataWithAdditionalValue = {
-      ...this.myForm.value,
-      phonenumber:9734325235,
-      areaaccess: 'Full access',
-      status:"active"
-    };
-    console.log(formDataWithAdditionalValue);
-    this.userService.addUser(formDataWithAdditionalValue).subscribe({
-      next: (res:any) => {
-        console.log(res);
-        this.spinnerLoading = false;
-        this.myForm.disable();
-        this.router.navigate(['/users']);
-        this.myForm.reset();
+   ngOnInit() { 
+    this.getAccessLevelDetails();
+   }
+
+   getAccessLevelDetails(){
+    this.userService.getAccessLevelDetails().subscribe({
+      next: (res: any) => {
+        this.accessLevelLists=res;
+        console.log(this.accessLevelLists);
       },
-      error: (err:any) => {
+      error: (err: any) => {
         console.log(err);
-        this.spinnerLoading = false;
       }
     })
+    console.log(this.accessLevelLists)
+   }
+
+  getInputFormValues() {
+    const addUserJson = {
+        firstname:this.myForm.get('firstname')?.value,
+        lastname:this.myForm.get('lastname')?.value,
+        email:this.myForm.get('emailid')?.value,
+        password:this.myForm.get('password')?.value,
+        phonenumber: null,
+        jobtitle:this.myForm.get('jobtitle')?.value,
+        accesslevel:+this.myForm.get('accesslevel')?.value,
+        areaaccess:null
+    }
+    console.log(addUserJson);
+    if (this.myForm.valid) {
+      this.spinnerLoading = true;
+      this.userService.addUser(addUserJson).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.toastrService.success(res.message);
+          this.spinnerLoading = false;
+          this.myForm.disable();
+          this.router.navigate(['/users']);
+          this.myForm.reset();
+          this.userService.refreshUserList();
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.toastrService.error(err.message);
+          this.spinnerLoading = false;
+        }
+      })
+    }
+    else {
+      this.invalidForm = true;
+      this.spinnerLoading = false;
+    }
+
   }
 }

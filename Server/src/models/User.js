@@ -57,8 +57,8 @@ class User {
     }
 
     static addUser(userData, callback) {
-        const { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess, status } = userData;
-        if (!firstname || !lastname || !email || !password || !phonenumber || !jobtitle || !accesslevel || !areaaccess) {
+        const { firstname, lastname, email, password, jobtitle, accesslevel, status } = userData;
+        if (!firstname || !lastname || !email || !password || !jobtitle || !accesslevel) {
             console.log("Required fields are missing, Fields can't be an empty value");
             return callback('Required fields are missing', null);
         }
