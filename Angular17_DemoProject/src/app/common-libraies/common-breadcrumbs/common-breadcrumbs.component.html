@@ -2,32 +2,46 @@
     <div class="mt-4 row align-items-center">
         <div class="col bredCrumbsTitle">
             @for (item of user.title.split('>'); track $index;let last = $last;) {
-                @if (!last) {
-                    @if($index < customRoutes.length){
-                        <span class="breadCrumbsLink" [routerLink]="customRoutes[$index]">{{item}}</span> <span class="arrowMark"> > </span>
-                    }
+            @if (!last) {
+            @if($index < customRoutes.length){ <span class="breadCrumbsLink" [routerLink]="customRoutes[$index]">
+                {{item}}</span> <span class="arrowMark"> > </span>
+                }
                 }
                 @else if (last) {
-                    <span>{{item}}</span>
+                <span>{{item}}</span>
                 }
                 @else {
-                    <span> &gt; </span>
+                <span> &gt; </span>
                 }
-            }
+                }
         </div>
         <div class="col-auto">
             @if(!user.hideIcons){
-            <div class="d-flex justify-content-end tableOptions">
-                <i class="fa-sharp fa-regular fa-circle-plus fa-lg me-4 custom-tooltip" style="color: #007cba;"
+            <div class="d-flex justify-content-end gap-3 align-items-center tableOptions">
+                @if(!openFilterChips)
+                {
+                <i class="fa-sharp fa-regular fa-circle-plus fa-lg custom-tooltip" style="color: #007cba;"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
                     [attr.data-bs-title]="user.currentTitle" (click)="saveFunctionaity()"></i>
-                <i class="fa-sharp fa-regular fa-filter-list fa-lg me-4" style="color: #007cba;"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Filter"></i>
+                }
+                <i class="fa-sharp fa-regular fa-filter-list fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" data-bs-title="Filter" (click)="openFilterModal()"></i>
+                @if(openFilterChips)
+                {
+                <div class="d-flex align-items-center justify-content-between gap-2 form-control">
+                    @for(chip of chips;track $index)
+                    {
+                    <app-common-chip [text]="chip" (remove)="removeChip($event)"></app-common-chip>
+                    }
+                    <div><i class="fa-solid fa-xmark cursor-pointer" (click)="closeChips()"></i></div>
+                </div>
+                }
+
                 <i class="fa-solid fa-down-to-line fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" data-bs-title="Download"></i>
             </div>
-        }
-        @else {
+            }
+            @else {
             <div class="d-flex justify-content-end tableOptions">
                 <div class="me-4 d-flex align-items-center functionName">
                     <i class="fa-solid fa-bookmark" style="color: #007cba;"></i>
@@ -37,8 +51,8 @@
                     <i class="fa-sharp fa-solid fa-xmark fa-lg" style="color: #007cba;"></i>
                     <span class="p-2" (click)="closeOption()">Close</span>
                 </div>
-            </div>            
-        }
+            </div>
+            }
         </div>
     </div>
 </div>

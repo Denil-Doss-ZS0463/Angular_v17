@@ -1,30 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChildren } from '@angular/core';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
 import { CommonTableComponent } from '../../../common-libraies/common-table/common-table.component';
 import { ActivatedRoute } from '@angular/router';
-
+import { CommonFilterComponent } from '../../../common-libraies/common-filter/common-filter.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonBreadcrumbsComponent, CommonTableComponent],
+  imports: [CommonBreadcrumbsComponent, CommonTableComponent, CommonFilterComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  mockData: any[] = [];
-  userOptions={
-    title:"User Management",
-    currentTitle:"Add User",
-    hideIcons:false
-  }
 
-  constructor(private route: ActivatedRoute) {}
-  ngOnInit(){
-    this.mockData = this.employeeDetails;
-    this.route.params.subscribe((params) => {
-      console.log(params);
-    })
+  mockData: any[] = [];
+  userOptions = {
+    title: "User Management",
+    currentTitle: "Add User",
+    hideIcons: false
   }
+  appliedFilters: any[] = [];
   employeeDetails: any[] =
     [
       {
@@ -140,4 +135,38 @@ export class UsersComponent {
     ]
 
   employeeHeader: any[] = ['First Name', 'Last Name', 'Age', 'Email', 'Department', 'Position', 'Salary', 'Join Date']
+
+  constructor(private route: ActivatedRoute, private modalService: NgbModal) { }
+  ngOnInit() {
+    this.mockData = this.employeeDetails;
+    this.route.params.subscribe((params) => {
+      console.log(params);
+    })
+  }
+
+  applyFilters(filteredData: any) {
+    this.mockData = filteredData;
+  }
+
+  openFilterModal(ifFilterSelected: boolean, filterModal: any) {
+    if (ifFilterSelected) {
+      this.modalService.open(filterModal, { windowClass: 'filterModalUserScreen', keyboard: false, size: 'lg', scrollable: true, backdrop: 'static' });
+    }
+  }
+
+  filterApplied(event: any, modal: any) {
+    if (event) {
+      this.appliedFilters = event;
+      modal.close();
+    }
+  }
+
+  closeChip(chipClosingEvent: any) {
+    if (chipClosingEvent) {
+      this.mockData = this.employeeDetails;
+    }
+  }
+  closeFilterModal(modal: any) {
+    modal.dismiss('Cross click');
+  }
 }
