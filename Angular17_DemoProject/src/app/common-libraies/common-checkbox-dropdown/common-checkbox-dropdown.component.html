@@ -1,3 +1,4 @@
+
 <div class="form-group">
     <label [for]="idSelector" class="form-label commonLabel ps-0">
         {{ label }}
@@ -9,7 +10,6 @@
     <div #container class="customCheckboxDropdownContainer">
         <div (click)="toggleDropdDown()" class="form-select customCheckBoxTextbox" placeholder="Select Items"
             [ngClass]="{'border border-danger':selectedItems.length == 0 && invalidForm}">
-
             <span> {{selectedItems.length === 0 ? placeholderText : (selectedItems.length === 1 ?
                 returnLastSelectedValue(selectedItems[0]) : selectedItems.length + ' selected')}}</span>
         </div>

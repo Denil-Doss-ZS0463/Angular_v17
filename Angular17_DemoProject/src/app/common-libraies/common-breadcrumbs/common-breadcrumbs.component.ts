@@ -17,6 +17,9 @@ export class CommonBreadcrumbsComponent {
   @Input() chips: string[] = ['First name', 'Last Name'];
   @Input() filters: string[] = ['Filter 1', 'Filter 2', 'Filter 3'];
   @Output() closeChip = new EventEmitter<any>();
+  @Output() save: EventEmitter<void> = new EventEmitter<void>();
+  
+  tooltip:any;
   hideIcons: boolean = false;
   tooltip: any;
   customRoutes = ['/users', '/users/new-user'];
@@ -39,10 +42,15 @@ export class CommonBreadcrumbsComponent {
       });
     });
   }
-  saveFunctionaity() {
+  openFunctionaity(){
     this.hideIcons = true;
     this.tooltip.hide();
-    this.router.navigate(['users/new-user']);
+    if(this.user.currentTitle=="Add User"){
+      this.router.navigate(['users/new-user']);
+    }
+  }
+  saveFunctionality(){
+    this.save.emit();
   }
   closeOption() {
     this.router.navigate(['users']);

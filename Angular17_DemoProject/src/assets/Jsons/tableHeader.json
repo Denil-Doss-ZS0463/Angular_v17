@@ -1,0 +1,11 @@
+{
+    "user":[
+        "Email",
+        "First Name",
+        "Last Name",
+        "Job Title",
+        "Access Level",
+        "Area Access",
+        "Status"
+    ]
+}

@@ -4,6 +4,8 @@ import { CommonTableComponent } from '../../../common-libraies/common-table/comm
 import { ActivatedRoute } from '@angular/router';
 import { CommonFilterComponent } from '../../../common-libraies/common-filter/common-filter.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../../../services/user.service';
+
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -20,6 +22,8 @@ export class UsersComponent {
     hideIcons: false
   }
   appliedFilters: any[] = [];
+    userHeaderList: any[] = [];
+
   employeeDetails: any[] =
     [
       {
@@ -136,12 +140,14 @@ export class UsersComponent {
 
   employeeHeader: any[] = ['First Name', 'Last Name', 'Age', 'Email', 'Department', 'Position', 'Salary', 'Join Date']
 
-  constructor(private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) { }
   ngOnInit() {
     this.mockData = this.employeeDetails;
     this.route.params.subscribe((params) => {
       console.log(params);
     })
+     this.getUsersTableHeaderList();
+    this.getUsers();
   }
 
   applyFilters(filteredData: any) {
@@ -168,5 +174,31 @@ export class UsersComponent {
   }
   closeFilterModal(modal: any) {
     modal.dismiss('Cross click');
+  }
+  getUsersTableHeaderList(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      fetch('./assets/Jsons/tableHeader.json')
+        .then(res => res.json())
+        .then(data => {
+          this.userHeaderList = data.user;
+          resolve();
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    });
+  }
+  getUsers(){
+    this.userService.getUsersList().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.mockData = res;
+      },
+      error:(err:any)=>{
+        console.log(err);
+      }
+    }
+    )
+
   }
 }

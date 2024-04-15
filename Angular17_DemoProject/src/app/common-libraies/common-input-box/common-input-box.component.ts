@@ -25,5 +25,4 @@ export class CommonInputBoxComponent {
     const control = this.parentForm.get(this.controlName);
     return control && control.invalid && control.touched || this.invalidForm;
   }
-  
 }

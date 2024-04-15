@@ -22,7 +22,7 @@
                 {
                 <i class="fa-sharp fa-regular fa-circle-plus fa-lg custom-tooltip" style="color: #007cba;"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
-                    [attr.data-bs-title]="user.currentTitle" (click)="saveFunctionaity()"></i>
+                   [attr.data-bs-title]="user.currentTitle" (click)="openFunctionaity()"></i>
                 }
                 <i class="fa-sharp fa-regular fa-filter-list fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" data-bs-title="Filter" (click)="openFilterModal()"></i>
@@ -35,17 +35,19 @@
                     }
                     <div><i class="fa-solid fa-xmark cursor-pointer" (click)="closeChips()"></i></div>
                 </div>
-                }
-
+                }  
+                <i class="fa-sharp fa-regular fa-filter-list fa-lg me-4" style="color: #007cba;"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Filter"></i>
+              
                 <i class="fa-solid fa-down-to-line fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" data-bs-title="Download"></i>
             </div>
             }
             @else {
             <div class="d-flex justify-content-end tableOptions">
-                <div class="me-4 d-flex align-items-center functionName">
+                <div class="me-4 d-flex align-items-center functionName" (click)="saveFunctionality()">
                     <i class="fa-solid fa-bookmark" style="color: #007cba;"></i>
-                    <span class="p-2">Add User</span>
+                    <span class="p-2">{{user.currentTitle}}</span>
                 </div>
                 <div class="d-flex align-items-center functionName">
                     <i class="fa-sharp fa-solid fa-xmark fa-lg" style="color: #007cba;"></i>
