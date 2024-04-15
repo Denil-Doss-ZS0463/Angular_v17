@@ -38,14 +38,18 @@
 
 .form-control:focus,
 .form-select:focus {
-  box-shadow: none !important; 
+  box-shadow: none !important;
   border: 2px solid #d6d4d2 !important;
 }
 
 .form-check-input:focus,
 .form-check-input:checked {
-  box-shadow: none !important; 
+  box-shadow: none !important;
   border: none !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .text-danger {

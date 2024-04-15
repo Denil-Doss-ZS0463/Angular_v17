@@ -1,4 +1,20 @@
-<app-common-breadcrumbs [user]="userOptions"></app-common-breadcrumbs>
+<app-common-breadcrumbs [user]="userOptions" (ifFilterSelected)="openFilterModal($event,fitlerModal)"
+    [chips]="appliedFilters" (closeChip)="closeChip($event)" ></app-common-breadcrumbs>
+    
 <div class="container mt-3 overflow-auto">
     <app-common-table [headers]="userHeaderList" [data]="mockData" [mockData]="mockData" [dataToRemove]="['password', 'phonenumber']"></app-common-table>
 </div>
+<ng-template #fitlerModal let-modal>
+    <div class="">
+        <div class="modal-body filterModalBody">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="filterModalTitle mx-2">Filter</div>
+                <div class="closefilterModal cursor-pointer"><i class="fa-solid fa-xmark"
+                        (click)="closeFilterModal(modal)"></i></div>
+            </div>
+
+            <app-common-filter [headers]="employeeHeader" [tableData]="mockData" (filtersChanged)="applyFilters($event)"
+                (filterApplied)="filterApplied($event, modal)" [filters]="appliedFilters"></app-common-filter>
+        </div>
+    </div>
+</ng-template>

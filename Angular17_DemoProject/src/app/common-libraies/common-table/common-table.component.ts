@@ -53,7 +53,7 @@ export class CommonTableComponent {
 
   getColumnKey(columnIndex: number): string {
     const matchedHeader = this.toCamelCase(this.headers[columnIndex].replace(' ', ''));
-    return matchedHeader
+    return matchedHeader;
   }
 
   sortByColumnDescending(columnIndex: number) {
@@ -99,6 +99,7 @@ export class CommonTableComponent {
   }
 
   availablePages(totalPages: any) {
+    this.calculateTotalPages();
     return Array(totalPages).fill(0).map((_, i) => i + 1);
   }
 
