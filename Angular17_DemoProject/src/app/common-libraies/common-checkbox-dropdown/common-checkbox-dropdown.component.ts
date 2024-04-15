@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input, Output, EventEmitter,  ViewChildren, QueryList, ElementRef  } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -28,7 +28,7 @@ export class CommonCheckboxDropdownComponent {
   showDropdown: boolean = false;
   checkedIndex: number = 0;
 
-  constructor() {}
+  constructor() { }
   ngAfterViewInit() {
     document.body.addEventListener('click', this.onClickOutside.bind(this));
   }
@@ -55,11 +55,6 @@ export class CommonCheckboxDropdownComponent {
     this.showDropdown = !this.showDropdown;
   }
 
-  showData() {
-    console.log(this.selectedItems);
-    this.invalidForm = true;
-  }
-
   isSelected(id: number): boolean {
     const checkedIds = this.selectedItems.includes(id);
     this.itemsSelected.emit(this.selectedItems);
@@ -68,7 +63,8 @@ export class CommonCheckboxDropdownComponent {
 
   returnLastSelectedValue(id: any) {
     const data = this.dropdownOptions.find(obj => obj.id === id);
-    return data[this.objectKeyToShow];
+    const checkForObject = this.checkForArrayOfObject();
+    return checkForObject ? data[this.objectKeyToShow] : this.selectedItems[0];
   }
 
   onClickOutside(event: MouseEvent) {

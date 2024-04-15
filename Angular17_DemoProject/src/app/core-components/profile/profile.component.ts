@@ -9,6 +9,7 @@ import {
 import { CommonInputBoxComponent } from '../../common-libraies/common-input-box/common-input-box.component';
 import { CommonLogicsService } from '../../services/common-logics.service';
 import { UserService } from '../../services/user.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +28,8 @@ export class ProfileComponent {
     private formBuilder: FormBuilder,
     private activeModal: NgbActiveModal,
     private userService: UserService,
-    private logicService: CommonLogicsService
+    private logicService: CommonLogicsService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -55,6 +57,7 @@ export class ProfileComponent {
   enableEditMode() {
     this.isEditMode = true;
     this.myForm.enable();
+    this.toastService.warning('Edit mode Enabled!');
   }
 
   invalidForm!: boolean | null;
@@ -64,11 +67,11 @@ export class ProfileComponent {
       // Example: this.userService.saveUserData(this.myForm.value);
       this.isEditMode = false;
       this.invalidForm = false;
-      alert('Profile Saved !');
-      this.myForm.disable(); // Disable form fields after saving
+      this.toastService.success('Profile Saved !');
+      this.myForm.disable();
     } else {
+      this.toastService.error('Invalid Form');
       this.invalidForm = true;
-      alert('Invalid Form');
     }
   }
 
