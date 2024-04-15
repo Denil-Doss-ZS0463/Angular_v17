@@ -47,4 +47,10 @@ export class UserService {
   loggedUser(id: any) {
     return this.http.get(`${this.baseUrl}getUserById/${id}`);
   }
+  addUser(userData: any) {
+    return this.http.post(`${this.baseUrl}addUser`, userData);
+  }
+  getUsersList(){
+    return this.http.get(`${this.baseUrl}getAllUsers`);
+  }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
 import { CommonTableComponent } from '../../../common-libraies/common-table/common-table.component';
-import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -17,127 +17,36 @@ export class UsersComponent {
     currentTitle:"Add User",
     hideIcons:false
   }
+  userHeaderList: any[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private userService:UserService) {}
   ngOnInit(){
-    this.mockData = this.employeeDetails;
-    this.route.params.subscribe((params) => {
-      console.log(params);
-    })
+    this.getUsersTableHeaderList();
+    this.getUsers();
   }
-  employeeDetails: any[] =
-    [
-      {
-        "id": '1',
-        "firstName": "John",
-        "lastName": "Doe",
-        "age": '35',
-        "email": "john.doe@example.com",
-        "department": "Engineering",
-        "position": "Software Engineer",
-        "salary": '75000',
-        "joinDate": "2022-01-15"
+  getUsersTableHeaderList(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      fetch('./assets/Jsons/tableHeader.json')
+        .then(res => res.json())
+        .then(data => {
+          this.userHeaderList = data.user;
+          resolve();
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    });
+  }
+  getUsers(){
+    this.userService.getUsersList().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.mockData = res;
       },
-      {
-        "id": '2',
-        "firstName": "Jane",
-        "lastName": "Smith",
-        "age": "",
-        "email": "jane.smith@example.com",
-        "department": "Marketing",
-        "position": "Marketing Manager",
-        "salary": "65000",
-        "joinDate": "2021-11-20"
-      },
-      {
-        "id": "3",
-        "firstName": "Michael",
-        "lastName": "Johnson",
-        "age": "40",
-        "email": "michael.johnson@example.com",
-        "department": "Finance",
-        "position": "Financial Analyst",
-        "salary": "80000",
-        "joinDate": "2020-09-10"
-      },
-      {
-        "id": "4",
-        "firstName": "Emily",
-        "lastName": "Davis",
-        "age": "32",
-        "email": "emily.davis@example.com",
-        "department": "Human Resources",
-        "position": "HR Manager",
-        "salary": "70000",
-        "joinDate": "2023-03-05"
-      },
-      {
-        "id": "5",
-        "firstName": "William",
-        "lastName": "Wilson",
-        "age": "45",
-        "email": "william.wilson@example.com",
-        "department": "Operations",
-        "position": "Operations Director",
-        "salary": "90000",
-        "joinDate": "2019-06-15"
-      },
-      {
-        "id": "6",
-        "firstName": "Olivia",
-        "lastName": "",
-        "age": "29",
-        "email": "olivia.brown@example.com",
-        "department": "Customer Service",
-        "position": "Customer Service Representative",
-        "salary": "55000",
-        "joinDate": "2023-02-28"
-      },
-      {
-        "id": "7",
-        "firstName": "James",
-        "lastName": "Taylor",
-        "age": "38",
-        "email": "james.taylor@example.com",
-        "department": "Sales",
-        "position": "Sales Manager",
-        "salary": "75000",
-        "joinDate": "2020-12-10"
-      },
-      {
-        "id": "8",
-        "firstName": "Sophia",
-        "lastName": "Martinez",
-        "age": "33",
-        "email": "sophia.martinez@example.com",
-        "department": "Product Management",
-        "position": "Product Manager",
-        "salary": "85000",
-        "joinDate": "2021-08-20"
-      },
-      {
-        "id": "9",
-        "firstName": "Daniel",
-        "lastName": "Anderson",
-        "age": "31",
-        "email": "daniel.anderson@example.com",
-        "department": "Research and Development",
-        "position": "Research Scientist",
-        "salary": "80000",
-        "joinDate": "2022-04-30"
-      },
-      {
-        "id": "10",
-        "firstName": "Isabella",
-        "lastName": "Thomas",
-        "age": "27",
-        "email": "isabella.thomas@example.com",
-        "department": "Quality Assurance",
-        "position": "Quality Assurance Engineer",
-        "salary": "65000",
-        "joinDate": "2023-01-05"
+      error:(err:any)=>{
+        console.log(err);
       }
-    ]
-
-  employeeHeader: any[] = ['First Name', 'Last Name', 'Age', 'Email', 'Department', 'Position', 'Salary', 'Join Date']
+    }
+    )
+  }
 }
