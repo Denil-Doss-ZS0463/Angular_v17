@@ -27,20 +27,17 @@
                     <td class="text-center" [colSpan]="headers.length">No data found</td>
                     </tr>
                     }@else{
-                    @for(user of updateDisplayedData(); track $index)
-                    {
-                    <tr class="text-center" (click)="sendRowDetails(data)">
-                        @for(key of getUserKeys(user); track $index)
-                        {
-                        @if(key !== 'id' && !dataToRemove.includes(key))
-                        {
-                        <td>
-                            {{user[key]}}
-                        </td>
+                        @for(user of updateDisplayedData(); track $index) {
+                            <tr class="text-center" (click)="sendRowDetails(data)">
+                                @for(header of headers; track $index) {
+                                    @if(header !== 'id' && !dataToRemove.includes(header)) {
+                                        <td>
+                                            {{user[header.toLowerCase().replace(' ', '')]}}
+                                        </td>
+                                    }
+                                }
+                            </tr>
                         }
-                        }
-                    </tr>
-                    }
                     }
             </tbody>
         </table>

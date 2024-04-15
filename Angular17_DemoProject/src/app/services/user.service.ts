@@ -51,4 +51,11 @@ export class UserService {
   getLoggedInUser() {
     return this.loggedInUser;
   }
+
+  addUser(userData: any) {
+    return this.http.post(`${this.baseUrl}addUser`, userData);
+  }
+  getUsersList(){
+    return this.http.get(`${this.baseUrl}getAllUsers`);
+  }
 }

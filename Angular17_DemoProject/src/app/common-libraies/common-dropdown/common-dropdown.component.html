@@ -27,8 +27,6 @@
                 }
             </select>
         </div>
-        @if(invalidForm)
-        {
         <span class="text-danger errorMessage hidden m-0 pb-0">
             @if((showErrors() && parentForm.get(controlName)?.errors))
             {
@@ -36,10 +34,7 @@
             {
             {{errorMessage}}
             }
-            }@else {
-            &nbsp;
             }
         </span>
-        }
     </div>
 </div>

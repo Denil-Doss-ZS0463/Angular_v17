@@ -1,42 +1,55 @@
-<app-common-breadcrumbs [user]="userOptions"></app-common-breadcrumbs>
+@if(spinnerLoading) {
+    <div class="spinner-container" [class.show]="spinnerLoading">
+        <app-spinner-loading></app-spinner-loading>
+    </div>
+}
+<app-common-breadcrumbs [user]="userOptions" (save)="getInputFormValues()"></app-common-breadcrumbs>
 <form [formGroup]="myForm" class="mt-4">
     <div class="container">
         <div class="row mb-2">
             <div class="col-4">
-                <app-common-input-box [label]="'Email Id'" [controlName]="'emailId'" [parentForm]="myForm"
-                    [fieldType]="'text'" [idSelector]="'emailId'" [placeholderText]="'Enter user email'"
+                <app-common-input-box [label]="'Email Id'" [controlName]="'emailid'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'emailid'" [placeholderText]="'Enter user email'"
                     [errorMessage]="'Email id is required'" [invalidForm]="invalidForm" [required]="true">
                 </app-common-input-box>
             </div>
             <div class="col-4">
-                <app-common-input-box [label]="'First Name'" [controlName]="'firstName'" [parentForm]="myForm"
-                    [fieldType]="'text'" [idSelector]="'firstName'" [placeholderText]="'Enter user\'s first name'"
+                <app-common-input-box [label]="'First Name'" [controlName]="'firstname'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'firstname'" [placeholderText]="'Enter user\'s first name'"
                     [errorMessage]="'First name is required'" [invalidForm]="invalidForm"
                     [required]="true"></app-common-input-box>
             </div>
             <div class="col-4">
-                <app-common-input-box [label]="'Last Name'" [controlName]="'lastName'" [parentForm]="myForm"
-                    [fieldType]="'text'" [idSelector]="'lastName'" [placeholderText]="'Enter user\'s last name'"
+                <app-common-input-box [label]="'Last Name'" [controlName]="'lastname'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'lastname'" [placeholderText]="'Enter user\'s last name'"
                     [errorMessage]="'Last name is required'" [invalidForm]="invalidForm"
                     [required]="true"></app-common-input-box>
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <app-common-input-box [label]="'Job Title'" [controlName]="'jobTitle'" [parentForm]="myForm"
-                    [fieldType]="'text'" [idSelector]="'jobTitle'" [placeholderText]="'Enter job title'"
+                <app-common-input-box [label]="'Job Title'" [controlName]="'jobtitle'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'jobtitle'" [placeholderText]="'Enter job title'"
                     [errorMessage]="'Job title is required'" [invalidForm]="invalidForm"
                     [required]="true"></app-common-input-box>
             </div>
             <div class="col-4">
-                <app-common-dropdown [label]="'Access Level'" [controlName]="'accessLevel'" [parentForm]="myForm"
-                    [idSelector]="'accessLevel'" [placeholderText]="'Choose access level'"
+                <app-common-dropdown [label]="'Access Level'" [controlName]="'accesslevel'" [parentForm]="myForm"
+                    [idSelector]="'accesslevel'" [placeholderText]="'Choose access level'"
                     [errorMessage]="'Access level is required'" [objectKeyToShow]="'name'" [selectedValue]="'John Doe'"
-                    [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'">
+                    [invalidForm]="invalidForm" [dropDownValue]="users" [objectKeyAsValue]="'name'" [required]="true">
                 </app-common-dropdown>
             </div>
             <div class="col-4">
-                <app-common-checkbox-dropdown [dropdownOptions]="users" [errorMessage]="'Choose the user'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Users'"></app-common-checkbox-dropdown>
+                <app-common-checkbox-dropdown [dropdownOptions]="users" [errorMessage]="'Choose the user'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Users'" [required]="true"></app-common-checkbox-dropdown>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <app-common-input-box [label]="'Password'" [controlName]="'password'" [parentForm]="myForm"
+                    [fieldType]="'password'" [idSelector]="'password'" [placeholderText]="'Enter password'"
+                    [errorMessage]="'password is required'" [invalidForm]="invalidForm"
+                    [required]="true"></app-common-input-box>
             </div>
         </div>
     </div>

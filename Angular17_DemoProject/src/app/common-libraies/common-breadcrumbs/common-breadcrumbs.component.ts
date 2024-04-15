@@ -1,5 +1,4 @@
-import { NgIf } from '@angular/common';
-import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 declare let bootstrap: any;
 @Component({
@@ -11,6 +10,7 @@ declare let bootstrap: any;
 })
 export class CommonBreadcrumbsComponent {
 
+  @Output() save: EventEmitter<void> = new EventEmitter<void>();
   tooltip:any;
   @Input() user:any='';
   hideIcons: boolean = false;
@@ -31,10 +31,15 @@ export class CommonBreadcrumbsComponent {
       });
     });
   }
-  saveFunctionaity(){
+  openFunctionaity(){
     this.hideIcons = true;
     this.tooltip.hide();
-    this.router.navigate(['users/new-user']);
+    if(this.user.currentTitle=="Add User"){
+      this.router.navigate(['users/new-user']);
+    }
+  }
+  saveFunctionality(){
+    this.save.emit();
   }
   closeOption(){
     this.router.navigate(['users']);
