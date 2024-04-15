@@ -23,10 +23,10 @@ db.connect()
 
     return db.query(`
      INSERT INTO user_access_level (value) VALUES 
-     ('super admin'),
-     ('area admin'),
-     ('user'),
-     ('coach')
+     ('Super Admin'),
+     ('Area Admin'),
+     ('User'),
+     ('Coach')
      ON CONFLICT DO NOTHING;
    `);
   })
@@ -39,7 +39,7 @@ db.connect()
       id SERIAL PRIMARY KEY,
       firstName VARCHAR(20),
       lastName VARCHAR(20),
-      emailId VARCHAR(100),
+      email VARCHAR(100),
       password TEXT,
       phoneNumber VARCHAR(30),
       jobTitle VARCHAR(50),

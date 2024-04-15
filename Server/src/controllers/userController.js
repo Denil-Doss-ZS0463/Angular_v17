@@ -9,7 +9,9 @@ class UserController {
             if (err) {
                 return res.status(500).send("Internal Server Error");
             }
-            res.send(users);
+            // res.send(users);
+            res.status(200).json({ message: "Users retrieved successfully" });
+
         });
     }
 
@@ -43,7 +45,8 @@ class UserController {
 
         User.getUserById(userId)
             .then((user) => {
-                res.json(user);
+                // res.json(user);
+                res.status(200).json({ message: "User retrieved successfully", users });
             })
             .catch((error) => {
                 console.error("Error retrieving user:", error.message);
@@ -52,19 +55,19 @@ class UserController {
     }
 
     static addUser(req, res) {
-        const { firstname, lastname, emailid, password, phonenumber, jobtitle, accesslevel, areaaccess } = req.body;
+        const { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess } = req.body;
 
         bcrypt.hash(password, 10, (err, hashedPassword) => {
             if (err) {
                 console.error('Error hashing password:', err.message);
                 return res.status(500).json({ message: 'Internal Server Error' });
             }
-            const status = 'active';
+            const status = 'Active';
 
             User.addUser({
                 firstname,
                 lastname,
-                emailid,
+                email,
                 password: hashedPassword,
                 phonenumber,
                 jobtitle,
@@ -76,23 +79,23 @@ class UserController {
                     console.error('Error adding user:', err.message);
                     return res.status(500).json({ message: 'Internal Server Error' });
                 }
-                res.status(201).json(newUser);
+                res.status(201).json({ message: "User added successfully" });
             });
         });
     }
 
     static updateUser(req, res) {
         const userId = req.params.id;
-        const { firstname, lastname, emailid, password, phonenumber, jobtitle, accesslevel, areaaccess } = req.body;
-        if (!firstname || !lastname || !emailid) {
+        const { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess } = req.body;
+        if (!firstname || !lastname || !email) {
             return res.status(400).json({ message: 'First name, last name, and email are required' });
         }
-        User.updateUser(userId, { firstname, lastname, emailid, password, phonenumber, jobtitle, accesslevel, areaaccess }, (err, updatedUser) => {
+        User.updateUser(userId, { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess }, (err, updatedUser) => {
             if (err) {
                 console.error('Error updating user:', err);
                 return res.status(500).json({ message: 'Internal Server Error' });
             }
-            res.json(updatedUser);
+            res.status(200).json({ message: "User updated successfully" });
         });
     }
 
@@ -103,7 +106,7 @@ class UserController {
             return res.status(400).json({ message: 'User ID is required' });
         }
 
-        User.patchUserStatus(userId, 'inactive', (err, updatedUser) => {
+        User.patchUserStatus(userId, 'Inactive', (err, updatedUser) => {
             if (err) {
                 console.error('Error updating user status:', err);
                 return res.status(500).json({ message: 'Internal Server Error' });
@@ -111,11 +114,9 @@ class UserController {
             if (!updatedUser) {
                 return res.status(400).json({ message: 'Invalid or unsupported patch operation' });
             }
-            res.json(updatedUser);
+            res.status(200).json({ message: "User status updated successfully" });
         });
     }
-
-
 }
 
 module.exports = UserController;
