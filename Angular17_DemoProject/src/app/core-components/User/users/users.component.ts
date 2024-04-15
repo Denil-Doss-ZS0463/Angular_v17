@@ -26,21 +26,15 @@ export class UsersComponent {
 
   userHeaderList: any[] = [];
   spinnerLoading:boolean = false;
-
-  constructor(private userService:UserService) {
+  appliedFilters: any[] = [];
+  userDetails: any[] = [];
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) {
     this.refreshSubscription = this.userService.refreshUserList$.subscribe(() => {
       this.getUsers();
     });
-  }
-  ngOnInit(){
-    this.getUsersTableHeaderList();
-
-  appliedFilters: any[] = [];
-    userHeaderList: any[] = [];
-    
-  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) { }
+   }
   ngOnInit() {
-     this.getUsersTableHeaderList();
+    this.getUsersTableHeaderList();
     this.getUsers();
   }
 
@@ -63,7 +57,7 @@ export class UsersComponent {
 
   closeChip(chipClosingEvent: any) {
     if (chipClosingEvent) {
-      this.mockData = this.employeeDetails;
+      this.mockData = this.userDetails;
     }
   }
   closeFilterModal(modal: any) {
@@ -87,6 +81,7 @@ export class UsersComponent {
     this.userService.getUsersList().subscribe({
       next:(res:any)=>{
         console.log(res);
+        this.userDetails = res;
         this.mockData = res;
         this.spinnerLoading=false;
       },
