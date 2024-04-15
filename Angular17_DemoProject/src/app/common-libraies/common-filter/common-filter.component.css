@@ -28,3 +28,9 @@
     color: #a7a8a7;
 
 }
+.modal-content {
+    --bs-modal-width: 1138px !important;
+    width: 700px !important;
+    max-width: none;
+    padding: 20px !important;
+}

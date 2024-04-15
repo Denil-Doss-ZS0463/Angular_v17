@@ -15,24 +15,26 @@ export class CommonFilterComponent {
 
   @Input() headers!: string[];
   filterAttributes: string[] = StringContants.filter.filterAttributes;
-  @Output() filtersChanged = new EventEmitter<any[]>();
   @Input() tableData: any[] = [];
   @Input() dataAsSelected!: string;
   @Output() resetFilter = new EventEmitter<any>();
-
+  @Output() filtersChanged = new EventEmitter<any[]>();
+  @Output() filterApplied = new EventEmitter<any>();
   dataToFilter: any[] = [];
   filterForm!: FormGroup;
   columnValue!: string;
 
-  applyLabel:string = StringContants.generalContants.apply;
-  addFilterLabel:string = StringContants.filter.addFilterLabel;
-  andLabel:string = StringContants.filter.andLabel;
+  applyLabel: string = StringContants.generalContants.apply;
+  addFilterLabel: string = StringContants.filter.addFilterLabel;
+  andLabel: string = StringContants.filter.andLabel;
 
-  filters: any[] = [{ column: '', condition: '', value: '' }];
+  @Input() filters: any[] = [];
 
   ngOnInit() {
     this.dataToFilter = this.tableData;
-    this.filters = [{ column: this.headers[0], condition: 'Equals', value: '' }];
+    if (this.filters.length == 0) {
+      this.filters = [{ column: this.headers[0], condition: 'Equals', value: '' }];
+    }
   }
 
   addFilter() {
@@ -50,6 +52,7 @@ export class CommonFilterComponent {
       this.dataToFilter = this.applyFiltersCriteria(this.tableData, this.filters) ? this.applyFiltersCriteria(this.tableData, this.filters) : [];
       console.log(this.dataToFilter);
       this.filtersChanged.emit(this.dataToFilter);
+      this.filterApplied.emit(this.filters);
     }
 
   }

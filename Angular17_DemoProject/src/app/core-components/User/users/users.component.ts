@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChildren } from '@angular/core';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
 import { CommonTableComponent } from '../../../common-libraies/common-table/common-table.component';
+import { ActivatedRoute } from '@angular/router';
+import { CommonFilterComponent } from '../../../common-libraies/common-filter/common-filter.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { SpinnerLoadingComponent } from '../../../basic-components/spinner-loading/spinner-loading.component';
 import { Subscription } from 'rxjs';
@@ -8,18 +11,19 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonBreadcrumbsComponent, CommonTableComponent,SpinnerLoadingComponent],
+  imports: [CommonBreadcrumbsComponent, CommonTableComponent, CommonFilterComponent, SpinnerLoadingComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
   private refreshSubscription: Subscription;
   mockData: any[] = [];
-  userOptions={
-    title:"User Management",
-    currentTitle:"Add User",
-    hideIcons:false
+  userOptions = {
+    title: "User Management",
+    currentTitle: "Add User",
+    hideIcons: false
   }
+
   userHeaderList: any[] = [];
   spinnerLoading:boolean = false;
 
@@ -30,7 +34,40 @@ export class UsersComponent {
   }
   ngOnInit(){
     this.getUsersTableHeaderList();
+
+  appliedFilters: any[] = [];
+    userHeaderList: any[] = [];
+    
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) { }
+  ngOnInit() {
+     this.getUsersTableHeaderList();
     this.getUsers();
+  }
+
+  applyFilters(filteredData: any) {
+    this.mockData = filteredData;
+  }
+
+  openFilterModal(ifFilterSelected: boolean, filterModal: any) {
+    if (ifFilterSelected) {
+      this.modalService.open(filterModal, { windowClass: 'filterModalUserScreen', keyboard: false, size: 'lg', scrollable: true, backdrop: 'static' });
+    }
+  }
+
+  filterApplied(event: any, modal: any) {
+    if (event) {
+      this.appliedFilters = event;
+      modal.close();
+    }
+  }
+
+  closeChip(chipClosingEvent: any) {
+    if (chipClosingEvent) {
+      this.mockData = this.employeeDetails;
+    }
+  }
+  closeFilterModal(modal: any) {
+    modal.dismiss('Cross click');
   }
   getUsersTableHeaderList(): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -57,7 +94,6 @@ export class UsersComponent {
         console.log(err);
         this.spinnerLoading=false;
       }
-    }
-    );
+    });
   }
 }
