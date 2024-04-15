@@ -2,8 +2,7 @@ const db = require('../config/database');
 
 class User {
     static getAll(callback) {
-        db.query(`
-            SELECT u.*, ual.value AS accessLevel FROM users u JOIN user_access_level ual ON u.accessLevel = ual.id WHERE u.status = $1`, ['Active'], (err, result) => {
+        db.query('SELECT * FROM users WHERE status = $1', ['Active'], (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 callback(err, null);
@@ -14,19 +13,12 @@ class User {
     }
 
     static getUserById(id) {
-        return db.query(`
-            SELECT u.*, ual.value AS accessLevel FROM users u JOIN user_access_level ual ON u.accessLevel = ual.id WHERE u.id = $1 AND u.status = $2`, [id, 'Active'])
-            .then(userResult => {
-                if (userResult.rows.length === 0) {
+        return db.query('SELECT * FROM users WHERE id = $1 AND status = $2', [id, 'Active'])
+            .then(result => {
+                if (result.rows.length === 0) {
                     throw new Error('User not found or inactive');
                 }
-
-                const user = userResult.rows[0];
-                const accessLevel = user.accessLevel;
-
-                const userWithAccessLevel = { ...user, accessLevel };
-
-                return userWithAccessLevel;
+                return result.rows[0];
             })
             .catch(error => {
                 console.error('Error retrieving user:', error.message);
