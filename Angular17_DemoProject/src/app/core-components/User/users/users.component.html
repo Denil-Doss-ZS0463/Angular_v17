@@ -18,7 +18,7 @@
                         (click)="closeFilterModal(modal)"></i></div>
             </div>
 
-            <app-common-filter [headers]="employeeHeader" [tableData]="mockData" (filtersChanged)="applyFilters($event)"
+            <app-common-filter [headers]="userHeaderList" [tableData]="mockData" (filtersChanged)="applyFilters($event)"
                 (filterApplied)="filterApplied($event, modal)" [filters]="appliedFilters"></app-common-filter>
         </div>
     </div>

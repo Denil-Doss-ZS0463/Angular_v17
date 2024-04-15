@@ -21,7 +21,6 @@ export class CommonBreadcrumbsComponent {
   
   tooltip:any;
   hideIcons: boolean = false;
-  tooltip: any;
   customRoutes = ['/users', '/users/new-user'];
   addUser: string = "";
   newFilter: string = '';
