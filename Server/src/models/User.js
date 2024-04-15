@@ -47,7 +47,6 @@ class User {
                 if (!user) {
                     return callback('User not found', null);
                 }
-                // Check if the user is active
                 if (user.status !== 'Active') {
                     return callback('User is inactive', null);
                 }
@@ -64,9 +63,9 @@ class User {
         }
 
         db.query('SELECT * FROM users WHERE email = $1', [userData.email], (err, result) => {
+
             if (result.rows.length > 0) {
-                console.log('User already exists');
-                return callback(null);
+                return callback('User already exists', null);
             }
             db.query('INSERT INTO users (firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [
                 userData.firstname,
@@ -88,9 +87,9 @@ class User {
     }
 
     static updateUser(userId, userData, callback) {
-        const { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess, status } = userData;
-        db.query('UPDATE users SET firstname = $1, lastname = $2, email = $3, password = $4, phonenumber = $5, jobtitle = $6, accesslevel = $7, areaaccess = $8, status = $9 WHERE id = $10 RETURNING *',
-            [firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess, status, userId],
+        const { firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status } = userData;
+        db.query('UPDATE users SET firstname = $1, lastname = $2, jobtitle = $3, phonenumber=$4, accesslevel = $5, areaaccess = $6, status = $7 WHERE id = $8 RETURNING *',
+            [firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status, userId],
             (err, result) => {
                 if (err) {
                     return callback(err, null);

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const UserDTO = require("../DTO/userDTO");
 const jwtSecretKey = require("../middleware/authMiddleware").jwtSecretKey;
 const bcrypt = require("bcrypt");
 
@@ -9,9 +10,8 @@ class UserController {
             if (err) {
                 return res.status(500).send("Internal Server Error");
             }
-            // res.send(users);
-            res.status(200).json({ message: "Users retrieved successfully" });
-
+            const usersResponse = users.map(user => UserDTO.userResponse(user, 'getAllUsers'));
+            res.send(usersResponse);
         });
     }
 
@@ -45,8 +45,8 @@ class UserController {
 
         User.getUserById(userId)
             .then((user) => {
-                // res.json(user);
-                res.status(200).json({ message: "User retrieved successfully", users });
+                const userResponse = UserDTO.userResponse(user, 'getUserById');
+                res.json(userResponse);
             })
             .catch((error) => {
                 console.error("Error retrieving user:", error.message);
@@ -75,6 +75,9 @@ class UserController {
                 areaaccess,
                 status
             }, (err, newUser) => {
+                if (err === 'User already exists') {
+                    return res.status(400).json({ message: 'User already exists' });
+                }
                 if (err) {
                     console.error('Error adding user:', err.message);
                     return res.status(500).json({ message: 'Internal Server Error' });
@@ -86,11 +89,11 @@ class UserController {
 
     static updateUser(req, res) {
         const userId = req.params.id;
-        const { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess } = req.body;
-        if (!firstname || !lastname || !email) {
-            return res.status(400).json({ message: 'First name, last name, and email are required' });
+        const { firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status } = req.body;
+        if (!firstname || !lastname || !jobtitle || !accesslevel || !phonenumber || !areaaccess || !status) {
+            return res.status(400).json({ message: 'Required Fields are missing' });
         }
-        User.updateUser(userId, { firstname, lastname, email, password, phonenumber, jobtitle, accesslevel, areaaccess }, (err, updatedUser) => {
+        User.updateUser(userId, { firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status }, (err, updatedUser) => {
             if (err) {
                 console.error('Error updating user:', err);
                 return res.status(500).json({ message: 'Internal Server Error' });
