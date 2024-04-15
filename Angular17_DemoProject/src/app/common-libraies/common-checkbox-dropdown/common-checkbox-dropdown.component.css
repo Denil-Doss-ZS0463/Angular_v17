@@ -1,3 +1,7 @@
+.customCheckboxDropdownContainer
+{
+    z-index: 999 !important;
+}
 .customCheckboxDropdown {
     padding: 5px;
     margin: 2px;
@@ -10,7 +14,6 @@
     scrollbar-width: thin;
     scrollbar-color: lightgray;
     overflow-x: auto;
-    z-index: 999 !important;
 }
 
 .commonLabel {
@@ -33,7 +36,15 @@
 }
 .customCheckBoxTextbox
 {
+    font-size: 13px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.customCheckboxOption
+{
+    font-size: 13px;
 }
 .customCheckboxOption:hover,
 .customCheckboxOption:hover .customFormCheckLabel
