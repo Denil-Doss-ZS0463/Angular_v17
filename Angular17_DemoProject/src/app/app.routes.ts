@@ -39,6 +39,10 @@ export const routes: Routes = [
     component: AddUserComponent,
   },
   {
+    path: 'users/new-user/:id',
+    component: AddUserComponent,
+  },
+  {
     path: 'merchandise',
     component: MerchandiseComponent,
   },

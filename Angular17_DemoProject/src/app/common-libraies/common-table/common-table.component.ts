@@ -108,17 +108,17 @@ export class CommonTableComponent {
     switch (this.componentName) {
       case "users":
         {
-          this.router.navigate(['/users', data]);
+          this.router.navigate(['users/new-user', data.id]);
         } break;
 
       case "area":
         {
-          this.router.navigate(['/area', data]);
+          this.router.navigate(['/area']);
         } break;
 
       case "reports":
         {
-          this.router.navigate(['/reports', data]);
+          this.router.navigate(['/reports']);
         }
     }
 

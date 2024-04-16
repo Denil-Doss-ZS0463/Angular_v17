@@ -91,4 +91,7 @@ export class UsersComponent {
       }
     });
   }
+  ngOnDestroy(): void {
+    this.refreshSubscription.unsubscribe();
+  }
 }

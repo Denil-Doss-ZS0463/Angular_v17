@@ -8,7 +8,7 @@ import { UserService } from '../../../services/user.service';
 import { SpinnerLoadingComponent } from '../../../basic-components/spinner-loading/spinner-loading.component';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
-import { UsersComponent } from '../users/users.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -28,7 +28,7 @@ export class AddUserComponent {
   }
   spinnerLoading: boolean = false;
   accessLevelLists: any[] = [];
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toastrService:ToastService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toastrService:ToastService,private route: ActivatedRoute) {
     this.myForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -41,6 +41,11 @@ export class AddUserComponent {
 
    ngOnInit() { 
     this.getAccessLevelDetails();
+    this.route.params.subscribe(params => {
+      const userId = +params['id'];
+      console.log(userId,"user id");
+      
+    });
    }
 
    getAccessLevelDetails(){
