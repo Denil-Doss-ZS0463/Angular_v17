@@ -104,7 +104,7 @@ export class CommonTableComponent {
     return Array(this.totalPages).fill(0).map((_, i) => i + 1);
   }
 
-  showRowDetails(data: any) {
+  sendRowDetails(data: any) {
     switch (this.componentName) {
       case "users":
         {
