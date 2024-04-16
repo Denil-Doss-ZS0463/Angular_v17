@@ -14,17 +14,17 @@ export class CommonBreadcrumbsComponent {
 
   @Output() ifFilterSelected = new EventEmitter<any>();
   @Input() user: any = '';
-  @Input() chips: string[] = ['First name', 'Last Name'];
+  @Input() chips: string[] = [];
   @Input() filters: string[] = ['Filter 1', 'Filter 2', 'Filter 3'];
   @Output() closeChip = new EventEmitter<any>();
   @Output() save: EventEmitter<void> = new EventEmitter<void>();
+  @Input() openFilterChips: boolean = false;
   
   tooltip:any;
   hideIcons: boolean = false;
   customRoutes = ['/users', '/users/new-user'];
   addUser: string = "";
   newFilter: string = '';
-  openFilterChips: boolean = false;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router) { }
 
@@ -74,7 +74,6 @@ export class CommonBreadcrumbsComponent {
 
   removeChip(chip: string) {
     const index = this.chips.indexOf(chip);
-    console.log(index);
     if (this.chips.length === 1) {
       this.closeChips();
     }
@@ -84,5 +83,6 @@ export class CommonBreadcrumbsComponent {
       this.closeChips();
     }
   }
+
 
 }

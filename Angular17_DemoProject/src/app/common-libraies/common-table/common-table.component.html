@@ -6,7 +6,7 @@
                 <tr class="text-center">
                     @for(header of headers; track $index)
                     { <th>
-                        <div class="d-flex justify-content-between align-items-center gap-4 px-3">
+                        <div class="d-flex justify-content-between align-items-center px-2">
                             <span> {{ header }}</span>
                             <span class="d-grid">
                                 <span class="fa-solid fa-caret-up sortingArrowSize"
@@ -37,12 +37,14 @@
                                     }
                                 }
                             </tr>
-                        }
+                    }
                     }
             </tbody>
         </table>
     </div>
 </div>
+@if(mockData.length > itemsPerPage)
+{
 <div class="row paginationContent mt-3">
     <div class="col-5"></div>
     <div class="col-7 d-flex justify-content-end align-items-center gap-2 rowsPerPage">
@@ -54,8 +56,7 @@
         </div>
         <div class="d-flex gap-2 align-items-center">
             <button class="btn paginationButtons rounded col-1" (click)="onPageChange(currentPage - 1)"
-                [disabled]="currentPage === 1"
-                [ngClass]="{'disabledPaginations': currentPage === 1}">
+                [disabled]="currentPage === 1 && selectedPage === 1" [ngClass]="{'disabledPaginations': currentPage === 1 && selectedPage === 1}">
                 <div class="d-flex align-items-center justify-content-center">
                     <i class="fa-solid fa-angles-left"></i>
                 </div>
@@ -63,9 +64,9 @@
             <div class="d-flex gap-2 align-items-center rowsPerPageContainer">
                 <div class="">Page</div>
                 <select class="p-1" [(ngModel)]="currentPage" (ngModelChange)="onPageChange($event)">
-                    @for(page of availablePages(totalPages); track $index)
+                    @for(page of availablePages(); track $index)
                     {
-                    <option [value]="page">{{ page }}</option>
+                        <option [value]="page">{{ page }}</option>
                     }
                 </select>
                 <div class="d-flex gap-2">
@@ -85,3 +86,4 @@
         </div>
     </div>
 </div>
+}
