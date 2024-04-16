@@ -28,7 +28,7 @@
                     </tr>
                     }@else{
                         @for(user of updateDisplayedData(); track $index) {
-                            <tr class="text-center" (click)="sendRowDetails(data)">
+                            <tr class="text-center" (click)="sendRowDetails(user)">
                                 @for(header of headers; track $index) {
                                     @if(header !== 'id' && !dataToRemove.includes(header)) {
                                         <td>

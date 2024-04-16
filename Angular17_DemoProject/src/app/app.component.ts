@@ -4,6 +4,7 @@ import { SampleRenderingPageComponent } from './core-components/sample-rendering
 import { HeaderComponent } from './basic-components/header/header.component';
 import { NgIf } from '@angular/common';
 import { LoginComponent } from './basic-components/login/login.component';
+import { routes as appRoutes, routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
@@ -20,20 +21,31 @@ import { LoginComponent } from './basic-components/login/login.component';
 })
 export class AppComponent {
   title = 'ZuciBall Central';
-  includePaths: string[] = ['', 'home', 'reports', 'users', 'new-user','sampleRendering'];
   hideNav = false;
 
   constructor(private router: Router) { }
   ngOnInit() {
+    const includePaths = appRoutes.map(route => route.path);
+    console.log(includePaths,'appRoutes');
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const endpoint = this.getEndpointFromUrl(event.urlAfterRedirects);
-        this.hideNav = this.includePaths.includes(endpoint);
+        const firstTwoSegments = endpoint.split('/').slice(0, 2).join('/');
+        if (endpoint === 'login') {
+          this.hideNav = false;
+          return;
+        }
+        this.hideNav = this.isRouteDefined(firstTwoSegments);
       }
     });
   }
   private getEndpointFromUrl(url: string): string {
     const segments = url.split('/');
-    return segments[segments.length - 1];
+    return segments.slice(1).join('/');
+  }
+
+  private isRouteDefined(endpoint: string): boolean {
+    const includePaths = routes.map(route => route.path);
+    return includePaths.includes(endpoint);
   }
 }
