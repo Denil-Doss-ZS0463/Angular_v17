@@ -91,9 +91,7 @@ export class CommonTableComponent {
       this.currentPage = page;
       this.selectedPage = page;
     }
-    console.log("Selected Page ",page);
-    
-  }
+     }
 
   onItemsPerPageChange(itemsPerPage: any) {
     this.itemsPerPage = itemsPerPage?.target?.value;
@@ -101,9 +99,9 @@ export class CommonTableComponent {
     this.calculateTotalPages();
   }
 
-  availablePages(totalPages: any) {
+  availablePages() {
     this.calculateTotalPages();
-    return Array(totalPages).fill(0).map((_, i) => i + 1);
+    return Array(this.totalPages).fill(0).map((_, i) => i + 1);
   }
 
   showRowDetails(data: any) {

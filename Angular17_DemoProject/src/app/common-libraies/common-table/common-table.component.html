@@ -64,7 +64,7 @@
             <div class="d-flex gap-2 align-items-center rowsPerPageContainer">
                 <div class="">Page</div>
                 <select class="p-1" [(ngModel)]="currentPage" (ngModelChange)="onPageChange($event)">
-                    @for(page of availablePages(totalPages); track $index)
+                    @for(page of availablePages(); track $index)
                     {
                         <option [value]="page">{{ page }}</option>
                     }
