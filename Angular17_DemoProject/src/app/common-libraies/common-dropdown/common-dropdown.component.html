@@ -7,7 +7,7 @@
             <span class="text-danger">*</span>
             }
         </label>
-        <div class="d- align-items-center">
+        <div class="d-flex align-items-center">
             <select class="form-select dropdownPadding dropdownValue" [formControlName]="controlName" [id]="idSelector"
                 autocomplete="off"
                 [ngClass]="{'border border-danger':(showErrors() && parentForm.get(controlName)?.errors)}">

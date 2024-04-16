@@ -22,11 +22,11 @@ export class CommonTableComponent {
   loading: boolean = false;
   errorLoading: boolean = false;
   sortByColumn: number = 0;
-  pageItems: number[] = [50, 100, 150, 200, 250];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 0;
-
+  pageItems: number[] = [this.itemsPerPage, 10, 50, 100, 150, 200, 250];
+  selectedPage: number = 1;
 
   constructor(private router: Router) {
   }
@@ -52,7 +52,7 @@ export class CommonTableComponent {
   }
 
   getColumnKey(columnIndex: number): string {
-    const matchedHeader = this.toCamelCase(this.headers[columnIndex].replace(' ', ''));
+    const matchedHeader = this.headers[columnIndex].replace(' ', '').toLowerCase();
     return matchedHeader;
   }
 
@@ -89,8 +89,9 @@ export class CommonTableComponent {
   onPageChange(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
+      this.selectedPage = page;
     }
-  }
+     }
 
   onItemsPerPageChange(itemsPerPage: any) {
     this.itemsPerPage = itemsPerPage?.target?.value;
@@ -98,12 +99,12 @@ export class CommonTableComponent {
     this.calculateTotalPages();
   }
 
-  availablePages(totalPages: any) {
+  availablePages() {
     this.calculateTotalPages();
-    return Array(totalPages).fill(0).map((_, i) => i + 1);
+    return Array(this.totalPages).fill(0).map((_, i) => i + 1);
   }
 
-  sendRowDetails(data: any) {
+  showRowDetails(data: any) {
     switch (this.componentName) {
       case "users":
         {

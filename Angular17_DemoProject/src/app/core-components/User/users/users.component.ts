@@ -16,14 +16,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  private refreshSubscription: Subscription;
+ private refreshSubscription: Subscription;
   mockData: any[] = [];
   userOptions = {
     title: "User Management",
     currentTitle: "Add User",
     hideIcons: false
   }
-
+  
   userHeaderList: any[] = [];
   spinnerLoading:boolean = false;
   appliedFilters: any[] = [];
