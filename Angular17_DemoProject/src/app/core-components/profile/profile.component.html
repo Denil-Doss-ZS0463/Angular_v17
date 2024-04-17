@@ -8,7 +8,7 @@
                 <h4 class="signed-user">{{user.firstname}} {{user.lastname}}</h4>
             </div>
             <div class="user-role row">
-                <p class="signed-user-role">{{user.jobtitle}} | {{user.accesslevel}}</p>
+                <p class="signed-user-role">{{user.jobtitle}} | {{user.accessLevelName}}</p>
             </div>
         </div>
         <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
@@ -35,26 +35,26 @@
             <form>
                 <div class="row d-flex my-1">
                     <div class="col">
-                        <app-common-input-box [label]="'First Name'" [controlName]="'firstName'" [parentForm]="myForm"
-                            [fieldType]="'text'" [idSelector]="'firstName'" [placeholderText]="'Enter your First Name'"
+                        <app-common-input-box [label]="'First Name'" [controlName]="'firstname'" [parentForm]="myForm"
+                            [fieldType]="'text'" [idSelector]="'firstname'" [placeholderText]="'Enter your First Name'"
                             [errorMessage]="'FirstName is required'" [invalidForm]="invalidForm" [required]="true"
                             [disabled]="!isEditMode">
                         </app-common-input-box>
                     </div>
                     <div class="col">
-                        <app-common-input-box [label]="'Last Name'" [controlName]="'lastName'" [parentForm]="myForm"
-                            [fieldType]="'text'" [idSelector]="'lastName'" [placeholderText]="'Enter your Last Name'"
+                        <app-common-input-box [label]="'Last Name'" [controlName]="'lastname'" [parentForm]="myForm"
+                            [fieldType]="'text'" [idSelector]="'lastname'" [placeholderText]="'Enter your Last Name'"
                             [errorMessage]="'Last Name is required'" [invalidForm]="invalidForm" [required]="true"
                             [disabled]="!isEditMode">
                         </app-common-input-box>
                     </div>
                 </div>
-                <app-common-input-box [label]="'Phone Number'" [controlName]="'phoneNumber'" [parentForm]="myForm"
-                    [fieldType]="'tel'" [idSelector]="'phoneNumber'" [placeholderText]="'Enter your Phone Number'"
+                <app-common-input-box [label]="'Phone Number'" [controlName]="'phonenumber'" [parentForm]="myForm"
+                    [fieldType]="'tel'" [idSelector]="'phonenumber'" [placeholderText]="'Enter your Phone Number'"
                     [errorMessage]="'Phone Number is required'" [invalidForm]="invalidForm" [disabled]="!isEditMode">
                 </app-common-input-box>
-                <app-common-input-box [label]="'Email ID'" [controlName]="'emailid'" [parentForm]="myForm"
-                    [fieldType]="'email'" [idSelector]="'emailid'" [placeholderText]="'Enter your Email ID'"
+                <app-common-input-box [label]="'Email ID'" [controlName]="'email'" [parentForm]="myForm"
+                    [fieldType]="'email'" [idSelector]="'email'" [placeholderText]="'Enter your Email ID'"
                     [errorMessage]="'Email is required'" [invalidForm]="invalidForm" [required]="true"
                     [disabled]="!isEditMode">
                 </app-common-input-box>
