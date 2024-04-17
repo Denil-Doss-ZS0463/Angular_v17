@@ -27,7 +27,9 @@ export class CommonTableComponent {
   totalPages: number = 0;
   pageItems: number[] = [this.itemsPerPage, 10, 50, 100, 150, 200, 250];
   selectedPage: number = 1;
-
+  ifLastPage: boolean = false;
+  ifFirstPage: boolean = false;
+  
   constructor(private router: Router) {
   }
   ngOnInit() {
@@ -86,12 +88,23 @@ export class CommonTableComponent {
     return this.mockData.slice(startIndex, endIndex);
   }
 
+
+
   onPageChange(page: number) {
     if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.selectedPage = page;
+      this.currentPage = +page;
+      this.ifLastPage = false;
+      this.ifFirstPage = false;
+      if (page == 1) {
+        this.ifFirstPage = true;
+        this.ifLastPage = false;
+      }
+      if (page == this.totalPages) {
+        this.ifFirstPage = false;
+        this.ifLastPage = true;
+      }
     }
-     }
+  }
 
   onItemsPerPageChange(itemsPerPage: any) {
     this.itemsPerPage = itemsPerPage?.target?.value;

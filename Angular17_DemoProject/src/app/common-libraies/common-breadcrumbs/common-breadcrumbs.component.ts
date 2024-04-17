@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, SimpleChanges } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { CommonChipComponent } from '../common-chip/common-chip.component';
 import { FormsModule } from '@angular/forms';
@@ -19,14 +19,14 @@ export class CommonBreadcrumbsComponent {
   @Output() closeChip = new EventEmitter<any>();
   @Output() save: EventEmitter<void> = new EventEmitter<void>();
   @Input() openFilterChips: boolean = false;
-  
-  tooltip:any;
+  @Input() ifFilterModalClosed: boolean = false;
+  tooltip: any;
   hideIcons: boolean = false;
   customRoutes = ['/users', '/users/new-user'];
   addUser: string = "";
   newFilter: string = '';
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router) { }
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router) {}
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
@@ -41,14 +41,14 @@ export class CommonBreadcrumbsComponent {
       });
     });
   }
-  openFunctionaity(){
+  openFunctionaity() {
     this.hideIcons = true;
     this.tooltip.hide();
-    if(this.user.currentTitle=="Add User"){
+    if (this.user.currentTitle == "Add User") {
       this.router.navigate(['users/new-user']);
     }
   }
-  saveFunctionality(){
+  saveFunctionality() {
     this.save.emit();
   }
   closeOption() {
