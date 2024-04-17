@@ -91,6 +91,7 @@ class UserController {
         const userId = req.params.id;
         const { firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status } = req.body;
         if (!firstname || !lastname || !jobtitle || !accesslevel || !phonenumber || !areaaccess || !status) {
+        if (!firstname || !lastname || !jobtitle || !accesslevel || !status) {
             return res.status(400).json({ message: 'Required Fields are missing' });
         }
         User.updateUser(userId, { firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status }, (err, updatedUser) => {
@@ -117,7 +118,7 @@ class UserController {
             if (!updatedUser) {
                 return res.status(400).json({ message: 'Invalid or unsupported patch operation' });
             }
-            res.status(200).json({ message: "User status updated successfully" });
+            res.status(200).json({ message: "User deleted successfully" });
         });
     }
 }

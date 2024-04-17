@@ -5,7 +5,7 @@
     </div>
 }
 <app-common-breadcrumbs [user]="userOptions" (ifFilterSelected)="openFilterModal($event,fitlerModal)"
-    [chips]="appliedFilters" (closeChip)="closeChip($event)" ></app-common-breadcrumbs>
+    [chips]="appliedFilters" (closeChip)="closeChip($event)" [userDetails]="mockData"></app-common-breadcrumbs>
 <div class="container mt-3 overflow-auto">
     <app-common-table [headers]="userHeaderList" [data]="mockData" [mockData]="mockData" [dataToRemove]="['password', 'phonenumber']" [componentName]="'users'"></app-common-table>
 </div>

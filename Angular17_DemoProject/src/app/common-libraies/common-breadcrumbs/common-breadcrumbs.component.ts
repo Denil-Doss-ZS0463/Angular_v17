@@ -2,11 +2,13 @@ import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@
 import { RouterLink, Router } from '@angular/router';
 import { CommonChipComponent } from '../common-chip/common-chip.component';
 import { FormsModule } from '@angular/forms';
+import { CommonLogicsService } from '../../services/common-logics.service';
+import { SpinnerLoadingComponent } from '../../basic-components/spinner-loading/spinner-loading.component';
 declare let bootstrap: any;
 @Component({
   selector: 'app-common-breadcrumbs',
   standalone: true,
-  imports: [RouterLink, CommonChipComponent, FormsModule],
+  imports: [RouterLink, CommonChipComponent, FormsModule,SpinnerLoadingComponent],
   templateUrl: './common-breadcrumbs.component.html',
   styleUrl: './common-breadcrumbs.component.css'
 })
@@ -18,15 +20,27 @@ export class CommonBreadcrumbsComponent {
   @Input() filters: string[] = ['Filter 1', 'Filter 2', 'Filter 3'];
   @Output() closeChip = new EventEmitter<any>();
   @Output() save: EventEmitter<void> = new EventEmitter<void>();
+  @Output() enableForm: EventEmitter<void> = new EventEmitter<void>();
+  @Output() update: EventEmitter<string> = new EventEmitter<string>();
+  @Output() delete: EventEmitter<void> = new EventEmitter<void>();
+  @Output() download: EventEmitter<void> = new EventEmitter<void>();
   @Input() openFilterChips: boolean = false;
+  @Input() userStatus:string='';
+  @Input() userDetails:any;
+  spinnerLoading:boolean=false;
   
   tooltip:any;
   hideIcons: boolean = false;
   customRoutes = ['/users', '/users/new-user'];
   addUser: string = "";
   newFilter: string = '';
+  changeEditOptionToSave: boolean = false;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router) { }
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router, private commonService:CommonLogicsService) { }
+
+  ngOnChanges(): void {
+    console.log(this.userDetails,"user details 1213");
+  }
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
@@ -48,7 +62,7 @@ export class CommonBreadcrumbsComponent {
       this.router.navigate(['users/new-user']);
     }
   }
-  saveFunctionality(){
+  addFunctionality(){
     this.save.emit();
   }
   closeOption() {
@@ -83,6 +97,27 @@ export class CommonBreadcrumbsComponent {
       this.closeChips();
     }
   }
-
-
+  enableEditOption(){
+    this.changeEditOptionToSave = true;
+    this.enableForm.emit();
+  }
+  updateFunctionality(){
+    this.update.emit(this.userStatus);
+  }
+  changeUserStatus(){
+    if(this.userStatus=="Active"){
+      this.userStatus="Inactive";
+    }
+    else{
+      this.userStatus="Active";
+    }
+  }
+  deleteFunctionality(){
+    this.delete.emit();
+  }
+  downloadFunctionality(){
+    this.spinnerLoading=true;
+    this.commonService.exportAsExcelFile(this.userDetails, 'User');
+    this.spinnerLoading=false;
+  }
 }

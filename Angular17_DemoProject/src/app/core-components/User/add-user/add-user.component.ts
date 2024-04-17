@@ -24,34 +24,38 @@ export class AddUserComponent {
   userOptions = {
     title: "User Management > Add User",
     currentTitle: "Add User",
-    hideIcons: true
+    hideAddOptionIcons: true,
+    enableEditOptions: false
   }
   spinnerLoading: boolean = false;
   accessLevelLists: any[] = [];
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toastrService:ToastService,private route: ActivatedRoute) {
+  userStatus: string = '';
+  userId: number = 0;
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toastrService: ToastService, private route: ActivatedRoute) {
     this.myForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      emailid: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
       jobtitle: ['', Validators.required],
       accesslevel: ['', Validators.required],
     });
   }
 
-   ngOnInit() { 
+  ngOnInit() {
     this.getAccessLevelDetails();
     this.route.params.subscribe(params => {
-      const userId = +params['id'];
-      console.log(userId,"user id");
-      
+      this.userId = +params['id'];
+      console.log(this.userId, "user id");
+      if(this.userId)
+        this.getUserDetailsById(this.userId);
     });
-   }
+  }
 
-   getAccessLevelDetails(){
+  getAccessLevelDetails() {
     this.userService.getAccessLevelDetails().subscribe({
       next: (res: any) => {
-        this.accessLevelLists=res;
+        this.accessLevelLists = res;
         console.log(this.accessLevelLists);
       },
       error: (err: any) => {
@@ -59,18 +63,18 @@ export class AddUserComponent {
       }
     })
     console.log(this.accessLevelLists)
-   }
+  }
 
   getInputFormValues() {
     const addUserJson = {
-        firstname:this.myForm.get('firstname')?.value,
-        lastname:this.myForm.get('lastname')?.value,
-        email:this.myForm.get('emailid')?.value,
-        password:this.myForm.get('password')?.value,
-        phonenumber: null,
-        jobtitle:this.myForm.get('jobtitle')?.value,
-        accesslevel:+this.myForm.get('accesslevel')?.value,
-        areaaccess:null
+      firstname: this.myForm.get('firstname')?.value,
+      lastname: this.myForm.get('lastname')?.value,
+      email: this.myForm.get('email')?.value,
+      password: this.myForm.get('password')?.value,
+      phonenumber: null,
+      jobtitle: this.myForm.get('jobtitle')?.value,
+      accesslevel: +this.myForm.get('accesslevel')?.value,
+      areaaccess: null
     }
     console.log(addUserJson);
     if (this.myForm.valid) {
@@ -97,5 +101,93 @@ export class AddUserComponent {
       this.spinnerLoading = false;
     }
 
+  }
+  getUserDetailsById(userId: number) {
+    this.spinnerLoading = true;
+    this.userService.getUserDetailsById(userId).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.prepopulateUserDetails(res);
+        this.userOptions.title = "User Management > " +res.email;
+        this.userOptions.enableEditOptions = true;
+        this.spinnerLoading = false;
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    })
+  }
+  prepopulateUserDetails(response: any) {
+    this.myForm.disable();
+    this.myForm.patchValue({
+      firstname: response.firstname,
+      lastname: response.lastname,
+      email: response.email,
+      password: response.password,
+      phonenumber: response.phonenumber,
+      jobtitle: response.jobtitle,
+      accesslevel: response.accesslevel,
+      areaaccess: response.areaaccess
+    });
+    this.userStatus = response.status;
+  }
+  enableForm(){
+    this.myForm.enable();
+    this.myForm.get('email')?.disable();
+    this.myForm.get('password')?.disable();
+  }
+  updateUser(userStatus:any){
+    const updateUserJson = {
+      firstname: this.myForm.get('firstname')?.value,
+      lastname: this.myForm.get('lastname')?.value,
+      phonenumber: null,
+      jobtitle: this.myForm.get('jobtitle')?.value,
+      accesslevel: +this.myForm.get('accesslevel')?.value,
+      areaaccess: null,
+      status: userStatus
+    }
+    console.log(updateUserJson);
+    if (this.myForm.valid) {
+      this.spinnerLoading = true;
+      this.userService.updateUser(this.userId,updateUserJson).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.toastrService.success(res.message);
+          this.spinnerLoading = false;
+          this.myForm.disable();
+          this.router.navigate(['/users']);
+          this.myForm.reset();
+          this.userService.refreshUserList();
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.toastrService.error(err.message);
+          this.spinnerLoading = false;
+        }
+      })
+    }
+    else {
+      this.invalidForm = true;
+      this.spinnerLoading = false;
+    }
+  }
+  deleteUser(){
+    this.spinnerLoading=true;
+    this.userService.deleteUser(this.userId).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.toastrService.success(res.message);
+        this.spinnerLoading = false;
+        this.myForm.disable();
+        this.router.navigate(['/users']);
+        this.myForm.reset();
+        this.userService.refreshUserList();
+      },
+      error: (err: any) => {
+        console.log(err);
+        this.toastrService.error(err.message);
+        this.spinnerLoading = false;
+      }
+    })
   }
 }
