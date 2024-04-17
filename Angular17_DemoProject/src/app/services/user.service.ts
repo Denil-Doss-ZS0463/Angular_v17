@@ -62,4 +62,11 @@ export class UserService {
   refreshUserList() {
     this.refreshUserListSource.next();
   }
+
+  getUserDetailsById(id: any) {
+    return this.http.get(`${this.userUrl}getUserById/${id}`);
+  }
+  deleteUser(id:number){
+    return this.http.patch(`${this.userUrl}updateUserStatus/${id}`,null);
+  }
 }

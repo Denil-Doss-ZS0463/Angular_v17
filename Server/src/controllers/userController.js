@@ -125,7 +125,7 @@ class UserController {
             if (!updatedUser) {
                 return res.status(400).json({ message: 'Invalid or unsupported patch operation' });
             }
-            res.status(200).json({ message: "User status updated successfully" });
+            res.status(200).json({ message: "User deleted successfully" });
         });
     }
 }

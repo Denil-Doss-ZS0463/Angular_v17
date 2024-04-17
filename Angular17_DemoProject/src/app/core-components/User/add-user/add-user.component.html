@@ -3,13 +3,13 @@
         <app-spinner-loading></app-spinner-loading>
     </div>
 }
-<app-common-breadcrumbs [user]="userOptions" (save)="getInputFormValues()"></app-common-breadcrumbs>
+<app-common-breadcrumbs [user]="userOptions" [userStatus]="userStatus" (save)="getInputFormValues()" (enableForm)="enableForm()" (update)="updateUser($event)" (delete)="deleteUser()"></app-common-breadcrumbs>
 <form [formGroup]="myForm" class="mt-4">
     <div class="container">
         <div class="row mb-2">
             <div class="col-4">
-                <app-common-input-box [label]="'Email Id'" [controlName]="'emailid'" [parentForm]="myForm"
-                    [fieldType]="'text'" [idSelector]="'emailid'" [placeholderText]="'Enter user email'"
+                <app-common-input-box [label]="'Email Id'" [controlName]="'email'" [parentForm]="myForm"
+                    [fieldType]="'text'" [idSelector]="'email'" [placeholderText]="'Enter user email'"
                     [errorMessage]="'Email id is required'" [invalidForm]="invalidForm" [required]="true">
                 </app-common-input-box>
             </div>
@@ -26,7 +26,7 @@
                     [required]="true"></app-common-input-box>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-4">
                 <app-common-input-box [label]="'Job Title'" [controlName]="'jobtitle'" [parentForm]="myForm"
                     [fieldType]="'text'" [idSelector]="'jobtitle'" [placeholderText]="'Enter job title'"

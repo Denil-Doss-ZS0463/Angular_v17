@@ -21,7 +21,8 @@ export class UsersComponent {
   userOptions = {
     title: "User Management",
     currentTitle: "Add User",
-    hideIcons: false
+    hideAddOptionIcons: false,
+    enableEditOptions: false
   }
 
   userHeaderList: any[] = [];
@@ -29,7 +30,11 @@ export class UsersComponent {
   appliedFilters: any[] = [];
   userDetails: any[] = [];
   ifFilterModalClosed: boolean = false;
-  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService: UserService) {
+  userId:number=0;
+  
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) {
+    this.userId=this.userService.getUserIdFromToken();
+    console.log(this.userId,"USER ID");
     this.refreshSubscription = this.userService.refreshUserList$.subscribe(() => {
       this.getUsers();
     });
@@ -80,6 +85,7 @@ export class UsersComponent {
         });
     });
   }
+
   getUsers() {
     this.spinnerLoading = true;
     this.userService.getUsersList().subscribe({
@@ -87,7 +93,9 @@ export class UsersComponent {
         console.log(res);
         this.userDetails = res;
         this.mockData = res;
-        this.spinnerLoading = false;
+        this.mockData=this.userDetails.filter(data=>data.id!==this.userId);
+        console.log(this.mockData,"user details");
+        this.spinnerLoading=false;
       },
       error: (err: any) => {
         console.log(err);

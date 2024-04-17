@@ -39,7 +39,11 @@ export const routes: Routes = [
     component: AddUserComponent,
   },
   {
-    path: 'users/new-user/:id',
+    path: 'users/edit-user',
+    component: AddUserComponent,
+  },
+  {
+    path: 'users/edit-user/:id',
     component: AddUserComponent,
   },
   {

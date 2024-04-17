@@ -47,3 +47,13 @@
     color: rgba(0, 0, 0, 0.6);
     font-weight: 500;
 }
+
+.statusStyle {
+    color: #2bcc11;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    font-weight: 600;
+    margin-top: 1px;
+}
+

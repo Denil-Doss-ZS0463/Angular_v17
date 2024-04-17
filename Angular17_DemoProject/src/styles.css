@@ -71,3 +71,29 @@
 .spinner-container.show {
   display: flex;
 }
+
+.formSwitchStyle {
+  color: #2bcc11;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  font-weight: 600;
+}
+
+.form-check-input.formSwitch {
+  border-color: #ccc;
+}
+
+.form-check-input.formSwitch:checked {
+  background-color: #2bbc11;
+}
+
+.form-check-input.formSwitch:not(:checked) {
+  background-color: #ccc;
+}
+
+.formSwitch {
+  height: 20px !important;
+  width: 45px !important;
+  margin-bottom: 2px !important;
+}

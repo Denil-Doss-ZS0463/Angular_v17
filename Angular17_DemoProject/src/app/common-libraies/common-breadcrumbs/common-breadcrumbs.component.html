@@ -16,13 +16,13 @@
                 }
         </div>
         <div class="col-auto">
-            @if(!user.hideIcons){
+            @if(!user.hideAddOptionIcons && !user.enableEditOptions){
             <div class="d-flex justify-content-end gap-3 align-items-center tableOptions">
                 @if(!openFilterChips)
                 {
                 <i class="fa-sharp fa-regular fa-circle-plus fa-lg custom-tooltip" style="color: #007cba;"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
-                   [attr.data-bs-title]="user.currentTitle" (click)="openFunctionaity()"></i>
+                    [attr.data-bs-title]="user.currentTitle" (click)="openFunctionaity()"></i>
                 }
                 <i class="fa-sharp fa-regular fa-filter-list fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" data-bs-title="Filter" (click)="openFilterModal()"></i>
@@ -35,14 +35,50 @@
                     }
                     <div><i class="fa-solid fa-xmark cursor-pointer" (click)="closeChips()"></i></div>
                 </div>
-                } 
+                }
                 <i class="fa-solid fa-down-to-line fa-lg" style="color: #007cba;" data-bs-toggle="tooltip"
-                    data-bs-placement="bottom" data-bs-title="Download"></i>
+                    data-bs-placement="bottom" data-bs-title="Download" (click)="downloadFunctionality()"></i>
+            </div>
+            }
+            @else if(user.enableEditOptions) {
+            <div class="d-flex justify-content-end tableOptions">
+                @if(!changeEditOptionToSave) {
+                <div class="me-4 d-flex align-items-center statusStyle">
+                    <i class="fa-solid fa-period fa-lg" style="color: #2bbc11;margin-top: -8px;"></i>
+                    <span class="p-2">{{userStatus}}</span>
+                </div>
+                <div class="me-4 d-flex align-items-center functionName" (click)="deleteFunctionality()">
+                    <i class="fa-solid fa-trash-can" style="color: #007cba;"></i>
+                    <span class="p-2">Delete</span>
+                </div>
+                }
+                @if(changeEditOptionToSave) {
+                <div class="form-check form-switch me-4 d-flex align-items-center formSwitchStyle">
+                    <input class="form-check-input formSwitch" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked (click)="changeUserStatus()">
+                    <label class="form-check-label p-2" for="flexSwitchCheckChecked">{{userStatus}}</label>
+                </div>
+                <div class="me-4 d-flex align-items-center functionName" (click)="updateFunctionality()">
+                    <i class="fa-solid fa-bookmark" style="color: #007cba;"></i>
+                    <span class="p-2">Save</span>
+                </div>
+                }
+                @else {
+                <div class="me-2 d-flex align-items-center functionName" (click)="enableEditOption()">
+                    <i class="fa-solid fa-pen fa-sm" style="color: #007cba;"></i>
+                    <span class="p-2">Edit</span>
+                </div>
+                }
+                @if(changeEditOptionToSave) {
+                <div class="d-flex align-items-center functionName" (click)="closeOption()">
+                    <i class="fa-sharp fa-solid fa-xmark fa-lg" style="color: #007cba;"></i>
+                    <span class="p-2">Close</span>
+                </div>
+                }
             </div>
             }
             @else {
             <div class="d-flex justify-content-end tableOptions">
-                <div class="me-4 d-flex align-items-center functionName" (click)="saveFunctionality()">
+                <div class="me-4 d-flex align-items-center functionName" (click)="addFunctionality()">
                     <i class="fa-solid fa-bookmark" style="color: #007cba;"></i>
                     <span class="p-2">{{user.currentTitle}}</span>
                 </div>
