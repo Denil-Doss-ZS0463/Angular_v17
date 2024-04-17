@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { AuthService } from './auth.service';
+import { CommonLogicsService } from './common-logics.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,37 +15,22 @@ export class UserService {
   loggedInUser: any;
   token!: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService: AuthService) {}
 
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.userUrl}login`, credentials);
-  }
-
-  loggedUser(id: any) {
-    return this.http.get(`${this.userUrl}getUserById/${id}`);
-  }
-
-  updateUser(id: any, userData: any) {
-    return this.http.put(`${this.userUrl}updateUser/${id}`, id, userData);
+    return this.authService.login(credentials);
   }
 
   setUserToken(token: string) {
-    this.token = token;
-    localStorage.setItem('token', token);
+    this.authService.setToken(token);
   }
 
   getUserToken() {
-    return localStorage.getItem('token');
+    return this.authService.getToken();
   }
 
   getUserIdFromToken() {
-    const token = this.getUserToken();
-    if (token) {
-      const decodedToken: any = jwtDecode(token);
-      return decodedToken.userId;
-    } else {
-      return null;
-    }
+    return this.authService.getUserIdFromToken();
   }
 
   setLoggedInUser(user: any) {
@@ -52,6 +39,13 @@ export class UserService {
 
   getLoggedInUser() {
     return this.loggedInUser;
+  }
+  loggedUser(id: any) {
+    return this.http.get(`${this.userUrl}getUserById/${id}`);
+  }
+
+  updateUser(id: any, userData: any) {
+    return this.http.put(`${this.userUrl}updateUser/${id}`, userData);
   }
 
   addUser(userData: any) {

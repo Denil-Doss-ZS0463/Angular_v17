@@ -15,9 +15,7 @@ export class CommonLogicsService {
   user: any;
   userInitials: any;
 
-  constructor(private userService: UserService) {
-    this.setUserInitials();
-  }
+  constructor(private userService: UserService) {}
 
   setUserInitials(): any {
     this.user = this.userService.getLoggedInUser();
@@ -28,6 +26,7 @@ export class CommonLogicsService {
       return this.userInitials;
     }
   }
+  
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = {
@@ -46,6 +45,22 @@ export class CommonLogicsService {
     saveAs(
       data,
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
+  fetchUserDetails():any {
+    const userId = this.userService.getUserIdFromToken();
+    if (!userId) {
+    console.error('User ID is null or undefined');
+    return;
+  }
+    this.userService.loggedUser(userId).subscribe(
+      (userDetails) => {
+        this.userService.setLoggedInUser(userDetails);
+        this.setUserInitials();
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+      }
     );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Output, TemplateRef, ViewChildren } from '@angular/core';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
 import { CommonTableComponent } from '../../../common-libraies/common-table/common-table.component';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
- private refreshSubscription: Subscription;
+  private refreshSubscription: Subscription;
   mockData: any[] = [];
   userOptions = {
     title: "User Management",
@@ -24,20 +24,21 @@ export class UsersComponent {
     hideAddOptionIcons: false,
     enableEditOptions: false
   }
-  
+
   userHeaderList: any[] = [];
-  spinnerLoading:boolean = false;
+  spinnerLoading: boolean = false;
   appliedFilters: any[] = [];
   userDetails: any[] = [];
+  ifFilterModalClosed: boolean = false;
   userId:number=0;
+  
   constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) {
     this.userId=this.userService.getUserIdFromToken();
     console.log(this.userId,"USER ID");
-    
     this.refreshSubscription = this.userService.refreshUserList$.subscribe(() => {
       this.getUsers();
     });
-   }
+  }
   ngOnInit() {
     this.getUsersTableHeaderList();
     this.getUsers();
@@ -67,6 +68,9 @@ export class UsersComponent {
   }
   closeFilterModal(modal: any) {
     modal.dismiss('Cross click');
+    if (modal) {
+      this.ifFilterModalClosed = true;
+    }
   }
   getUsersTableHeaderList(): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -81,23 +85,21 @@ export class UsersComponent {
         });
     });
   }
-  getUsers(){
-    this.spinnerLoading=true;
-    console.log(this.userId,"USER ID");
-    
+
+  getUsers() {
+    this.spinnerLoading = true;
     this.userService.getUsersList().subscribe({
-      next:(res:any)=>{
+      next: (res: any) => {
         console.log(res);
         this.userDetails = res;
         this.mockData = res;
         this.mockData=this.userDetails.filter(data=>data.id!==this.userId);
         console.log(this.mockData,"user details");
-        
         this.spinnerLoading=false;
       },
-      error:(err:any)=>{
+      error: (err: any) => {
         console.log(err);
-        this.spinnerLoading=false;
+        this.spinnerLoading = false;
       }
     });
   }

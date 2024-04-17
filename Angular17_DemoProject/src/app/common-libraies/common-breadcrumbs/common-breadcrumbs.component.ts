@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, SimpleChanges } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { CommonChipComponent } from '../common-chip/common-chip.component';
 import { FormsModule } from '@angular/forms';
@@ -30,17 +30,14 @@ export class CommonBreadcrumbsComponent {
   spinnerLoading:boolean=false;
   
   tooltip:any;
+  @Input() ifFilterModalClosed: boolean = false;
   hideIcons: boolean = false;
   customRoutes = ['/users', '/users/new-user'];
   addUser: string = "";
   newFilter: string = '';
   changeEditOptionToSave: boolean = false;
-
+  
   constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router, private commonService:CommonLogicsService) { }
-
-  ngOnChanges(): void {
-    console.log(this.userDetails,"user details 1213");
-  }
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
@@ -55,10 +52,10 @@ export class CommonBreadcrumbsComponent {
       });
     });
   }
-  openFunctionaity(){
+  openFunctionaity() {
     this.hideIcons = true;
     this.tooltip.hide();
-    if(this.user.currentTitle=="Add User"){
+    if (this.user.currentTitle == "Add User") {
       this.router.navigate(['users/new-user']);
     }
   }

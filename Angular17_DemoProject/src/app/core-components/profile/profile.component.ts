@@ -34,10 +34,10 @@ export class ProfileComponent {
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      emailid: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      phonenumber: ['', Validators.required],
+      email: ['', Validators.required],
     });
 
     this.fetchUserData();
@@ -45,11 +45,24 @@ export class ProfileComponent {
 
   fetchUserData() {
     this.user = this.userService.getLoggedInUser();
+    const accessLevels:{ [key: number]: string } = {
+      1: 'Super Admin',
+      2: 'Area admin',
+      3: 'User',
+      4: 'Coach'
+    };
+    
+    // Assuming this.user.accesslevel is the ID
+    const accessLevelId = parseInt(this.user.accesslevel, 10);
+    
+    // Retrieve the access level name
+    this.user.accessLevelName = accessLevels[accessLevelId];
+
     this.myForm.patchValue({
-      firstName: this.user.firstname,
-      lastName: this.user.lastname,
-      phoneNumber: this.user.phonenumber,
-      emailid: this.user.emailid,
+      firstname: this.user.firstname,
+      lastname: this.user.lastname,
+      phonenumber: this.user.phonenumber,
+      email: this.user.email,
     });
     this.myForm.disable();
     this.userInitials = this.logicService.setUserInitials();
@@ -63,8 +76,22 @@ export class ProfileComponent {
   invalidForm!: boolean | null;
   saveUserData() {
     if (this.myForm.valid) {
-      // Call service to save user details
-      // Example: this.userService.saveUserData(this.myForm.value);
+      const userId = this.user.id;
+      const updatedData = {
+        firstname: this.myForm.value.firstname,
+        lastname:  this.myForm.value.lastname,
+        phonenumber: this.myForm.value.phonenumber,
+        email: this.user.email,
+        jobtitle: this.user.jobtitle,
+        accesslevel: this.user.accesslevel,
+        areaaccess: this.user.areaaccess,
+        status: this.user.status
+      }
+      console.log(updatedData);
+      this.userService.updateUser(userId, updatedData).subscribe(
+        (res) => {
+          this.logicService.fetchUserDetails();
+      })
       this.isEditMode = false;
       this.invalidForm = false;
       this.toastService.success('Profile Saved !');

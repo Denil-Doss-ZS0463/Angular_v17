@@ -8,6 +8,7 @@ import { ProfileComponent } from '../../core-components/profile/profile.componen
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { CommonLogicsService } from '../../services/common-logics.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -57,7 +58,8 @@ export class HeaderComponent {
     private modalService: NgbModal,
     private userService: UserService,
     private router: Router,
-    private logicService: CommonLogicsService
+    private logicService: CommonLogicsService,
+    private authService: AuthService
   ) {
     this.fetchUserDetails();
   }
@@ -84,8 +86,7 @@ export class HeaderComponent {
     });
   }
   userLogout() {
-    sessionStorage.clear();
-    localStorage.clear();
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }

@@ -28,11 +28,19 @@ class UserController {
                 }
                 if (result) {
                     console.log("Passwords match");
-                    const token = jwt.sign({ userId: user.id }, jwtSecretKey, {
-                        expiresIn: "1hr",
-                    });
-                    console.log(token);
-                    res.json({ token });
+                    const token = jwt.sign({ userId: user.id }, jwtSecretKey);
+                    const cookieOptions = {
+                            expiresIn: new Date(Date.now() + 60000) , 
+                            httpOnly: true, 
+                            sameSite: 'strict',
+                            secure: true
+                    };
+
+                    res.cookie('jwt', token, cookieOptions );
+                    res.status(200).json({
+                        status: 'success',
+                        token,
+                     });
                 } else {
                     console.log("Passwords do not match");
                 }
@@ -90,7 +98,6 @@ class UserController {
     static updateUser(req, res) {
         const userId = req.params.id;
         const { firstname, lastname, jobtitle, phonenumber, accesslevel, areaaccess, status } = req.body;
-        if (!firstname || !lastname || !jobtitle || !accesslevel || !phonenumber || !areaaccess || !status) {
         if (!firstname || !lastname || !jobtitle || !accesslevel || !status) {
             return res.status(400).json({ message: 'Required Fields are missing' });
         }
