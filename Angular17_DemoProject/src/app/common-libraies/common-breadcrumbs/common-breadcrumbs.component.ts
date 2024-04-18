@@ -117,11 +117,12 @@ export class CommonBreadcrumbsComponent {
     this.spinnerLoading=true;
     if(this.userDetails.length==0){
       this.toastService.error('No data to download');
+      this.spinnerLoading=false;
       return;
     }
     else{
       this.commonService.exportAsExcelFile(this.userDetails, 'User');
+      this.spinnerLoading=false;
     }
-    this.spinnerLoading=false;
   }
 }

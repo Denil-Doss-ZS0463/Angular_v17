@@ -1,3 +1,8 @@
+@if(spinnerLoading) {
+    <div class="spinner-container" [class.show]="spinnerLoading">
+        <app-spinner-loading></app-spinner-loading>
+    </div>
+}
 <div class="container">
     <div class="mt-4 row align-items-center">
         <div class="col bredCrumbsTitle">
