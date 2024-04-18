@@ -30,11 +30,11 @@ export class UsersComponent {
   appliedFilters: any[] = [];
   userDetails: any[] = [];
   ifFilterModalClosed: boolean = false;
-  userId:number=0;
-  
-  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService:UserService) {
-    this.userId=this.userService.getUserIdFromToken();
-    console.log(this.userId,"USER ID");
+  userId: any = 0;
+
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService: UserService) {
+    this.userId = this.userService.getUserIdFromToken();
+    console.log(this.userId, "USER ID");
     this.refreshSubscription = this.userService.refreshUserList$.subscribe(() => {
       this.getUsers();
     });
@@ -93,9 +93,9 @@ export class UsersComponent {
         console.log(res);
         this.userDetails = res;
         this.mockData = res;
-        this.mockData=this.userDetails.filter(data=>data.id!==this.userId);
-        console.log(this.mockData,"user details");
-        this.spinnerLoading=false;
+        this.mockData = this.userDetails.filter(data => data.id !== this.userId);
+        console.log(this.mockData, "user details");
+        this.spinnerLoading = false;
       },
       error: (err: any) => {
         console.log(err);
