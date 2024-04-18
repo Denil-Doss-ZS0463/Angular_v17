@@ -60,25 +60,25 @@ export class CommonFilterComponent {
   applyFiltersCriteria<T>(data: any, filterCriteria: any[]): T[] {
     return data.filter((item: any) => {
       return filterCriteria.every(criteria => {
-        const columnName = (criteria.column).toLowerCase().replace(' ', '');
-        this.columnValue = item[columnName];
-        switch (criteria.condition.toLowerCase()) {
+        const columnName = (criteria.column).toLocaleLowerCase().replace(' ', '');
+        this.columnValue = item[columnName].toString();
+        switch (criteria.condition.toLocaleLowerCase()) {
           case 'equals':
-            return this.columnValue.toLowerCase() === criteria.value.toLowerCase();
+            return this.columnValue.toLocaleLowerCase() === criteria.value.toLocaleLowerCase();
           case 'does not equal':
-            return this.columnValue.toLowerCase() !== criteria.value.toLowerCase();
+            return this.columnValue.toLocaleLowerCase() !== criteria.value.toLocaleLowerCase();
           case 'begins with':
-            return this.columnValue.startsWith(criteria.value.toLowerCase());
+            return this.columnValue.startsWith(criteria.value.toLocaleLowerCase());
           case 'not begins with':
-            return !this.columnValue.startsWith(criteria.value.toLowerCase());
+            return !this.columnValue.startsWith(criteria.value.toLocaleLowerCase());
           case 'ends with':
-            return this.columnValue.endsWith(criteria.value.toLowerCase());
+            return this.columnValue.endsWith(criteria.value.toLocaleLowerCase());
           case 'not ends with':
-            return !this.columnValue.endsWith(criteria.value.toLowerCase());
+            return !this.columnValue.endsWith(criteria.value.toLocaleLowerCase());
           case 'contains':
-            return this.columnValue.toLowerCase().includes(criteria.value.toLowerCase());
+            return this.columnValue.toLocaleLowerCase().includes(criteria.value.toLocaleLowerCase());
           case 'not contains':
-            return !this.columnValue.toLowerCase().includes(criteria.value.toLowerCase());
+            return !this.columnValue.toLocaleLowerCase().includes(criteria.value.toLocaleLowerCase());
           default:
             return true;
         }
