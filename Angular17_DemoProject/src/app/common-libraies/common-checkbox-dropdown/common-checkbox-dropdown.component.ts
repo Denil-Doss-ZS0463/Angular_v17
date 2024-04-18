@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, Output, EventEmitter, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-common-checkbox-dropdown',
@@ -28,7 +28,11 @@ export class CommonCheckboxDropdownComponent {
   showDropdown: boolean = false;
   checkedIndex: number = 0;
 
-  constructor() { }
+  selectedOptions = new FormControl([]);
+  @Input() parentForm!: FormGroup;
+  @Input() controlName!: string;
+  @Input() selectedItemsFormArray!: FormArray;
+  constructor(private fb: FormBuilder) {}
   ngAfterViewInit() {
     document.body.addEventListener('click', this.onClickOutside.bind(this));
   }
@@ -40,15 +44,14 @@ export class CommonCheckboxDropdownComponent {
     this.selectedItems.includes(id);
   }
 
-  toggleSelection(id: any, checkedIndex: number) {
-    const index = this.selectedItems.indexOf(id);
-    this.checkedIndex = checkedIndex;
+  toggleSelection(id: any) {
+    const index = this.selectedItemsFormArray.controls.findIndex(control => control.value === id);
     if (index > -1) {
-      this.selectedItems.splice(index, 1);
+      this.selectedItemsFormArray.removeAt(index);
     } else {
-      this.selectedItems.push(id);
+      this.selectedItemsFormArray.push(id);
     }
-    this.itemsSelected.emit(this.selectedItems);
+    this.itemsSelected.emit(this.selectedItemsFormArray.value);
   }
 
   toggleDropdDown() {
@@ -56,9 +59,7 @@ export class CommonCheckboxDropdownComponent {
   }
 
   isSelected(id: number): boolean {
-    const checkedIds = this.selectedItems.includes(id);
-    this.itemsSelected.emit(this.selectedItems);
-    return checkedIds;
+    return this.selectedItemsFormArray.controls.some(control => control.value === id);
   }
 
   returnLastSelectedValue(id: any) {
@@ -86,4 +87,5 @@ export class CommonCheckboxDropdownComponent {
   checkForArrayOfString() {
     return this.dropdownOptions && this.dropdownOptions.length && typeof this.dropdownOptions[0] === 'string'
   }
+  
 }

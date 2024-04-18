@@ -41,7 +41,10 @@
                 </app-common-dropdown>
             </div>
             <div class="col-4 areaDropdownAddUser">
-                <app-common-checkbox-dropdown [dropdownOptions]="accessLevelLists" [errorMessage]="'Area is required'" [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Area Access'" [required]="true"></app-common-checkbox-dropdown>
+                <app-common-checkbox-dropdown [dropdownOptions]="accessLevelLists" [errorMessage]="'Area is required'" 
+                    [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Area Access'" [required]="true"
+                    [parentForm]="myForm" [controlName]="'areaaccess'"
+                   ></app-common-checkbox-dropdown>
             </div>
         </div>
         <div class="row">

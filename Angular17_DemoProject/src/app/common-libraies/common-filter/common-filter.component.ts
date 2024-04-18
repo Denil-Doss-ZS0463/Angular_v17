@@ -60,7 +60,7 @@ export class CommonFilterComponent {
   applyFiltersCriteria<T>(data: any, filterCriteria: any[]): T[] {
     return data.filter((item: any) => {
       return filterCriteria.every(criteria => {
-        const columnName = (criteria.column).toLowerCase();
+        const columnName = (criteria.column).toLowerCase().replace(' ', '');
         this.columnValue = item[columnName];
         switch (criteria.condition.toLowerCase()) {
           case 'equals':
