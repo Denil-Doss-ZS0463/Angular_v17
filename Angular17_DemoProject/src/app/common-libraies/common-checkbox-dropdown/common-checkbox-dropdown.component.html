@@ -22,7 +22,7 @@
             <div class="my-1 p-1 customCheckboxOption">
                 <label class="customFormCheckLabel d-flex align-items-center gap-2">
                     <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item.id)"
-                        (change)="toggleSelection(item.id, $index)">
+                        (change)="toggleSelection(item.id)">
                     <span> {{item[objectKeyToShow]}}</span>
                 </label>
             </div>
@@ -33,7 +33,7 @@
             <div class="my-1 p-1 customCheckboxOption">
                 <label class="customFormCheckLabel d-flex align-items-center gap-2">
                     <input type="checkbox" class="customCheckBox form-check-input" [checked]="isSelected(item)"
-                        (change)="toggleSelection(item, $index)">
+                        (change)="toggleSelection(item)">
                     <span>{{item}}</span>
                 </label>
             </div>

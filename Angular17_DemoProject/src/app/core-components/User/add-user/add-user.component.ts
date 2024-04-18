@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonInputBoxComponent } from '../../../common-libraies/common-input-box/common-input-box.component';
 import { CommonDropdownComponent } from '../../../common-libraies/common-dropdown/common-dropdown.component';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
@@ -18,7 +18,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './add-user.component.css'
 })
 export class AddUserComponent {
-  [x: string]: any;
   myForm!: FormGroup;
   invalidForm!: boolean | null;
   userOptions = {
@@ -39,6 +38,7 @@ export class AddUserComponent {
       password: ['', Validators.required],
       jobtitle: ['', Validators.required],
       accesslevel: ['', Validators.required],
+      selectedItems: [this.fb.array([], Validators.required)],
     });
   }
 
@@ -63,6 +63,8 @@ export class AddUserComponent {
   }
 
   getInputFormValues() {
+    console.log(this.myForm.value);
+    
     const addUserJson = {
       firstname: this.myForm.get('firstname')?.value,
       lastname: this.myForm.get('lastname')?.value,
