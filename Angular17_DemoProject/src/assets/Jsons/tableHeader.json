@@ -7,5 +7,11 @@
         "Access Level",
         "Area Access",
         "Status"
+    ],
+    "area":[
+        "Area Name",
+        "Country",
+        "State/Province",
+        "Currency"
     ]
 }
