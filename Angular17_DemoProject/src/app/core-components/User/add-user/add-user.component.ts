@@ -46,7 +46,6 @@ export class AddUserComponent {
     this.getAccessLevelDetails();
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
-      console.log(this.userId, "user id");
       if(this.userId)
         this.getUserDetailsById(this.userId);
     });
@@ -56,13 +55,11 @@ export class AddUserComponent {
     this.userService.getAccessLevelDetails().subscribe({
       next: (res: any) => {
         this.accessLevelLists = res;
-        console.log(this.accessLevelLists);
       },
       error: (err: any) => {
         console.log(err);
       }
     })
-    console.log(this.accessLevelLists)
   }
 
   getInputFormValues() {
@@ -78,12 +75,10 @@ export class AddUserComponent {
       accesslevel: +this.myForm.get('accesslevel')?.value,
       areaaccess: null
     }
-    console.log(addUserJson);
     if (this.myForm.valid) {
       this.spinnerLoading = true;
       this.userService.addUser(addUserJson).subscribe({
         next: (res: any) => {
-          console.log(res);
           this.toastrService.success(res.message);
           this.spinnerLoading = false;
           this.myForm.disable();
@@ -108,7 +103,6 @@ export class AddUserComponent {
     this.spinnerLoading = true;
     this.userService.getUserDetailsById(userId).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.prepopulateUserDetails(res);
         this.userOptions.title = "User Management > " +res.email;
         this.userOptions.enableEditOptions = true;
@@ -148,12 +142,10 @@ export class AddUserComponent {
       areaaccess: null,
       status: userStatus
     }
-    console.log(updateUserJson);
     if (this.myForm.valid) {
       this.spinnerLoading = true;
       this.userService.updateUser(this.userId,updateUserJson).subscribe({
         next: (res: any) => {
-          console.log(res);
           this.toastrService.success(res.message);
           this.spinnerLoading = false;
           this.myForm.disable();
@@ -177,7 +169,6 @@ export class AddUserComponent {
     this.spinnerLoading=true;
     this.userService.deleteUser(this.userId).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.toastrService.success(res.message);
         this.spinnerLoading = false;
         this.myForm.disable();

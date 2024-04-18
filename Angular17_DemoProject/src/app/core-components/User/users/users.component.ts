@@ -30,8 +30,9 @@ export class UsersComponent {
   appliedFilters: any[] = [];
   userDetails: any[] = [];
   ifFilterModalClosed: boolean = false;
-  userId: any = 0;
-
+  userId:any;
+  accessLevelLists:any[]=[];
+ 
   constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService: UserService) {
     this.userId = this.userService.getUserIdFromToken();
     this.refreshSubscription = this.userService.refreshUserList$.subscribe(() => {
@@ -93,9 +94,9 @@ export class UsersComponent {
     this.spinnerLoading = true;
     this.userService.getUsersList().subscribe({
       next: (res: any) => {
-        console.log(res);
         this.userDetails = res;
         this.mockData = res;
+        this.getAccessLevelDetails();
         this.filterUserDetails();
         console.log(this.mockData, "user details");
         this.spinnerLoading = false;
@@ -107,9 +108,31 @@ export class UsersComponent {
     });
   }
 
-  filterUserDetails() {
-    this.mockData = this.userDetails.filter(data => data.id !== this.userId);
+  getAccessLevelDetails() {
+    this.userService.getAccessLevelDetails().subscribe({
+      next: (res: any) => {
+        this.accessLevelLists = res;
+        this.replaceAccessLevels();
+        this.spinnerLoading=false;
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    })
   }
+
+  replaceAccessLevels() {
+    this.userDetails.forEach(user => {
+      const accessLevel = this.accessLevelLists.find(level => level.id === user.accesslevel);
+      if (accessLevel) {
+        user.accesslevel = accessLevel.value;
+      }
+    });
+  }
+
+ filterUserDetails() {
+    this.mockData = this.userDetails.filter(data => data.id !== this.userId);
+ }
 
   ngOnDestroy(): void {
     this.refreshSubscription.unsubscribe();

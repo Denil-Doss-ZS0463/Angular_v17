@@ -4,6 +4,7 @@ import { CommonChipComponent } from '../common-chip/common-chip.component';
 import { FormsModule } from '@angular/forms';
 import { CommonLogicsService } from '../../services/common-logics.service';
 import { SpinnerLoadingComponent } from '../../basic-components/spinner-loading/spinner-loading.component';
+import { ToastService } from '../../services/toast.service';
 declare let bootstrap: any;
 @Component({
   selector: 'app-common-breadcrumbs',
@@ -37,7 +38,7 @@ export class CommonBreadcrumbsComponent {
   newFilter: string = '';
   changeEditOptionToSave: boolean = false;
   
-  constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router, private commonService:CommonLogicsService) { }
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, private router: Router, private commonService:CommonLogicsService, private toastService: ToastService) { }
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
@@ -114,7 +115,13 @@ export class CommonBreadcrumbsComponent {
   }
   downloadFunctionality(){
     this.spinnerLoading=true;
-    this.commonService.exportAsExcelFile(this.userDetails, 'User');
+    if(this.userDetails.length==0){
+      this.toastService.error('No data to download');
+      return;
+    }
+    else{
+      this.commonService.exportAsExcelFile(this.userDetails, 'User');
+    }
     this.spinnerLoading=false;
   }
 }
