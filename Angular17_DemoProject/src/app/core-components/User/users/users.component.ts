@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, TemplateRef, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Output, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
 import { CommonTableComponent } from '../../../common-libraies/common-table/common-table.component';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { SpinnerLoadingComponent } from '../../../basic-components/spinner-loading/spinner-loading.component';
 import { Subscription } from 'rxjs';
-
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -16,6 +15,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
+  @ViewChild(CommonBreadcrumbsComponent) commonBreadcrumbsComponent!: CommonBreadcrumbsComponent;
+
   private refreshSubscription: Subscription;
   mockData: any[] = [];
   userOptions = {
@@ -24,7 +25,6 @@ export class UsersComponent {
     hideAddOptionIcons: false,
     enableEditOptions: false
   }
-
   userHeaderList: any[] = [];
   spinnerLoading: boolean = false;
   appliedFilters: any[] = [];
@@ -34,7 +34,6 @@ export class UsersComponent {
 
   constructor(private route: ActivatedRoute, private modalService: NgbModal, private userService: UserService) {
     this.userId = this.userService.getUserIdFromToken();
-    console.log(this.userId, "USER ID");
     this.refreshSubscription = this.userService.refreshUserList$.subscribe(() => {
       this.getUsers();
     });
@@ -63,11 +62,15 @@ export class UsersComponent {
 
   closeChip(chipClosingEvent: any) {
     if (chipClosingEvent) {
-      this.mockData = this.userDetails;
+      this.filterUserDetails();
     }
   }
   closeFilterModal(modal: any) {
     modal.dismiss('Cross click');
+    if (this.commonBreadcrumbsComponent.chips.length == 1 || this.commonBreadcrumbsComponent.chips.length == 0) {
+      this.commonBreadcrumbsComponent.openFilterChips = false;
+      this.commonBreadcrumbsComponent.closeChip.emit(true);
+    }
     if (modal) {
       this.ifFilterModalClosed = true;
     }
@@ -93,7 +96,7 @@ export class UsersComponent {
         console.log(res);
         this.userDetails = res;
         this.mockData = res;
-        this.mockData = this.userDetails.filter(data => data.id !== this.userId);
+        this.filterUserDetails();
         console.log(this.mockData, "user details");
         this.spinnerLoading = false;
       },
@@ -103,6 +106,11 @@ export class UsersComponent {
       }
     });
   }
+
+  filterUserDetails() {
+    this.mockData = this.userDetails.filter(data => data.id !== this.userId);
+  }
+
   ngOnDestroy(): void {
     this.refreshSubscription.unsubscribe();
   }
