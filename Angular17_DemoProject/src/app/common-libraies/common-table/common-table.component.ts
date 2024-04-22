@@ -2,6 +2,7 @@ import { NgClass, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StringContants } from '../../../assets/Constants/stringConstant';
 @Component({
   selector: 'app-common-table',
   standalone: true,
@@ -29,6 +30,10 @@ export class CommonTableComponent {
   selectedPage: number = 1;
   ifLastPage: boolean = false;
   ifFirstPage: boolean = false;
+
+  noDataFoundLabel:string = StringContants.commonTable.noDataFound;
+  pageLabel:string = StringContants.commonTable.page;
+  rowsPerPageLabel:string = StringContants.commonTable.rowsPerPage;
   
   constructor(private router: Router) {
   }

@@ -72,3 +72,7 @@ input {
     color: rgba(48, 38, 29, 0.698);
     opacity: 0.7;
 }
+.disabledCustomDropdown
+{
+    background-color: #e9ecef;
+}

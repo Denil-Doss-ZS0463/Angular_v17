@@ -1,9 +1,10 @@
 @if(spinnerLoading) {
-    <div class="spinner-container" [class.show]="spinnerLoading">
-        <app-spinner-loading></app-spinner-loading>
-    </div>
+<div class="spinner-container" [class.show]="spinnerLoading">
+    <app-spinner-loading></app-spinner-loading>
+</div>
 }
-<app-common-breadcrumbs [user]="userOptions" [userStatus]="userStatus" (save)="getInputFormValues()" (enableForm)="enableForm()" (update)="updateUser($event)" (delete)="deleteUser()"></app-common-breadcrumbs>
+<app-common-breadcrumbs [user]="userOptions" [userStatus]="userStatus" (save)="getInputFormValues()"
+    (enableForm)="enableForm()" (update)="updateUser($event)" (delete)="deleteUser()"></app-common-breadcrumbs>
 <form [formGroup]="myForm" class="mt-4">
     <div class="container">
         <div class="row mb-2">
@@ -37,14 +38,14 @@
                 <app-common-dropdown [label]="'Access Level'" [controlName]="'accesslevel'" [parentForm]="myForm"
                     [idSelector]="'accesslevel'" [placeholderText]="'Choose access level'"
                     [errorMessage]="'Access level is required'" [objectKeyToShow]="'value'" [selectedValue]="'John Doe'"
-                    [invalidForm]="invalidForm" [dropDownValue]="accessLevelLists"  [objectKeyAsValue]="'id'" [required]="true">
+                    [invalidForm]="invalidForm" [dropDownValue]="accessLevelLists" [objectKeyAsValue]="'id'"
+                    [required]="true">
                 </app-common-dropdown>
             </div>
             <div class="col-4 areaDropdownAddUser">
-                <app-common-checkbox-dropdown [dropdownOptions]="accessLevelLists" [errorMessage]="'Area is required'" 
+                <app-common-checkbox-dropdown [dropdownOptions]="accessLevelLists" [errorMessage]="'Area is required'"
                     [invalidForm]="invalidForm" [objectKeyToShow]="'name'" [label]="'Area Access'" [required]="true"
-                    [parentForm]="myForm" [controlName]="'areaaccess'"
-                   ></app-common-checkbox-dropdown>
+                    [parentForm]="myForm" [controlName]="'areaaccess'"></app-common-checkbox-dropdown>
             </div>
         </div>
         <div class="row">
@@ -54,6 +55,55 @@
                     [errorMessage]="'password is required'" [invalidForm]="invalidForm"
                     [required]="true"></app-common-input-box>
             </div>
+            @if(userOptions.enableEditOptions)
+            {
+                <div class="col-4 ps-0 changePasswordIconContainer">
+                    <span class="changePasswordIcon" (click)="openChangePasswordModal(changePassword)">
+                        <i class="fa-solid fa-key fa-xl" style="color: #007cba;"></i>
+                    </span>
+                </div>
+            }
+
         </div>
     </div>
 </form>
+
+<ng-template #changePassword let-changePasswordModal>
+    <div class="spinner-container" [class.show]="spinnerLoading">
+        <app-spinner-loading></app-spinner-loading>
+    </div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{changePasswordLabel}}</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <form action="" [formGroup]="changePasswordForm">
+                <div class="row mb-2">
+                    <app-common-input-box [label]="oldPasswordLabel" [controlName]="'oldpassword'"
+                        [parentForm]="changePasswordForm" [fieldType]="'password'" [idSelector]="'oldPassword'"
+                        [placeholderText]="'Enter old password'" [errorMessage]="'Old password is required'"
+                        [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+                </div>
+                <div class="row mb-2">
+                    <app-common-input-box [label]="newPasswordLabel" [controlName]="'newpassword'"
+                        [parentForm]="changePasswordForm" [fieldType]="'password'" [idSelector]="'newPassword'"
+                        [placeholderText]="'Enter new password'" [errorMessage]="'New password is required'"
+                        [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+                </div>
+                <div class="row mb-2">
+                    <app-common-input-box [label]="confirmPasswordLabel" [controlName]="'confirmpassword'"
+                        [parentForm]="changePasswordForm" [fieldType]="'password'" [idSelector]="'confirmPassword'"
+                        [placeholderText]="'Enter confirm password'" [errorMessage]="'Confirm password is required'"
+                        [invalidForm]="invalidForm" [required]="true"></app-common-input-box>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex justify-content-end align-items-center gap-3 mt-2">
+            <button type="button" class="btn btn-secondary cancelBtnChangePassword"
+                (click)="closeChangePasswordModal(changePasswordModal)">{{cancelLabel}}</button>
+            <button type="button" class="btn btn-apply" [disabled]="this.changePasswordForm.invalid"
+                (click)="applyChangedPassword(changePasswordModal)">{{applyLabel }}</button>
+        </div>
+
+    </div>
+</ng-template>

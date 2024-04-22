@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonInputBoxComponent } from '../../../common-libraies/common-input-box/common-input-box.component';
 import { CommonDropdownComponent } from '../../../common-libraies/common-dropdown/common-dropdown.component';
 import { CommonBreadcrumbsComponent } from '../../../common-libraies/common-breadcrumbs/common-breadcrumbs.component';
@@ -9,16 +9,26 @@ import { SpinnerLoadingComponent } from '../../../basic-components/spinner-loadi
 import { Router } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { StringContants } from '../../../../assets/Constants/stringConstant';
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [CommonInputBoxComponent, ReactiveFormsModule, CommonDropdownComponent, CommonBreadcrumbsComponent, CommonCheckboxDropdownComponent, SpinnerLoadingComponent],
+  imports: [
+    CommonInputBoxComponent,
+    ReactiveFormsModule,
+    CommonDropdownComponent,
+    CommonBreadcrumbsComponent,
+    CommonCheckboxDropdownComponent,
+    SpinnerLoadingComponent],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })
 export class AddUserComponent {
+
   myForm!: FormGroup;
+  changePasswordForm!: FormGroup;
+
   invalidForm!: boolean | null;
   userOptions = {
     title: "User Management > Add User",
@@ -30,7 +40,22 @@ export class AddUserComponent {
   accessLevelLists: any[] = [];
   userStatus: string = '';
   userId: number = 0;
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private toastrService: ToastService, private route: ActivatedRoute) {
+
+  changePasswordLabel:string = StringContants.changePassword.changePasswordLabel
+  oldPasswordLabel:string = StringContants.changePassword.oldPasswordLabel
+  newPasswordLabel:string = StringContants.changePassword.newPasswordLabel
+  confirmPasswordLabel:string = StringContants.changePassword.confirmPasswordLabel
+  applyLabel:string = StringContants.generalContants.apply;
+  cancelLabel:string = StringContants.generalContants.cancel;
+  passwordRegexPattern:RegExp = StringContants.changePassword.passwordRegex;
+
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private toastrService: ToastService,
+    private route: ActivatedRoute,
+    private modalService: NgbModal) {
     this.myForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -40,13 +65,21 @@ export class AddUserComponent {
       accesslevel: ['', Validators.required],
       selectedItems: [this.fb.array([], Validators.required)],
     });
+
+    this.changePasswordForm = this.fb.group({
+      oldpassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegexPattern)]],
+      newpassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegexPattern)]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegexPattern)]]
+    }, {
+      validator: this.passwordMatchValidator
+    });
   }
 
   ngOnInit() {
     this.getAccessLevelDetails();
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
-      if(this.userId)
+      if (this.userId)
         this.getUserDetailsById(this.userId);
     });
   }
@@ -63,8 +96,6 @@ export class AddUserComponent {
   }
 
   getInputFormValues() {
-    console.log(this.myForm.value);
-    
     const addUserJson = {
       firstname: this.myForm.get('firstname')?.value,
       lastname: this.myForm.get('lastname')?.value,
@@ -104,7 +135,6 @@ export class AddUserComponent {
     this.userService.getUserDetailsById(userId).subscribe({
       next: (res: any) => {
         this.prepopulateUserDetails(res);
-        this.userOptions.title = "User Management > " +res.email;
         this.userOptions.enableEditOptions = true;
         this.spinnerLoading = false;
       },
@@ -127,12 +157,12 @@ export class AddUserComponent {
     });
     this.userStatus = response.status;
   }
-  enableForm(){
+  enableForm() {
     this.myForm.enable();
     this.myForm.get('email')?.disable();
     this.myForm.get('password')?.disable();
   }
-  updateUser(userStatus:any){
+  updateUser(userStatus: any) {
     const updateUserJson = {
       firstname: this.myForm.get('firstname')?.value,
       lastname: this.myForm.get('lastname')?.value,
@@ -144,7 +174,7 @@ export class AddUserComponent {
     }
     if (this.myForm.valid) {
       this.spinnerLoading = true;
-      this.userService.updateUser(this.userId,updateUserJson).subscribe({
+      this.userService.updateUser(this.userId, updateUserJson).subscribe({
         next: (res: any) => {
           this.toastrService.success(res.message);
           this.spinnerLoading = false;
@@ -165,8 +195,8 @@ export class AddUserComponent {
       this.spinnerLoading = false;
     }
   }
-  deleteUser(){
-    this.spinnerLoading=true;
+  deleteUser() {
+    this.spinnerLoading = true;
     this.userService.deleteUser(this.userId).subscribe({
       next: (res: any) => {
         this.toastrService.success(res.message);
@@ -183,4 +213,33 @@ export class AddUserComponent {
       }
     })
   }
+
+  
+  openChangePasswordModal(changePasswordModal: any) {
+    this.modalService.open(changePasswordModal, { windowClass: 'changePasswordModal', centered: true, backdrop: 'static', keyboard: false, size: 'md' });
+  }
+
+  closeChangePasswordModal(changePasswordModal: any) {
+    changePasswordModal.close();
+    this.changePasswordForm.reset();
+  }
+
+  applyChangedPassword(changePasswordModal: any) {
+    if (this.changePasswordForm.valid) {
+      changePasswordModal.close();
+      this.changePasswordForm.reset();
+    }
+  }
+
+  passwordMatchValidator(formGroup: FormGroup) {
+    const newpassword = formGroup.get('newpassword')?.value;
+    const confirmpassword = formGroup.get('confirmpassword')?.value;
+
+    if (newpassword !== confirmpassword) {
+      formGroup.get('confirmpassword')?.setErrors({ mismatch: true });
+    } else {
+      formGroup.get('confirmpassword')?.setErrors(null);
+    }
+  }
+
 }
