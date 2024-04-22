@@ -28,4 +28,10 @@ export class StringContants {
         passwordLengthErrorText: "Password must be at least 8 characters long",
 
     }
+
+    public static commonTable = {
+        noDataFound: 'No Data Found',
+        rowsPerPage: 'Rows Per Page',
+        page: 'Page'
+    }
 }

@@ -55,11 +55,15 @@
                     [errorMessage]="'password is required'" [invalidForm]="invalidForm"
                     [required]="true"></app-common-input-box>
             </div>
-            <div class="col-4 ps-0 changePasswordIconContainer">
-                <span class="changePasswordIcon" (click)="openChangePasswordModal(changePassword)">
-                    <i class="fa-solid fa-key fa-xl" style="color: #007cba;"></i>
-                </span>
-            </div>
+            @if(userOptions.enableEditOptions)
+            {
+                <div class="col-4 ps-0 changePasswordIconContainer">
+                    <span class="changePasswordIcon" (click)="openChangePasswordModal(changePassword)">
+                        <i class="fa-solid fa-key fa-xl" style="color: #007cba;"></i>
+                    </span>
+                </div>
+            }
+
         </div>
     </div>
 </form>
