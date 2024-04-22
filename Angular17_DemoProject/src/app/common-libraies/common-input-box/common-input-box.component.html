@@ -1,24 +1,48 @@
 <div [formGroup]="parentForm">
     <div class="form-group mt-1">
         <label [for]="idSelector" class="form-label commonLabel ps-0">
-            {{ label }}
+                {{ label }}
             @if(required)
             {
-            <span class="text-danger">*</span>
+                <span class="text-danger">*</span>
             }
         </label>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center textboxContainer">
             <input class="form-control" [type]="fieldType" [formControlName]="controlName" [id]="idSelector"
                 [placeholder]="placeholderText" autocomplete="off"
                 [ngClass]="{' border border-danger':showErrors() && parentForm.get(controlName)?.errors}">
+            @if(fieldType == 'password' || placeholderText.toLowerCase().includes('password'))
+            {
+            <div class="eyeIcon" (click)="toggleEyeIcon()">
+                @if(toggleEye)
+                {
+                    <span><i class="fa-sharp fa-solid fa-eye"></i></span>
+                }@else {
+                    <span><i class="fa-sharp fa-solid fa-eye-slash"></i></span>
+                }
+            </div>
+            }
         </div>
         <span class="text-danger errorMessage hidden m-0 mb-1">
-            @if(showErrors() && parentForm.get(controlName)?.errors)
+            @if(showErrors() && parentForm.get(controlName)?.hasError('required'))
             {
                 {{errorMessage}}
             }
+            @else if(parentForm.get(controlName)?.hasError('minlength'))
+            {
+                {{passwordLengthError}}
+            }
+            @else if(parentForm.get(controlName)?.hasError('pattern'))
+            {
+                {{passwordRegexError}}
+            }
+            @else if(parentForm.get(controlName)?.hasError('mismatch'))
+            {
+                {{passwordNotMatchError}}
+            }
         </span>
+
     </div>
 
 </div>

@@ -15,3 +15,19 @@ input {
   color: rgba(48, 38, 29, 0.698);
   opacity: 0.7;
 }
+
+.textboxContainer {
+  position: relative;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 10px;
+  color: rgb(151, 150, 150);
+  cursor: pointer;
+}
+
+input:disabled + .eyeIcon {
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+}

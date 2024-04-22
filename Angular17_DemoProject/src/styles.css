@@ -8,6 +8,12 @@
   /* font-size: 11px; */
 }
 
+.btn-apply {
+  background-color: #EB0045 !important;
+  color: white !important;
+}
+
+
 .outerBorder {
   border: 1px solid lightgray;
   border-radius: 5px;
